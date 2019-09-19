@@ -1,5 +1,8 @@
 package cnr.isti.labsedc.glimpse_reloaded.cep;
 
-public interface ComplexEventProcessorManager {
+import javax.jms.Message;
 
+public abstract class ComplexEventProcessorManager extends Thread{
+
+	public abstract void onMessage(Message message);
 }

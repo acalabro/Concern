@@ -8,6 +8,8 @@ import javax.jms.Session;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import cnr.isti.labsedc.glimpse_reloaded.register.RegisterForCommunicationChannels;
+
 public class ListenerChannelTask implements Runnable {
 
 
@@ -31,6 +33,7 @@ public class ListenerChannelTask implements Runnable {
 		try {
 			Queue queue = receiverSession.createQueue(channelTaskName);
 			MessageConsumer consumer = receiverSession.createConsumer(queue);
+			//RegisterForCommunicationChannels.ServiceListeningOnWhichChannel.put(key, value)
 			logger.info("...consumer named " + consumer.toString() + " created within the executor named " + this.getChannelTaskName());
 		} catch (JMSException e) {
 			// TODO Auto-generated catch block

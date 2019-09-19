@@ -15,12 +15,10 @@ import org.apache.logging.log4j.Logger;
 public class ListenerChannelsManager {
 
 	private TopicConnection receiverConnection;
-	private ActiveMQConnectionFactory factory;
     private static final Logger logger = LogManager.getLogger(ListenerChannelsManager.class);
 
-	public ListenerChannelsManager(String brokerURl, Vector<String> loadChannels) {
+	public ListenerChannelsManager(ActiveMQConnectionFactory factory, Vector<String> loadChannels) {
 
-	     factory = new ActiveMQConnectionFactory(brokerURl);
 	     try {
 			receiverConnection = factory.createTopicConnection();
 			Session receiverSession = receiverConnection.createSession(true, Session.SESSION_TRANSACTED);
