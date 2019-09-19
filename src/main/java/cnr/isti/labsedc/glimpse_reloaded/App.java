@@ -12,8 +12,8 @@ import cnr.isti.labsedc.glimpse_reloaded.notification.NotificationManager;
 import cnr.isti.labsedc.glimpse_reloaded.register.RegisterForCommunicationChannels;
 import cnr.isti.labsedc.glimpse_reloaded.client.ClientManager;
 import cnr.isti.labsedc.glimpse_reloaded.listener.ListenerChannelsManager;
-import cnr.isti.labsedc.glimpse_reloaded.listener.StorageController;
 import cnr.isti.labsedc.glimpse_reloaded.storage.InfluxDBStorageController;
+import cnr.isti.labsedc.glimpse_reloaded.storage.StorageController;
 import cnr.isti.labsedc.glimpse_reloaded.utils.ChannelUtilities;
 import cnr.isti.labsedc.glimpse_reloaded.web.WebInterfaceManager;
 

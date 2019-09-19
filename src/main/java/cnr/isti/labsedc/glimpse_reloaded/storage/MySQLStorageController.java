@@ -4,7 +4,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import cnr.isti.labsedc.glimpse_reloaded.event.Event;
-import cnr.isti.labsedc.glimpse_reloaded.listener.StorageController;
 
 public class MySQLStorageController implements StorageController {
 

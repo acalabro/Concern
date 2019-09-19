@@ -1,7 +1,6 @@
 package cnr.isti.labsedc.glimpse_reloaded.storage;
 
 import cnr.isti.labsedc.glimpse_reloaded.event.Event;
-import cnr.isti.labsedc.glimpse_reloaded.listener.StorageController;
 
 public class InfluxDBStorageController implements StorageController {
 

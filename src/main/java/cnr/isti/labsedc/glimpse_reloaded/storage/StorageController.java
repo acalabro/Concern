@@ -1,4 +1,4 @@
-package cnr.isti.labsedc.glimpse_reloaded.listener;
+package cnr.isti.labsedc.glimpse_reloaded.storage;
 
 import cnr.isti.labsedc.glimpse_reloaded.event.Event;
 
