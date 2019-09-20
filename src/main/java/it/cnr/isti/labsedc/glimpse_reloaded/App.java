@@ -41,8 +41,6 @@ public class App
 
     public static void main( String[] args )
     {
-    	logger.info("asd");
-
     	brokerUrl = "tcp://localhost:61616";
     	maxMemoryUsage = 128000l;
     	maxCacheUsage = 128000l;
@@ -53,19 +51,18 @@ public class App
 
 	private static void StartComponents() {
 
-		//storage = new MySQLStorageController();
 		storage = new InfluxDBStorageController();
 
 	    broker = new ActiveMQBrokerManager(brokerUrl, maxMemoryUsage, maxCacheUsage);
     	broker.run();
-
+System.out.println("asd");
     	channelRegistry = new ChannelsManagementRegistry();
     	channelRegistry.setConnectionFactory(factory);
 
-    	cep = new DroolsComplexEventProcessorManager("InstanceOne");
+    	cep = new DroolsComplexEventProcessorManager("InstanceOne", "/home/acalabro/workspace/glimpse_reloaded/src/main/resources/startupRule.drl");
     	cep.start();
 
-    	cep = new DroolsComplexEventProcessorManager("InstanceTwo");
+    	cep = new DroolsComplexEventProcessorManager("InstanceTwo", "/home/acalabro/workspace/glimpse_reloaded/src/main/resources/startupRule.drl");
     	cep.start();
 
     	lcManager = new ServiceListenerManager(ChannelUtilities.loadChannels());
@@ -76,9 +73,9 @@ public class App
     	web = new WebInterfaceManager();
 
     	if(SHUTDOWN) {
-    	ServiceListenerManager.killAllServiceListeners();
-    	ActiveMQBrokerManager.StopActiveMQBroker();
-    	System.exit(0);
+	    	ServiceListenerManager.killAllServiceListeners();
+	    	ActiveMQBrokerManager.StopActiveMQBroker();
+	    	System.exit(0);
     	}
 
 	}

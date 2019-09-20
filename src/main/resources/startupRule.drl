@@ -1,0 +1,5 @@
+import it.cnr.isti.labsedc.glimpse_reloaded.event.GlimpseEvaluationRequestEvent;
+
+declare GlimpseEvaluationRequestEvent
+    @timestamp( timeStamp )
+end

@@ -11,16 +11,16 @@ import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import it.cnr.isti.labsedc.glimpse_reloaded.listener.ServiceChannel;
+import it.cnr.isti.labsedc.glimpse_reloaded.listener.ServiceChannelProperties;
 
 public class ChannelsManagementRegistry {
 
 	private static final Logger logger = LogManager.getLogger(ChannelsManagementRegistry.class);
 
-	public static HashMap<String, String> ActiveQueues = new HashMap<String, String>();
+	public static HashMap<String, QueueAndProperties> ActiveQueues = new HashMap<String, QueueAndProperties>();
 	//creator and queue name
 
-	public static HashMap<ServiceChannel, String> ServiceListeningOnWhichChannel = new HashMap<ServiceChannel, String>();
+	public static HashMap<ServiceChannelProperties, String> ServiceListeningOnWhichChannel = new HashMap<ServiceChannelProperties, String>();
 	//channel on which the system will listen for incoming messages (requests to forward to a specific cep)
 
 	public static HashMap<Session, TopicConnection> ActiveSessions = new HashMap<Session, TopicConnection>();
@@ -54,9 +54,9 @@ public class ChannelsManagementRegistry {
 		return session;
 	}
 
-	public static Queue GetNewSessionQueue(String creator, Session receiverSession, String queueName) throws JMSException {
+	public static Queue GetNewSessionQueue(String creator, Session receiverSession, String queueName, ServiceChannelProperties property) throws JMSException {
 		Queue queue = receiverSession.createQueue(queueName);
-		ChannelsManagementRegistry.ActiveQueues.put(creator,queueName);
+		ChannelsManagementRegistry.ActiveQueues.put(creator,new QueueAndProperties(queueName,property));
 		return queue;
 	}
 

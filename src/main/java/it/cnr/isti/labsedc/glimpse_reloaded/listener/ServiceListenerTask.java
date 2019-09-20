@@ -31,7 +31,7 @@ public class ServiceListenerTask implements Runnable {
 
 		logger.info("...within the executor named " + this.getChannelTaskName());
 		try {
-			Queue queue = ChannelsManagementRegistry.GetNewSessionQueue(this.toString(), receiverSession,channelTaskName);
+			Queue queue = ChannelsManagementRegistry.GetNewSessionQueue(this.toString(), receiverSession,channelTaskName, ServiceChannelProperties.GENERICREQUESTS);
 
 			MessageConsumer consumer = receiverSession.createConsumer(queue);
 			//RegisterForCommunicationChannels.ServiceListeningOnWhichChannel.put(key, value)

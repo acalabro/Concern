@@ -77,28 +77,28 @@
 
     <Loggers>
 
-        <Logger name="cnr.isti.labsedc.glimpse_reloaded.storage" additivity="false" level="trace">
+        <Logger name="it.cnr.isti.labsedc.glimpse_reloaded.storage" additivity="false" level="trace">
             <AppenderRef ref="debugLog" />
             <AppenderRef ref="infoLog"  />
             <AppenderRef ref="errorLog" />
             <AppenderRef ref="Console"  />
         </Logger>
 
-        <Logger name="cnr.isti.labsedc.glimpse_reloaded.cep" additivity="false" level="debug">
+        <Logger name="it.cnr.isti.labsedc.glimpse_reloaded.cep" additivity="false" level="debug">
             <AppenderRef ref="debugLog" />
             <AppenderRef ref="infoLog"  />
             <AppenderRef ref="errorLog" />
             <AppenderRef ref="Console"  />
         </Logger>
 
-       <Logger name="cnr.isti.labsedc.glimpse_reloaded.broker" additivity="false" level="trace">
+       <Logger name="it.cnr.isti.labsedc.glimpse_reloaded.broker" additivity="false" level="trace">
             <AppenderRef ref="debugLog" />
             <AppenderRef ref="infoLog"  />
             <AppenderRef ref="errorLog" />
             <AppenderRef ref="Console"  />
         </Logger>
 
-        <Logger name="cnr.isti.labsedc.glimpse_reloaded" additivity="false" level="info">
+        <Logger name="it.cnr.isti.labsedc.glimpse_reloaded" additivity="false" level="info">
             <AppenderRef ref="debugLog" />
             <AppenderRef ref="infoLog"  />
             <AppenderRef ref="errorLog" />
