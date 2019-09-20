@@ -9,9 +9,9 @@ import cnr.isti.labsedc.glimpse_reloaded.broker.BrokerManager;
 import cnr.isti.labsedc.glimpse_reloaded.cep.ComplexEventProcessorManager;
 import cnr.isti.labsedc.glimpse_reloaded.cep.DroolsComplexEventProcessorManager;
 import cnr.isti.labsedc.glimpse_reloaded.notification.NotificationManager;
-import cnr.isti.labsedc.glimpse_reloaded.register.RegisterForCommunicationChannels;
+import cnr.isti.labsedc.glimpse_reloaded.register.ChannelsManagementRegistry;
 import cnr.isti.labsedc.glimpse_reloaded.client.ClientManager;
-import cnr.isti.labsedc.glimpse_reloaded.listener.ListenerChannelsManager;
+import cnr.isti.labsedc.glimpse_reloaded.listener.ServiceListenerManager;
 import cnr.isti.labsedc.glimpse_reloaded.storage.InfluxDBStorageController;
 import cnr.isti.labsedc.glimpse_reloaded.storage.StorageController;
 import cnr.isti.labsedc.glimpse_reloaded.utils.ChannelUtilities;
@@ -29,13 +29,14 @@ public class App
 	private static ClientManager clientMan;
 	private static NotificationManager notificationMan;
 	private static WebInterfaceManager web;
-	private static ListenerChannelsManager lcManager;
+	private static ServiceListenerManager lcManager;
 	private static String brokerUrl;
 	private static Long maxMemoryUsage;
 	private static Long maxCacheUsage;
-	private static RegisterForCommunicationChannels channelRegistry;
+	private static ChannelsManagementRegistry channelRegistry;
 	private static ActiveMQConnectionFactory factory;
     private static final Logger logger = LogManager.getLogger(App.class);
+	private static final boolean SHUTDOWN = false;
 
 
     public static void main( String[] args )
@@ -58,24 +59,28 @@ public class App
 	    broker = new ActiveMQBrokerManager(brokerUrl, maxMemoryUsage, maxCacheUsage);
     	broker.run();
 
-    	channelRegistry = new RegisterForCommunicationChannels();
+    	channelRegistry = new ChannelsManagementRegistry();
     	channelRegistry.setConnectionFactory(factory);
 
-    	cep = new DroolsComplexEventProcessorManager();
+    	cep = new DroolsComplexEventProcessorManager("InstanceOne");
     	cep.start();
 
-    	lcManager = new ListenerChannelsManager(RegisterForCommunicationChannels.getConnectionFactory(), ChannelUtilities.loadChannels());
+    	cep = new DroolsComplexEventProcessorManager("InstanceTwo");
+    	cep.start();
 
-    	clientMan = new cnr.isti.labsedc.glimpse_reloaded.client.ClientManager();
+    	lcManager = new ServiceListenerManager(ChannelUtilities.loadChannels());
+    	lcManager.start();
+
+    	clientMan = new ClientManager();
     	notificationMan = new NotificationManager();
     	web = new WebInterfaceManager();
 
+    	if(SHUTDOWN) {
+    	ServiceListenerManager.killAllServiceListeners();
+    	ActiveMQBrokerManager.StopActiveMQBroker();
+    	System.exit(0);
+    	}
 
-    	testConnector();
 	}
 
-	private static void testConnector() {
-		// TODO Auto-generated method stub
-
-	}
 }

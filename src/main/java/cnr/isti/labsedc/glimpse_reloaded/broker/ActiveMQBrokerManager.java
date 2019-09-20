@@ -15,9 +15,9 @@ import cnr.isti.labsedc.glimpse_reloaded.cep.DroolsComplexEventProcessorManager;
 
 public class ActiveMQBrokerManager implements BrokerManager, Runnable {
 
-	private BrokerService broker;
-	private TransportConnector connector;
-	private ActiveMQConnectionFactory connectionFactory;
+	private static BrokerService broker;
+	private static TransportConnector connector;
+	private static ActiveMQConnectionFactory connectionFactory;
 	private static long ACTIVEMQ_MEMORY_USAGE = 0;
 	private static long ACTIVEMQ_TEMP_USAGE = 0;
 	private static String ACTIVEMQ_HOST;
@@ -44,8 +44,12 @@ public class ActiveMQBrokerManager implements BrokerManager, Runnable {
 			SystemUsage systemUsage= broker.getSystemUsage();
 			systemUsage.getMemoryUsage().setLimit(ACTIVEMQ_MEMORY_USAGE);
 			systemUsage.getTempUsage().setLimit(ACTIVEMQ_TEMP_USAGE);
-			logger.debug("Starting Broker");
+
 			broker.start();
+			logger.debug("Waiting for broker start");
+			broker.waitUntilStarted();
+			logger.debug("broker started");
+
 			logger.debug("Enabling SSL ConnectionFactory");
 			connectionFactory = new ActiveMQSslConnectionFactory(ACTIVEMQ_HOST);
 			connectionFactory.setTrustAllPackages(true);
@@ -53,6 +57,19 @@ public class ActiveMQBrokerManager implements BrokerManager, Runnable {
 
 		} catch (Exception e) {
 			logger.error(e.getCause());
+		}
+	}
+
+	public static void StopActiveMQBroker() {
+		try {
+			broker.stop();
+			logger.debug("Waiting for broker stop");
+			broker.waitUntilStopped();
+			logger.debug("broker stopped");
+			connector.stop();
+			logger.debug("Connector Stopped");
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 }
