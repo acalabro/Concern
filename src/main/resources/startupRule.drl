@@ -1,5 +1,8 @@
-import it.cnr.isti.labsedc.glimpse_reloaded.event.GlimpseEvaluationRequestEvent;
+import it.cnr.isti.labsedc.glimpse_reloaded.event.GlimpseBasicEvent;
 
-declare GlimpseEvaluationRequestEvent
-    @timestamp( timeStamp )
+dialect "java"
+
+declare GlimpseBasicEvent
+    @role( event )
+    @timestamp( timestamp )
 end
