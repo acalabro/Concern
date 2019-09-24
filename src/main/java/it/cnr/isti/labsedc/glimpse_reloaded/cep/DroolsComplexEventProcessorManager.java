@@ -82,7 +82,6 @@ public class DroolsComplexEventProcessorManager extends ComplexEventProcessorMan
 
         pkgs = kbuilder.getKnowledgePackages();
         kbase.addPackages(pkgs);
-
         ksession = kbase.newKieSession();
 		logger.info("...CEP named " + this.getInstanceName() + " created Session and fires rules " + staticRuleToLoadAtStartup + " with errors: " + kbuilder.getKnowledgePackages());
 		started  = true;
@@ -92,7 +91,7 @@ public class DroolsComplexEventProcessorManager extends ComplexEventProcessorMan
 	private void communicationSetup() throws JMSException {
 		receiverConnection = ChannelsManagementRegistry.GetNewTopicConnection();
 		receiverSession = ChannelsManagementRegistry.GetNewSession(receiverConnection);
-		queue = ChannelsManagementRegistry.GetNewSessionQueue(this.cep.name()+"-"+instanceName, receiverSession, "DroolsService-"+instanceName, ServiceChannelProperties.GENERICREQUESTS);
+		queue = ChannelsManagementRegistry.RegisterNewCepQueue(this.cep.name()+"-"+instanceName, receiverSession, "DroolsService-"+instanceName, ServiceChannelProperties.GENERICREQUESTS);
 		logger.info("...CEP named " + this.getInstanceName() + " creates a listening channel called: " + queue.getQueueName());
 		MessageConsumer complexEventProcessorReceiver = receiverSession.createConsumer(queue);
 		complexEventProcessorReceiver.setMessageListener(this);
@@ -111,7 +110,6 @@ public class DroolsComplexEventProcessorManager extends ComplexEventProcessorMan
 					logger.error("error on casting or getting ObjectMessage to GlimpseEvaluationRequestEvent");
 				}
 		}
-
 		if (message instanceof TextMessage) {
 			TextMessage msg = (TextMessage) message;
 			try {

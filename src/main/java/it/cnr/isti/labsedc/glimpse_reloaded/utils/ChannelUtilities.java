@@ -8,11 +8,11 @@ public class ChannelUtilities {
 
 		Vector<String> listenerChannels = new Vector<String>();
 
-		listenerChannels.add("asd");
-		listenerChannels.add("esd");
-		listenerChannels.add("isd");
-		listenerChannels.add("osd");
-		listenerChannels.add("usd");
+		listenerChannels.add("ServiceChannel-ONE");
+		listenerChannels.add("ServiceChannel-TWO");
+		listenerChannels.add("ServiceChannel-THREE");
+		listenerChannels.add("ServiceChannel-FOUR");
+		listenerChannels.add("ServiceChannel-FIVE");
 
 		return listenerChannels;
 	}

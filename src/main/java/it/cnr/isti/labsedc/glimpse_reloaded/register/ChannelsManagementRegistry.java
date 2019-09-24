@@ -20,6 +20,9 @@ public class ChannelsManagementRegistry {
 	public static HashMap<String, QueueAndProperties> ActiveQueues = new HashMap<String, QueueAndProperties>();
 	//creator and queue name
 
+	public static HashMap<String, QueueAndProperties> ActiveCep = new HashMap<String, QueueAndProperties>();
+	//cep available on the infrastructure
+
 	public static HashMap<ServiceChannelProperties, String> ServiceListeningOnWhichChannel = new HashMap<ServiceChannelProperties, String>();
 	//channel on which the system will listen for incoming messages (requests to forward to a specific cep)
 
@@ -65,5 +68,12 @@ public class ChannelsManagementRegistry {
 			logger.info(ActiveQueues.values().toArray()[i].toString());
 		}
 
+	}
+
+	public static Queue RegisterNewCepQueue(String CepIdentifier, Session receiverSession, String queueName,
+			ServiceChannelProperties properties) throws JMSException {
+		Queue queue = receiverSession.createQueue(queueName);
+		ChannelsManagementRegistry.ActiveCep.put(CepIdentifier,new QueueAndProperties(queueName,properties));
+		return queue;
 	}
 }

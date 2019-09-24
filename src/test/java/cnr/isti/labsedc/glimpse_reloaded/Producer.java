@@ -30,9 +30,17 @@ public class Producer {
 		String brokerUrl = "tcp://localhost:61616";
 
 		testProducer(brokerUrl, "DroolsService-InstanceOne");
-		Thread.sleep(1000);
+		Thread.sleep(500);
 		testProducer(brokerUrl, "DroolsService-InstanceTwo");
-		Thread.sleep(1000);
-		testProducer(brokerUrl, "DroolsService-InstanceThree");
+		Thread.sleep(500);
+		testProducer(brokerUrl, "ServiceChannel-ONE");
+		Thread.sleep(500);
+		testProducer(brokerUrl, "ServiceChannel-TWO");
+		Thread.sleep(500);
+		testProducer(brokerUrl, "ServiceChannel-THREE");
+		Thread.sleep(500);
+		testProducer(brokerUrl, "ServiceChannel-FOUR");
+		Thread.sleep(500);
+		testProducer(brokerUrl, "ServiceChannel-FIVE");
 	}
 }
