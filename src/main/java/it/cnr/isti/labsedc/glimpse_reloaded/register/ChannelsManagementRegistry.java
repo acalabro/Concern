@@ -23,20 +23,20 @@ public class ChannelsManagementRegistry {
 	public static HashMap<String, QueueAndProperties> ActiveCep = new HashMap<String, QueueAndProperties>();
 	//cep available on the infrastructure
 
-	public static HashMap<ServiceChannelProperties, String> ServiceListeningOnWhichChannel = new HashMap<ServiceChannelProperties, String>();
-	//channel on which the system will listen for incoming messages (requests to forward to a specific cep)
+	public static HashMap<ServiceChannelProperties, String> ActiveServicesChannel = new HashMap<ServiceChannelProperties, String>();
+	//channel on which the system will listen for incoming messages organized by service (requests to forward to a specific cep)
 
 	public static HashMap<Session, TopicConnection> ActiveSessions = new HashMap<Session, TopicConnection>();
 	//map the session associated to a connection
 
-	public static HashMap<String, String> ConsumerListeningOnWhichChannel = new HashMap<String, String>();
-	//map the consumer that requests an evaluation and are waiting for a response on that channel dnamically created
+	public static HashMap<String, String> ConsumersChannels = new HashMap<String, String>();
+	//map the consumer that requests an evaluation and are waiting for a response on that channel dinamically created
 
-	public static HashMap<String, String> ProbesOpenChannels = new HashMap<String, String>();
+	public static HashMap<String, String> ProbesChannels = new HashMap<String, String>();
 	//channels available for probes
 
 	public static ActiveMQConnectionFactory connectionFactory;
-	//the brokerconnection factory
+	//the broker connection factory
 
 	public void setConnectionFactory(ActiveMQConnectionFactory factory) {
 		ChannelsManagementRegistry.connectionFactory = factory;
@@ -67,7 +67,6 @@ public class ChannelsManagementRegistry {
 		for (int i = 0; i<ActiveQueues.size();i++) {
 			logger.info(ActiveQueues.values().toArray()[i].toString());
 		}
-
 	}
 
 	public static Queue RegisterNewCepQueue(String CepIdentifier, Session receiverSession, String queueName,

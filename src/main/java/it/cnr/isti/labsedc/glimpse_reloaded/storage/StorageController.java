@@ -8,5 +8,5 @@ public interface StorageController {
 	public boolean connectToDB();
 	public boolean disconnectFromDB();
 
-	public boolean saveMessage(Event message);
+	public boolean saveMessage(Event<?> message);
 }

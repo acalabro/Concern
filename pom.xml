@@ -68,7 +68,6 @@
     <artifactId>activemq-broker</artifactId>
     <version>5.15.10</version>
 </dependency>
-
 <dependency>
     <groupId>mysql</groupId>
     <artifactId>mysql-connector-java</artifactId>
@@ -94,5 +93,5 @@
     <artifactId>drools-compiler</artifactId>
     <version>7.26.0.Final</version>
 </dependency>
-  </dependencies>
+</dependencies>
 </project>

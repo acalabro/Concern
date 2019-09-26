@@ -12,6 +12,8 @@ import javax.jms.Session;
 import javax.jms.TextMessage;
 import javax.jms.TopicConnection;
 
+import org.apache.activemq.broker.ConnectionContext;
+import org.apache.activemq.security.MessageAuthorizationPolicy;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.drools.core.impl.InternalKnowledgeBase;
@@ -28,7 +30,7 @@ import it.cnr.isti.labsedc.glimpse_reloaded.event.GlimpseEvaluationRequestEvent;
 import it.cnr.isti.labsedc.glimpse_reloaded.listener.ServiceChannelProperties;
 import it.cnr.isti.labsedc.glimpse_reloaded.register.ChannelsManagementRegistry;
 
-public class DroolsComplexEventProcessorManager extends ComplexEventProcessorManager implements MessageListener {
+public class DroolsComplexEventProcessorManager extends ComplexEventProcessorManager implements MessageListener, MessageAuthorizationPolicy {
 
     private static final Logger logger = LogManager.getLogger(DroolsComplexEventProcessorManager.class);
 	private TopicConnection receiverConnection;
@@ -90,6 +92,7 @@ public class DroolsComplexEventProcessorManager extends ComplexEventProcessorMan
 
 	private void communicationSetup() throws JMSException {
 		receiverConnection = ChannelsManagementRegistry.GetNewTopicConnection();
+
 		receiverSession = ChannelsManagementRegistry.GetNewSession(receiverConnection);
 		queue = ChannelsManagementRegistry.RegisterNewCepQueue(this.cep.name()+"-"+instanceName, receiverSession, "DroolsService-"+instanceName, ServiceChannelProperties.GENERICREQUESTS);
 		logger.info("...CEP named " + this.getInstanceName() + " creates a listening channel called: " + queue.getQueueName());
@@ -123,5 +126,11 @@ public class DroolsComplexEventProcessorManager extends ComplexEventProcessorMan
 	@Override
 	public boolean cepHasCompletedStartup() {
 		return started;
+	}
+
+	@Override
+	public boolean isAllowedToConsume(ConnectionContext context, org.apache.activemq.command.Message message) {
+		System.out.println("asd");
+		return false;
 	}
 }

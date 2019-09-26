@@ -27,7 +27,7 @@ public class MySQLStorageController implements StorageController {
 	}
 
 	@Override
-	public boolean saveMessage(Event message) {
+	public boolean saveMessage(Event<?> message) {
 		// TODO Auto-generated method stub
 		return false;
 	}

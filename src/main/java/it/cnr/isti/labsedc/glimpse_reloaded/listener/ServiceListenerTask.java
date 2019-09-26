@@ -13,14 +13,15 @@ import javax.jms.TopicConnection;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import it.cnr.isti.labsedc.glimpse_reloaded.event.GlimpseEvaluationRequestEvent;
 import it.cnr.isti.labsedc.glimpse_reloaded.register.ChannelsManagementRegistry;
+import it.cnr.isti.labsedc.glimpse_reloaded.register.QueueAndProperties;
 import it.cnr.isti.labsedc.glimpse_reloaded.utils.RoutingUtilities;
 
 public class ServiceListenerTask implements Runnable, MessageListener {
 
 
 	private String channelTaskName;
-	private Session receiverSession;
 	private TopicConnection receiverConnection;
     private static final Logger logger = LogManager.getLogger(ServiceListenerTask.class);
 
@@ -58,7 +59,14 @@ public class ServiceListenerTask implements Runnable, MessageListener {
 	public void onMessage(Message message) {
 
 		if (message instanceof ObjectMessage) {
-			RoutingUtilities.BestCepSelection(message);
+			ObjectMessage casted = (ObjectMessage)message;
+			try {
+				if (casted.getObject() != null && (casted.getObject() instanceof GlimpseEvaluationRequestEvent<?>)) {
+					forwardRequestToCEP(RoutingUtilities.BestCepSelection((GlimpseEvaluationRequestEvent<?>)casted.getObject()), (GlimpseEvaluationRequestEvent<?>)casted.getObject());
+				}
+			} catch (JMSException e) {
+				e.printStackTrace();
+			}
 		}
 
 
@@ -70,6 +78,12 @@ public class ServiceListenerTask implements Runnable, MessageListener {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	private void forwardRequestToCEP(QueueAndProperties whereToForward, GlimpseEvaluationRequestEvent<?> messageToForward) {
+
+
+
 	}
 
 

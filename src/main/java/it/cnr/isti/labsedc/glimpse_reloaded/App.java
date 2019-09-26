@@ -1,12 +1,5 @@
 package it.cnr.isti.labsedc.glimpse_reloaded;
 
-import java.net.URI;
-
-import javax.jms.Destination;
-import javax.jms.Message;
-import javax.jms.MessageProducer;
-import javax.jms.Session;
-
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -29,7 +22,6 @@ public class App
 	private static StorageController storage;
 	private static BrokerManager broker;
 	private static ComplexEventProcessorManager cep;
-	private static ComplexEventProcessorManager cepTwo;
 	private static ClientManager clientMan;
 	private static NotificationManager notificationMan;
 	private static WebInterfaceManager web;
@@ -39,7 +31,7 @@ public class App
 	private static Long maxCacheUsage;
 	private static ChannelsManagementRegistry channelRegistry;
 	private static ActiveMQConnectionFactory factory;
-    private static final Logger logger = LogManager.getLogger(App.class);
+    public static final Logger logger = LogManager.getRootLogger();
 	private static final boolean SHUTDOWN = false;
 
 
@@ -50,21 +42,21 @@ public class App
     	maxCacheUsage = 128000l;
     	factory = new ActiveMQConnectionFactory(brokerUrl);
 
-    	StartComponents();
+    	logger.info("Starting components");
+    	StartComponents(factory, brokerUrl, maxMemoryUsage, maxCacheUsage);
     }
 
-	private static void StartComponents() throws InterruptedException {
+	public static void StartComponents(ActiveMQConnectionFactory factory, String brokerUrl, long maxMemoryUsage, long maxCacheUsage) throws InterruptedException {
 
 		storage = new InfluxDBStorageController();
-
 	    broker = new ActiveMQBrokerManager(brokerUrl, maxMemoryUsage, maxCacheUsage);
     	broker.run();
-    	System.out.println("asd");
     	channelRegistry = new ChannelsManagementRegistry();
     	channelRegistry.setConnectionFactory(factory);
 
     	//STARTING CEP ONE
-    	cep = new DroolsComplexEventProcessorManager("InstanceOne", "/home/acalabro/workspace/glimpse_reloaded/src/main/resources/startupRule.drl");
+    	System.out.println(System.getProperty("user.dir"));
+    	cep = new DroolsComplexEventProcessorManager("InstanceOne", System.getProperty("user.dir")+ "/src/main/resources/startupRule.drl");
     	cep.start();
 
     	while (!cep.cepHasCompletedStartup()) {
@@ -73,7 +65,7 @@ public class App
     	}
 
     	//STARTING CEP TWO
-    	cep = new DroolsComplexEventProcessorManager("InstanceTwo", "/home/acalabro/workspace/glimpse_reloaded/src/main/resources/startupRule.drl");
+    	cep = new DroolsComplexEventProcessorManager("InstanceTwo", System.getProperty("user.dir")+ "/src/main/resources/startupRule.drl");
     	cep.start();
 
     	while (!cep.cepHasCompletedStartup()) {
@@ -83,7 +75,7 @@ public class App
 
 
     	//STARTING CEP THREE
-    	cep = new DroolsComplexEventProcessorManager("InstanceThree", "/home/acalabro/workspace/glimpse_reloaded/src/main/resources/startupRule.drl");
+    	cep = new DroolsComplexEventProcessorManager("InstanceThree", System.getProperty("user.dir")+ "/src/main/resources/startupRule.drl");
     	cep.start();
 
 

@@ -17,7 +17,7 @@ public class InfluxDBStorageController implements StorageController {
 	}
 
 	@Override
-	public boolean saveMessage(Event message) {
+	public boolean saveMessage(Event<?> message) {
 		// TODO Auto-generated method stub
 		return false;
 	}
