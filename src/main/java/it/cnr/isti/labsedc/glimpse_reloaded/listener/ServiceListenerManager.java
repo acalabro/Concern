@@ -8,6 +8,8 @@ import java.util.concurrent.Executors;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import it.cnr.isti.labsedc.glimpse_reloaded.App;
+
 public class ServiceListenerManager extends Thread {
 
 	private Vector<String> loadChannels;
@@ -27,6 +29,7 @@ public class ServiceListenerManager extends Thread {
 				Runnable worker = new ServiceListenerTask(loadChannels.get(i));
 				executor.execute(worker);
 			}
+			App.componentStarted.put(this.getClass().getSimpleName(), true);
 			while(!ServiceListenerManager.killAll) {
 			}
 			logger.info("KILALLLLLLLL");

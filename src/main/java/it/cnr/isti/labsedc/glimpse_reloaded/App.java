@@ -1,5 +1,7 @@
 package it.cnr.isti.labsedc.glimpse_reloaded;
 
+import java.util.HashMap;
+
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -33,7 +35,7 @@ public class App
 	private static ActiveMQConnectionFactory factory;
     public static final Logger logger = LogManager.getRootLogger();
 	private static final boolean SHUTDOWN = false;
-
+	public static HashMap<String, Boolean> componentStarted = new HashMap<String, Boolean>();
 
     public static void main( String[] args ) throws InterruptedException
     {
@@ -55,7 +57,6 @@ public class App
     	channelRegistry.setConnectionFactory(factory);
 
     	//STARTING CEP ONE
-    	System.out.println(System.getProperty("user.dir"));
     	cep = new DroolsComplexEventProcessorManager("InstanceOne", System.getProperty("user.dir")+ "/src/main/resources/startupRule.drl");
     	cep.start();
 
@@ -91,6 +92,8 @@ public class App
 	    	ActiveMQBrokerManager.StopActiveMQBroker();
 	    	System.exit(0);
     	}
+
+
 
 	}
 }

@@ -3,6 +3,8 @@ package it.cnr.isti.labsedc.glimpse_reloaded.gui;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 import it.cnr.isti.labsedc.glimpse_reloaded.App;
@@ -15,16 +17,24 @@ import java.awt.Window.Type;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
-import java.awt.Label;
-import javax.swing.JCheckBox;
 import java.awt.Font;
+
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.JProgressBar;
+import javax.swing.JScrollPane;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
+import java.awt.FlowLayout;
 
 public class Main {
 
 	private JFrame frmGlimpseReloaded;
-
+	private JTextArea textArea = new JTextArea();
+	JProgressBar progressBar = new JProgressBar();
 	/**
 	 * Launch the application.
 	 */
@@ -43,15 +53,22 @@ public class Main {
 
 	/**
 	 * Create the application.
+	 * @throws IOException
 	 */
-	public Main() {
+	public Main() throws IOException {
 		initialize();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
+	 * @throws IOException
 	 */
-	private void initialize() {
+	private void initialize() throws IOException {
+		PrintStream printStream = new PrintStream(new CustomOutputStream(textArea));
+		System.setOut(printStream);
+		System.setErr(printStream);
+
+		progressBar.setSize(200, 20);
 		frmGlimpseReloaded = new JFrame();
 		frmGlimpseReloaded.setType(Type.UTILITY);
 		frmGlimpseReloaded.setFont(new Font("Verdana", Font.PLAIN, 14));
@@ -63,13 +80,15 @@ public class Main {
 
 		Panel panel = new Panel();
 		panel.setBackground(new Color(23, 35, 54));
-		panel.setBounds(0, 0, 190, 590);
+		panel.setBounds(0, 0, 220, 590);
 		frmGlimpseReloaded.getContentPane().add(panel);
 
-		JButton btnNewButton = new JButton("RUN");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton runButton = new JButton("RUN");
+		runButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
+					runButton.setEnabled(false);
+					progressBar.setIndeterminate(true);
 					App.main(null);
 					} catch (InterruptedException e) {
 					e.printStackTrace();
@@ -78,66 +97,23 @@ public class Main {
 
 		});
 
-		Label label = new Label("                                         ");
-				label.setForeground(new Color(0, 0, 0));
-				panel.add(label);
+		BufferedImage logo = ImageIO.read(new File(System.getProperty("user.dir")+ "/src/main/resources/binoculars.png"));
+		JLabel image = new JLabel(new ImageIcon(logo));
+		panel.add(image);
 
-		Label label_1 = new Label("                                         ");
-		label_1.setForeground(Color.BLACK);
-		panel.add(label_1);
+		BufferedImage components = ImageIO.read(new File(System.getProperty("user.dir")+ "/src/main/resources/algorithm.png"));
+		JLabel component = new JLabel(new ImageIcon(components));
+		panel.add(component);
+		panel.add(progressBar);
 
-		JLabel lblComponentStatus_1 = new JLabel("COMPONENT STATUS");
-		lblComponentStatus_1.setFont(new Font("Verdana", Font.PLAIN, 12));
-		lblComponentStatus_1.setForeground(new Color(255, 255, 255));
-		panel.add(lblComponentStatus_1);
-
-		Label label_2 = new Label("-----------------------------------");
-		label_2.setForeground(new Color(255, 255, 255));
-		panel.add(label_2);
-
-		JCheckBox chckbxNewCheckBox = new JCheckBox("STORAGE");
-		chckbxNewCheckBox.setFont(new Font("URW Gothic L", Font.BOLD, 12));
-		chckbxNewCheckBox.setForeground(new Color(255, 255, 255));
-		chckbxNewCheckBox.setBackground(new Color(23, 35, 54));
-		chckbxNewCheckBox.setVerticalAlignment(SwingConstants.BOTTOM);
-		chckbxNewCheckBox.setHorizontalAlignment(SwingConstants.TRAILING);
-		panel.add(chckbxNewCheckBox);
-
-		JCheckBox chckbxNewCheckBox_1 = new JCheckBox("MESSAGE BROKER");
-		chckbxNewCheckBox_1.setFont(new Font("URW Gothic L", Font.BOLD, 12));
-		chckbxNewCheckBox_1.setBackground(new Color(23, 35, 54));
-		chckbxNewCheckBox_1.setForeground(new Color(255, 255, 255));
-		panel.add(chckbxNewCheckBox_1);
-
-		JCheckBox chckbxNewCheckBox_2 = new JCheckBox("CHANNEL REGISTRY");
-		chckbxNewCheckBox_2.setFont(new Font("URW Gothic L", Font.BOLD, 12));
-		chckbxNewCheckBox_2.setBackground(new Color(23, 35, 54));
-		chckbxNewCheckBox_2.setForeground(new Color(255, 255, 255));
-		panel.add(chckbxNewCheckBox_2);
-
-		JCheckBox chckbxNewCheckBox_3 = new JCheckBox("CEP INSTANCES");
-		chckbxNewCheckBox_3.setFont(new Font("URW Gothic L", Font.BOLD, 12));
-		chckbxNewCheckBox_3.setBackground(new Color(23, 35, 54));
-		chckbxNewCheckBox_3.setForeground(new Color(255, 255, 255));
-		panel.add(chckbxNewCheckBox_3);
-
-		JCheckBox chckbxNewCheckBox_4 = new JCheckBox("SERVICE LISTENERS");
-		chckbxNewCheckBox_4.setFont(new Font("URW Gothic L", Font.BOLD, 12));
-		chckbxNewCheckBox_4.setBackground(new Color(23, 35, 54));
-		chckbxNewCheckBox_4.setForeground(new Color(255, 255, 255));
-		panel.add(chckbxNewCheckBox_4);
-
-		JCheckBox chckbxNewCheckBox_5 = new JCheckBox("NOTIFICATION ENGINE");
-		chckbxNewCheckBox_5.setFont(new Font("URW Gothic L", Font.BOLD, 12));
-		chckbxNewCheckBox_5.setBackground(new Color(23, 35, 54));
-		chckbxNewCheckBox_5.setForeground(new Color(255, 255, 255));
-		panel.add(chckbxNewCheckBox_5);
-		panel.add(btnNewButton);
-
-		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(new Color(113, 168, 255));
-		panel_1.setBounds(189, 51, 705, 64);
-		frmGlimpseReloaded.getContentPane().add(panel_1);
+		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(new Color(23, 35, 54));
+		FlowLayout flowLayout = (FlowLayout) panel_2.getLayout();
+		flowLayout.setAlignment(FlowLayout.LEADING);
+		flowLayout.setVgap(150);
+		flowLayout.setHgap(90);
+		panel.add(panel_2);
+		panel.add(runButton);
 
 		JLabel lblNewLabel = new JLabel("Glimpse - Complex Event Processing Infrastructure");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -146,14 +122,58 @@ public class Main {
 		lblNewLabel.setBounds(189, 0, 705, 50);
 		frmGlimpseReloaded.getContentPane().add(lblNewLabel);
 
-		JTextArea textArea = new JTextArea();
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(113, 168, 255));
+		panel_1.setBounds(219, 51, 675, 64);
+
+		BufferedImage broker = ImageIO.read(new File(System.getProperty("user.dir")+ "/src/main/resources/broker.png"));
+		JLabel brokerim = new JLabel(new ImageIcon(broker));
+		panel_1.add(brokerim);
+
+		BufferedImage notification = ImageIO.read(new File(System.getProperty("user.dir")+ "/src/main/resources/notification.png"));
+		JLabel notificationim = new JLabel(new ImageIcon(notification));
+		panel_1.add(notificationim);
+
+		BufferedImage web = ImageIO.read(new File(System.getProperty("user.dir")+ "/src/main/resources/web.png"));
+		JLabel webim = new JLabel(new ImageIcon(web));
+		panel_1.add(webim);
+
+		BufferedImage channel = ImageIO.read(new File(System.getProperty("user.dir")+ "/src/main/resources/channel.png"));
+		JLabel channelim = new JLabel(new ImageIcon(channel));
+		panel_1.add(channelim);
+
+		BufferedImage storage = ImageIO.read(new File(System.getProperty("user.dir")+ "/src/main/resources/storage.png"));
+		JLabel storageim = new JLabel(new ImageIcon(storage));
+		panel_1.add(storageim);
+
+		frmGlimpseReloaded.getContentPane().add(panel_1);
+
 		textArea.setForeground(new Color(50, 205, 50));
 		textArea.setFont(new Font("Courier 10 Pitch", Font.PLAIN, 12));
 		textArea.setBackground(new Color(0, 0, 0));
-		textArea.setRows(8);
-		textArea.setLineWrap(true);
 		textArea.setEditable(false);
 		textArea.setBounds(189, 481, 705, 110);
-		frmGlimpseReloaded.getContentPane().add(textArea);
+		JScrollPane console = new JScrollPane(textArea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		console.setSize(675, 160);
+		console.setLocation(220, 430);
+		frmGlimpseReloaded.getContentPane().add(console);
+	}
+
+	class CustomOutputStream extends OutputStream {
+	    private JTextArea textArea;
+
+	    public CustomOutputStream(JTextArea textArea) {
+	        this.textArea = textArea;
+	    }
+
+	    @Override
+	    public void write(int b) throws IOException {
+	        // redirects data to the text area
+	        textArea.append(String.valueOf((char)b));
+	        // scrolls the text area to the end of data
+	        textArea.setCaretPosition(textArea.getDocument().getLength());
+	        // keeps the textArea up to date
+	        textArea.update(textArea.getGraphics());
+	    }
 	}
 }

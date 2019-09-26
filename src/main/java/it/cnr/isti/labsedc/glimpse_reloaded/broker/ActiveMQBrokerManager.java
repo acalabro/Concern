@@ -11,6 +11,7 @@ import org.apache.activemq.usage.SystemUsage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import it.cnr.isti.labsedc.glimpse_reloaded.App;
 import it.cnr.isti.labsedc.glimpse_reloaded.cep.DroolsComplexEventProcessorManager;
 
 public class ActiveMQBrokerManager implements BrokerManager, Runnable {
@@ -54,6 +55,7 @@ public class ActiveMQBrokerManager implements BrokerManager, Runnable {
 			connectionFactory = new ActiveMQSslConnectionFactory(ACTIVEMQ_HOST);
 			connectionFactory.setTrustAllPackages(true);
 			connectionFactory.createConnection();
+			App.componentStarted.put(this.getClass().getSimpleName(), true);
 
 		} catch (Exception e) {
 			logger.error(e.getCause());
