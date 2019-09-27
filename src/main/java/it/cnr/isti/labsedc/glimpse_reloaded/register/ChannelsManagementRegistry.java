@@ -1,5 +1,7 @@
 package it.cnr.isti.labsedc.glimpse_reloaded.register;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 import javax.jms.JMSException;
@@ -12,13 +14,14 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import it.cnr.isti.labsedc.glimpse_reloaded.App;
+import it.cnr.isti.labsedc.glimpse_reloaded.cep.CepType;
 import it.cnr.isti.labsedc.glimpse_reloaded.listener.ServiceChannelProperties;
 
 public class ChannelsManagementRegistry {
 
 	private static Logger logger ;
 	public static HashMap<String, QueueAndProperties> ActiveQueues;
-	public static HashMap<String, QueueAndProperties> ActiveCep;
+	public static HashMap<QueueAndProperties, String> ActiveCep;
 	public static HashMap<ServiceChannelProperties, String> ActiveServicesChannel;
 	public static HashMap<Session, TopicConnection> ActiveSessions;
 	public static HashMap<String, String> ConsumersChannels;
@@ -32,8 +35,8 @@ public class ChannelsManagementRegistry {
 		ActiveQueues = new HashMap<String, QueueAndProperties>();
 		//creator and queue name
 
-		ActiveCep = new HashMap<String, QueueAndProperties>();
-		//cep available on the infrastructure
+		ActiveCep = new HashMap<QueueAndProperties, String>();
+		//cep available on the infrastructure- the string is the queueName
 
 		ActiveServicesChannel = new HashMap<ServiceChannelProperties, String>();
 		//channel on which the system will listen for incoming messages organized by service (requests to forward to a specific cep)
@@ -58,7 +61,10 @@ public class ChannelsManagementRegistry {
 		return connectionFactory;
 	}
 
-	public static TopicConnection GetNewTopicConnection() throws JMSException {
+	public static TopicConnection GetNewTopicConnection(String username, String password) throws JMSException {
+		ChannelsManagementRegistry.connectionFactory.setTrustedPackages(new ArrayList<String>(Arrays.asList("it.cnr.isti.labsedc.glimpse_reloaded.event,it.cnr.isti.labsedc.glimpse_reloaded.cep,it.cnr.isti.labsedc.glimpse_reloaded.listener".split(","))));
+		ChannelsManagementRegistry.connectionFactory.setUserName(username);
+		ChannelsManagementRegistry.connectionFactory.setUserName(password);
 		return  ChannelsManagementRegistry.connectionFactory.createTopicConnection();
 	}
 
@@ -71,7 +77,7 @@ public class ChannelsManagementRegistry {
 
 	public static Queue GetNewSessionQueue(String creator, Session receiverSession, String queueName, ServiceChannelProperties property) throws JMSException {
 		Queue queue = receiverSession.createQueue(queueName);
-		ChannelsManagementRegistry.ActiveQueues.put(creator,new QueueAndProperties(queueName,property));
+		//ChannelsManagementRegistry.ActiveQueues.put(creator,new QueueAndProperties(queueName,property));
 		return queue;
 	}
 
@@ -82,9 +88,9 @@ public class ChannelsManagementRegistry {
 	}
 
 	public static Queue RegisterNewCepQueue(String CepIdentifier, Session receiverSession, String queueName,
-			ServiceChannelProperties properties) throws JMSException {
+			ServiceChannelProperties channelProperties, CepType cepType) throws JMSException {
 		Queue queue = receiverSession.createQueue(queueName);
-		ChannelsManagementRegistry.ActiveCep.put(CepIdentifier,new QueueAndProperties(queueName,properties));
+		ChannelsManagementRegistry.ActiveCep.put(new QueueAndProperties(CepIdentifier,channelProperties, cepType), queueName);
 		return queue;
 	}
 }

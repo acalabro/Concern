@@ -13,11 +13,15 @@ import it.cnr.isti.labsedc.glimpse_reloaded.App;
 public class ServiceListenerManager extends Thread {
 
 	private Vector<String> loadChannels;
+	private String username;
+	private String password;
 	private static boolean killAll = true;
     private static final Logger logger = LogManager.getLogger(ServiceListenerManager.class);
 
-	public ServiceListenerManager(Vector<String> loadChannels) {
+	public ServiceListenerManager(Vector<String> loadChannels, String connectionUsername, String connectionPassword) {
 		this.loadChannels = loadChannels;
+		this.username = connectionUsername;
+		this.password = connectionPassword;
 	}
 
 	public void run() {
@@ -26,7 +30,7 @@ public class ServiceListenerManager extends Thread {
 			ExecutorService executor = Executors.newFixedThreadPool(loadChannels.size());
 			logger.info("Creating executors");
 			for (int i = 0; i< loadChannels.size(); i++) {
-				Runnable worker = new ServiceListenerTask(loadChannels.get(i));
+				Runnable worker = new ServiceListenerTask(loadChannels.get(i), username, password);
 				executor.execute(worker);
 			}
 			App.componentStarted.put(this.getClass().getSimpleName(), true);

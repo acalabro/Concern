@@ -1,29 +1,32 @@
 package it.cnr.isti.labsedc.glimpse_reloaded.event;
 
+import java.io.Serializable;
+
 import it.cnr.isti.labsedc.glimpse_reloaded.cep.CepType;
 
-public abstract class GlimpseBasicEvent<T> implements Event<T> {
+public abstract class GlimpseBasicEvent<T> implements Event<T>, Serializable {
 
+	private static final long serialVersionUID = 7077313246352116557L;
 	private String checksum;
 	private String sender;
 	private CepType cepType;
 	private long timestamp;
-	protected T data;
+	private T data;
 
 
 	public GlimpseBasicEvent(T data,CepType type,String senderID, String checksum, long timestamp) {
-		this.data = data;
-		this.timestamp = timestamp;
+		this.setEventData(data);
+		this.setTimestamp(timestamp);
 		this.setCepType(type);
-		this.setSender(senderID);
+		this.setSenderID(senderID);
 		this.setChecksum(checksum);
 	}
 
-	public T getData() {
+	public T getEventData() {
 		return data;
 	}
 
-	public void setData(T data) {
+	public void setEventData(T data) {
 		this.data = data;
 	}
 
@@ -42,11 +45,11 @@ public abstract class GlimpseBasicEvent<T> implements Event<T> {
 		this.cepType = cepType;
 	}
 
-	public String getSender() {
+	public String getSenderID() {
 		return sender;
 	}
 
-	public void setSender(String sender) {
+	public void setSenderID(String sender) {
 		this.sender = sender;
 	}
 

@@ -4,6 +4,7 @@ import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageConsumer;
 import javax.jms.MessageListener;
+import javax.jms.MessageProducer;
 import javax.jms.ObjectMessage;
 import javax.jms.Queue;
 import javax.jms.Session;
@@ -15,7 +16,6 @@ import org.apache.logging.log4j.Logger;
 
 import it.cnr.isti.labsedc.glimpse_reloaded.event.GlimpseEvaluationRequestEvent;
 import it.cnr.isti.labsedc.glimpse_reloaded.register.ChannelsManagementRegistry;
-import it.cnr.isti.labsedc.glimpse_reloaded.register.QueueAndProperties;
 import it.cnr.isti.labsedc.glimpse_reloaded.utils.RoutingUtilities;
 
 public class ServiceListenerTask implements Runnable, MessageListener {
@@ -23,11 +23,17 @@ public class ServiceListenerTask implements Runnable, MessageListener {
 
 	private String channelTaskName;
 	private TopicConnection receiverConnection;
+	private String username;
+	private String password;
     private static final Logger logger = LogManager.getLogger(ServiceListenerTask.class);
+    private static MessageProducer producer;
+    private static MessageConsumer consumer;
+    private static Session receiverSession;
 
-
-	public ServiceListenerTask(String channelTaskName) {
+	public ServiceListenerTask(String channelTaskName, String connectionUsername, String connectionPassword) {
 		this.channelTaskName = channelTaskName;
+		this.username = connectionUsername;
+		this.password = connectionPassword;
 	}
 
 	public String getChannelTaskName() {
@@ -38,11 +44,11 @@ public class ServiceListenerTask implements Runnable, MessageListener {
 
 		logger.info("...within the executor named " + this.getChannelTaskName());
 		try {
-			receiverConnection = ChannelsManagementRegistry.GetNewTopicConnection();
-			Session receiverSession = ChannelsManagementRegistry.GetNewSession(receiverConnection);
+			receiverConnection = ChannelsManagementRegistry.GetNewTopicConnection(username, password);
+			receiverSession = ChannelsManagementRegistry.GetNewSession(receiverConnection);
 
 			Queue queue = ChannelsManagementRegistry.GetNewSessionQueue(this.toString(), receiverSession,channelTaskName, ServiceChannelProperties.GENERICREQUESTS);
-			MessageConsumer consumer = receiverSession.createConsumer(queue);
+			consumer = receiverSession.createConsumer(queue);
 			//RegisterForCommunicationChannels.ServiceListeningOnWhichChannel.put(key, value)
 			logger.info("...consumer named " + consumer.toString() + " created within the executor named " + this.getChannelTaskName());
 
@@ -62,7 +68,12 @@ public class ServiceListenerTask implements Runnable, MessageListener {
 			ObjectMessage casted = (ObjectMessage)message;
 			try {
 				if (casted.getObject() != null && (casted.getObject() instanceof GlimpseEvaluationRequestEvent<?>)) {
-					forwardRequestToCEP(RoutingUtilities.BestCepSelection((GlimpseEvaluationRequestEvent<?>)casted.getObject()), (GlimpseEvaluationRequestEvent<?>)casted.getObject());
+					GlimpseEvaluationRequestEvent<?> incomingRequest = (GlimpseEvaluationRequestEvent<?>)casted.getObject();
+
+					String queueWhereToForward= RoutingUtilities.BestCepSelection(incomingRequest);
+					if (queueWhereToForward != null) {
+						forwardToCep(queueWhereToForward, message);
+					}
 				}
 			} catch (JMSException e) {
 				e.printStackTrace();
@@ -80,11 +91,16 @@ public class ServiceListenerTask implements Runnable, MessageListener {
 		}
 	}
 
-	private void forwardRequestToCEP(QueueAndProperties whereToForward, GlimpseEvaluationRequestEvent<?> messageToForward) {
-
-
-
+	private void forwardToCep(String queueWhereToForward, Message message) {
+		try {
+	        Queue queue = receiverSession.createQueue(queueWhereToForward);
+			producer = receiverSession.createProducer(queue);
+			System.out.println("Send: " + queue.getQueueName() + " ------ " + queueWhereToForward);
+			message.setJMSDestination(queue);
+			producer.send(message);
+		} catch (JMSException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
-
-
 }

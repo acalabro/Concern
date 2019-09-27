@@ -41,18 +41,22 @@ public class DroolsComplexEventProcessorManager extends ComplexEventProcessorMan
 	private String instanceName;
 	private String staticRuleToLoadAtStartup;
 	private boolean started = false;
+	private String username;
+	private String password;
 
 	private static KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
     private static Collection<KiePackage> pkgs;
     private static InternalKnowledgeBase kbase = KnowledgeBaseFactory.newKnowledgeBase();
     private static KieSession ksession;
 
-	public DroolsComplexEventProcessorManager(String instanceName, String staticRuleToLoadAtStartup) {
+	public DroolsComplexEventProcessorManager(String instanceName, String staticRuleToLoadAtStartup, String connectionUsername, String connectionPassword) {
 		super();
 		logger.info("asd");
 		cep = CepType.DROOLS;
 		this.instanceName = instanceName;
 		this.staticRuleToLoadAtStartup = staticRuleToLoadAtStartup;
+		this.username = connectionUsername;
+		this.password = connectionPassword;
 	}
 
 	public String getInstanceName() {
@@ -93,10 +97,10 @@ public class DroolsComplexEventProcessorManager extends ComplexEventProcessorMan
 	}
 
 	private void communicationSetup() throws JMSException {
-		receiverConnection = ChannelsManagementRegistry.GetNewTopicConnection();
+		receiverConnection = ChannelsManagementRegistry.GetNewTopicConnection(username, password);
 
 		receiverSession = ChannelsManagementRegistry.GetNewSession(receiverConnection);
-		queue = ChannelsManagementRegistry.RegisterNewCepQueue(this.cep.name()+"-"+instanceName, receiverSession, "DroolsService-"+instanceName, ServiceChannelProperties.GENERICREQUESTS);
+		queue = ChannelsManagementRegistry.RegisterNewCepQueue(this.cep.name()+"-"+instanceName, receiverSession, "DroolsService-"+instanceName, ServiceChannelProperties.GENERICREQUESTS, cep);
 		logger.info("...CEP named " + this.getInstanceName() + " creates a listening channel called: " + queue.getQueueName());
 		MessageConsumer complexEventProcessorReceiver = receiverSession.createConsumer(queue);
 		complexEventProcessorReceiver.setMessageListener(this);

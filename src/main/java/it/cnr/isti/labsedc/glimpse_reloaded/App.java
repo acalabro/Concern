@@ -36,6 +36,8 @@ public class App
     public static final Logger logger = LogManager.getRootLogger();
 	private static final boolean SHUTDOWN = false;
 	public static HashMap<String, Boolean> componentStarted = new HashMap<String, Boolean>();
+	private static String username;
+	private static String password;
 
     public static void main( String[] args ) throws InterruptedException
     {
@@ -43,6 +45,8 @@ public class App
     	maxMemoryUsage = 128000l;
     	maxCacheUsage = 128000l;
     	factory = new ActiveMQConnectionFactory(brokerUrl);
+    	username = "vera";
+    	password = "griselda";
 
     	logger.info("Starting components");
     	StartComponents(factory, brokerUrl, maxMemoryUsage, maxCacheUsage);
@@ -51,13 +55,13 @@ public class App
 	public static void StartComponents(ActiveMQConnectionFactory factory, String brokerUrl, long maxMemoryUsage, long maxCacheUsage) throws InterruptedException {
 
 		storage = new InfluxDBStorageController();
-	    broker = new ActiveMQBrokerManager(brokerUrl, maxMemoryUsage, maxCacheUsage);
+	    broker = new ActiveMQBrokerManager(brokerUrl, maxMemoryUsage, maxCacheUsage, username, password);
     	broker.run();
     	channelRegistry = new ChannelsManagementRegistry();
     	channelRegistry.setConnectionFactory(factory);
 
     	//STARTING CEP ONE
-    	cep = new DroolsComplexEventProcessorManager("InstanceOne", System.getProperty("user.dir")+ "/src/main/resources/startupRule.drl");
+    	cep = new DroolsComplexEventProcessorManager("InstanceOne", System.getProperty("user.dir")+ "/src/main/resources/startupRule.drl", username, password);
     	cep.start();
 
     	while (!cep.cepHasCompletedStartup()) {
@@ -66,7 +70,7 @@ public class App
     	}
 
     	//STARTING CEP TWO
-    	cep = new DroolsComplexEventProcessorManager("InstanceTwo", System.getProperty("user.dir")+ "/src/main/resources/startupRule.drl");
+    	cep = new DroolsComplexEventProcessorManager("InstanceTwo", System.getProperty("user.dir")+ "/src/main/resources/startupRule.drl", username, password);
     	cep.start();
 
     	while (!cep.cepHasCompletedStartup()) {
@@ -76,11 +80,11 @@ public class App
 
 
     	//STARTING CEP THREE
-    	cep = new DroolsComplexEventProcessorManager("InstanceThree", System.getProperty("user.dir")+ "/src/main/resources/startupRule.drl");
+    	cep = new DroolsComplexEventProcessorManager("InstanceThree", System.getProperty("user.dir")+ "/src/main/resources/startupRule.drl", username, password);
     	cep.start();
 
 
-    	lcManager = new ServiceListenerManager(ChannelUtilities.loadChannels());
+    	lcManager = new ServiceListenerManager(ChannelUtilities.loadChannels(), username, password);
     	lcManager.start();
 
     	clientMan = new ClientManager();
