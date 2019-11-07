@@ -10,23 +10,18 @@ import it.cnr.isti.labsedc.glimpse_reloaded.broker.ActiveMQBrokerManager;
 import it.cnr.isti.labsedc.glimpse_reloaded.broker.BrokerManager;
 import it.cnr.isti.labsedc.glimpse_reloaded.cep.ComplexEventProcessorManager;
 import it.cnr.isti.labsedc.glimpse_reloaded.cep.DroolsComplexEventProcessorManager;
-import it.cnr.isti.labsedc.glimpse_reloaded.client.ClientManager;
 import it.cnr.isti.labsedc.glimpse_reloaded.listener.ServiceListenerManager;
-import it.cnr.isti.labsedc.glimpse_reloaded.notification.NotificationManager;
 import it.cnr.isti.labsedc.glimpse_reloaded.register.ChannelsManagementRegistry;
-import it.cnr.isti.labsedc.glimpse_reloaded.storage.InfluxDBStorageController;
-import it.cnr.isti.labsedc.glimpse_reloaded.storage.StorageController;
 import it.cnr.isti.labsedc.glimpse_reloaded.utils.ChannelUtilities;
-import it.cnr.isti.labsedc.glimpse_reloaded.web.WebInterfaceManager;
 
 public class App
 {
-	private static StorageController storage;
+	//private static StorageController storage;
 	private static BrokerManager broker;
 	private static ComplexEventProcessorManager cep;
-	private static ClientManager clientMan;
-	private static NotificationManager notificationMan;
-	private static WebInterfaceManager web;
+	//private static ClientManager clientMan;
+	//private static NotificationManager notificationMan;
+	//private static WebInterfaceManager web;
 	private static ServiceListenerManager lcManager;
 	private static String brokerUrl;
 	private static Long maxMemoryUsage;
@@ -54,7 +49,7 @@ public class App
 
 	public static void StartComponents(ActiveMQConnectionFactory factory, String brokerUrl, long maxMemoryUsage, long maxCacheUsage) throws InterruptedException {
 
-		storage = new InfluxDBStorageController();
+		//storage = new InfluxDBStorageController();
 	    broker = new ActiveMQBrokerManager(brokerUrl, maxMemoryUsage, maxCacheUsage, username, password);
     	broker.run();
     	channelRegistry = new ChannelsManagementRegistry();
@@ -78,7 +73,6 @@ public class App
     		System.out.println("wait for Second CEP start");
     	}
 
-
     	//STARTING CEP THREE
     	cep = new DroolsComplexEventProcessorManager("InstanceThree", System.getProperty("user.dir")+ "/src/main/resources/startupRule.drl", username, password);
     	cep.start();
@@ -87,17 +81,16 @@ public class App
     	lcManager = new ServiceListenerManager(ChannelUtilities.loadChannels(), username, password);
     	lcManager.start();
 
+    	/*
     	clientMan = new ClientManager();
     	notificationMan = new NotificationManager();
     	web = new WebInterfaceManager();
-
+    	 */
+    	
     	if(SHUTDOWN) {
 	    	ServiceListenerManager.killAllServiceListeners();
 	    	ActiveMQBrokerManager.StopActiveMQBroker();
 	    	System.exit(0);
     	}
-
-
-
 	}
 }
