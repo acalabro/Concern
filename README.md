@@ -1,2 +1,2 @@
 # glimpse_reloaded
-works on Java 14
+Works on Java 14
