@@ -43,13 +43,6 @@ public class Producer {
 	public static void main(String[] args) throws InterruptedException {
 		String brokerUrl = "tcp://localhost:61616";
 
-/*
-		testProducer(brokerUrl, "DroolsService-InstanceOne", "vera", "griselda");
-		Thread.sleep(500);
-		testProducer(brokerUrl, "DroolsService-InstanceTwo", "vera", "griselda");
-		Thread.sleep(500);
-*/
-
 		testProducer(brokerUrl, "ServiceChannel-ONE", "vera", "griselda");
 		Thread.sleep(500);
 		testProducer(brokerUrl, "ServiceChannel-TWO", "vera", "griselda");
