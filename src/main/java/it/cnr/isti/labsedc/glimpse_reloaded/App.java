@@ -67,7 +67,7 @@ public class App
 
 
     	//STARTING CEP ONE
-    	cep = new DroolsComplexEventProcessorManager("InstanceOne", System.getProperty("user.dir")+ "/src/main/resources/startupRule.drl", username, password);
+    	cep = new DroolsComplexEventProcessorManager("InstanceOne", System.getProperty("user.dir")+ "/../src/main/resources/startupRule.drl", username, password);
     	cep.start();
 
     	while (!cep.cepHasCompletedStartup()) {
