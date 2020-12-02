@@ -51,7 +51,7 @@ public class DroolsComplexEventProcessorManager extends ComplexEventProcessorMan
 
 	public DroolsComplexEventProcessorManager(String instanceName, String staticRuleToLoadAtStartup, String connectionUsername, String connectionPassword) {
 		super();
-		logger.info("asd");
+		logger.info("CEP creation ");
 		cep = CepType.DROOLS;
 		this.instanceName = instanceName;
 		this.staticRuleToLoadAtStartup = staticRuleToLoadAtStartup;

@@ -32,6 +32,7 @@ public class ChannelsManagementRegistry {
 	public ChannelsManagementRegistry() {
 		logger = LogManager.getLogger(ChannelsManagementRegistry.class);
 
+    	logger.debug("into " + this.getClass().getSimpleName());
 		ActiveQueues = new HashMap<String, QueueAndProperties>();
 		//creator and queue name
 
@@ -49,8 +50,11 @@ public class ChannelsManagementRegistry {
 
 		ProbesChannels = new HashMap<String, String>();
 		//channels available for probes
+    	logger.debug(this.getClass().getSimpleName() + " started");
 
 		App.componentStarted.put(this.getClass().getSimpleName(), true);
+
+    	logger.debug(this.getClass().getSimpleName() + " loaded in registry.");
 	}
 
 	public void setConnectionFactory(ActiveMQConnectionFactory factory) {
