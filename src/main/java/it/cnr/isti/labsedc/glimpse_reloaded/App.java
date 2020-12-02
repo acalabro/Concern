@@ -55,6 +55,8 @@ public class App
 	    System.out.println("---------------------------------> MI SONO DIMENTICATO COME CI SI SIEDE");
     	logger.debug(App.class.getSimpleName() + " is launching the broker.");
     	broker.run();
+	    System.out.println("---------------------------------> DAIDAI DAI DAI DAI DAID AID ADI ADIADI ADI AID ADI ");
+
     	logger.debug(App.class.getSimpleName() + " broker launched.");
     	channelRegistry = new ChannelsManagementRegistry();
     	logger.debug("Channels Management Registry created");
