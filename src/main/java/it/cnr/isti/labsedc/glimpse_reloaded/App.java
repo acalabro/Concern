@@ -56,6 +56,7 @@ public class App
     	channelRegistry.setConnectionFactory(factory);
 
     	//STARTING CEP ONE
+    	System.out.println("PATH: " + System.getProperty("user.dir"));
     	cep = new DroolsComplexEventProcessorManager("InstanceOne", System.getProperty("user.dir")+ "/src/main/resources/startupRule.drl", username, password);
     	cep.start();
 
