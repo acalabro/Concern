@@ -51,8 +51,8 @@ public class App
 
 		//storage = new InfluxDBStorageController();
 	    broker = new ActiveMQBrokerManager(brokerUrl, maxMemoryUsage, maxCacheUsage, username, password);
-	    System.out.println("il pupazzo gonfiabile che saluta come uno scemo");
 	    logger = LogManager.getLogger(App.class);
+	    System.out.println("---------------------------------> MI SONO DIMENTICATO COME CI SI SIEDE");
     	logger.debug(App.class.getSimpleName() + " is launching the broker.");
     	broker.run();
     	logger.debug(App.class.getSimpleName() + " broker launched.");
