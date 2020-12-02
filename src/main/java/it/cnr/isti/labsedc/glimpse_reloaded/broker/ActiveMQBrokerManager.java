@@ -24,7 +24,7 @@ public class ActiveMQBrokerManager implements BrokerManager, Runnable {
 	private static long ACTIVEMQ_MEMORY_USAGE = 0;
 	private static long ACTIVEMQ_TEMP_USAGE = 0;
 	private static String ACTIVEMQ_HOST;
-    private static final Logger logger = LogManager.getLogger(DroolsComplexEventProcessorManager.class);
+    private static final Logger logger = LogManager.getLogger(ActiveMQBrokerManager.class);
 	private static String ACTIVEMQ_LOGINNAME;
 	private static String ACTIVEMQ_PASSWORD;
 

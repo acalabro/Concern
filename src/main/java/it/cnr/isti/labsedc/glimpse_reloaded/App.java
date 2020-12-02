@@ -57,11 +57,9 @@ public class App
 
     	logger.debug(App.class.getSimpleName() + " broker launched.");
     	channelRegistry = new ChannelsManagementRegistry();
-	    System.out.println("---------------------------------> aaaaaaaaaaaaaaaaa ");
 
     	logger.debug("Channels Management Registry created");
-	    System.out.println("---------------------------------> eeeeeeeeeeeeeeeee ");
-    	System.out.println("PATH: " + System.getProperty("user.dir"));
+    	System.out.println("PATH: " + System.getProperty("user.dir")+ "/../src/main/resources/startupRule.drl");
     	channelRegistry.setConnectionFactory(factory);
 	    System.out.println("---------------------------------> uuuuuuuuuuuuuuuuuuuuu ");
 

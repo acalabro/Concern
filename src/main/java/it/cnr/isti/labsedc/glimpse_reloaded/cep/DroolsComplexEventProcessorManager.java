@@ -27,13 +27,14 @@ import org.kie.internal.builder.KnowledgeBuilderFactory;
 import org.kie.internal.io.ResourceFactory;
 
 import it.cnr.isti.labsedc.glimpse_reloaded.App;
+import it.cnr.isti.labsedc.glimpse_reloaded.broker.ActiveMQBrokerManager;
 import it.cnr.isti.labsedc.glimpse_reloaded.event.GlimpseEvaluationRequestEvent;
 import it.cnr.isti.labsedc.glimpse_reloaded.listener.ServiceChannelProperties;
 import it.cnr.isti.labsedc.glimpse_reloaded.register.ChannelsManagementRegistry;
 
 public class DroolsComplexEventProcessorManager extends ComplexEventProcessorManager implements MessageListener, MessageAuthorizationPolicy {
 
-    private static final Logger logger = LogManager.getLogger(DroolsComplexEventProcessorManager.class);
+    private static Logger logger = LogManager.getLogger(DroolsComplexEventProcessorManager.class);
 	private TopicConnection receiverConnection;
 	private Queue queue;
 	private Session receiverSession;
@@ -51,6 +52,7 @@ public class DroolsComplexEventProcessorManager extends ComplexEventProcessorMan
 
 	public DroolsComplexEventProcessorManager(String instanceName, String staticRuleToLoadAtStartup, String connectionUsername, String connectionPassword) {
 		super();
+		logger = LogManager.getLogger(DroolsComplexEventProcessorManager.class);
 		logger.info("CEP creation ");
 		cep = CepType.DROOLS;
 		this.instanceName = instanceName;
