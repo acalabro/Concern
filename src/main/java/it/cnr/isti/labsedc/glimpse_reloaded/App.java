@@ -53,10 +53,11 @@ public class App
 	    broker = new ActiveMQBrokerManager(brokerUrl, maxMemoryUsage, maxCacheUsage, username, password);
     	broker.run();
     	channelRegistry = new ChannelsManagementRegistry();
+    	logger.debug("Channels Management Registry created");
+    	logger.debug("PATH: " + System.getProperty("user.dir"));
     	channelRegistry.setConnectionFactory(factory);
 
     	//STARTING CEP ONE
-    	logger.debug("PATH: " + System.getProperty("user.dir"));
     	cep = new DroolsComplexEventProcessorManager("InstanceOne", System.getProperty("user.dir")+ "/src/main/resources/startupRule.drl", username, password);
     	cep.start();
 
