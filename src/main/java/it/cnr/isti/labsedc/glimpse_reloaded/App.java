@@ -28,7 +28,7 @@ public class App
 	private static Long maxCacheUsage;
 	private static ChannelsManagementRegistry channelRegistry;
 	private static ActiveMQConnectionFactory factory;
-    public static final Logger logger = LogManager.getRootLogger();
+    public static Logger logger = LogManager.getRootLogger();
 	private static final boolean SHUTDOWN = false;
 	public static HashMap<String, Boolean> componentStarted = new HashMap<String, Boolean>();
 	private static String username;
@@ -51,6 +51,7 @@ public class App
 
 		//storage = new InfluxDBStorageController();
 	    broker = new ActiveMQBrokerManager(brokerUrl, maxMemoryUsage, maxCacheUsage, username, password);
+	    logger = LogManager.getLogger(App.class);
     	logger.debug(App.class.getSimpleName() + " is launching the broker.");
     	broker.run();
     	logger.debug(App.class.getSimpleName() + " broker launched.");
