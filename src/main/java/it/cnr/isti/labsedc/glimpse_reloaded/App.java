@@ -42,7 +42,7 @@ public class App
     	factory = new ActiveMQConnectionFactory(brokerUrl);
     	username = "vera";
     	password = "griselda";
-
+    	Thread.sleep(5000);
     	logger.info("Starting components");
     	StartComponents(factory, brokerUrl, maxMemoryUsage, maxCacheUsage);
     }
@@ -51,6 +51,7 @@ public class App
 
 		//storage = new InfluxDBStorageController();
 	    broker = new ActiveMQBrokerManager(brokerUrl, maxMemoryUsage, maxCacheUsage, username, password);
+	    System.out.println("il pupazzo gonfiabile che saluta come uno scemo");
 	    logger = LogManager.getLogger(App.class);
     	logger.debug(App.class.getSimpleName() + " is launching the broker.");
     	broker.run();
