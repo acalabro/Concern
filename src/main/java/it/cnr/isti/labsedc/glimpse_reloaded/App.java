@@ -52,16 +52,19 @@ public class App
 		//storage = new InfluxDBStorageController();
 	    broker = new ActiveMQBrokerManager(brokerUrl, maxMemoryUsage, maxCacheUsage, username, password);
 	    logger = LogManager.getLogger(App.class);
-	    System.out.println("---------------------------------> MI SONO DIMENTICATO COME CI SI SIEDE");
     	logger.debug(App.class.getSimpleName() + " is launching the broker.");
     	broker.run();
-	    System.out.println("---------------------------------> DAIDAI DAI DAI DAI DAID AID ADI ADIADI ADI AID ADI ");
 
     	logger.debug(App.class.getSimpleName() + " broker launched.");
     	channelRegistry = new ChannelsManagementRegistry();
+	    System.out.println("---------------------------------> aaaaaaaaaaaaaaaaa ");
+
     	logger.debug("Channels Management Registry created");
-    	logger.debug("PATH: " + System.getProperty("user.dir"));
+	    System.out.println("---------------------------------> eeeeeeeeeeeeeeeee ");
+    	System.out.println("PATH: " + System.getProperty("user.dir"));
     	channelRegistry.setConnectionFactory(factory);
+	    System.out.println("---------------------------------> uuuuuuuuuuuuuuuuuuuuu ");
+
 
     	//STARTING CEP ONE
     	cep = new DroolsComplexEventProcessorManager("InstanceOne", System.getProperty("user.dir")+ "/src/main/resources/startupRule.drl", username, password);
