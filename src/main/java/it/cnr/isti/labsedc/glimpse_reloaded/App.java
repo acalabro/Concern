@@ -51,7 +51,7 @@ public class App
 
 		//storage = new InfluxDBStorageController();
 	    broker = new ActiveMQBrokerManager(brokerUrl, maxMemoryUsage, maxCacheUsage, username, password);
-    	logger.debug(App.class.getSimpleName() + " is running the broker.");
+    	logger.debug(App.class.getSimpleName() + " is launching the broker.");
     	broker.run();
     	logger.debug(App.class.getSimpleName() + " broker launched.");
     	channelRegistry = new ChannelsManagementRegistry();

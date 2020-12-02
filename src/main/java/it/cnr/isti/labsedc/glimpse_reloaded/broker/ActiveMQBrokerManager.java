@@ -67,7 +67,6 @@ public class ActiveMQBrokerManager implements BrokerManager, Runnable {
 			logger.debug("Connection sucessfully created");
 			App.componentStarted.put(this.getClass().getSimpleName(), true);
 	    	logger.debug("Component "+ this.getClass().getSimpleName() + " loaded in registry.");
-
 		} catch (Exception e) {
 			logger.error(e.getCause());
 		}
