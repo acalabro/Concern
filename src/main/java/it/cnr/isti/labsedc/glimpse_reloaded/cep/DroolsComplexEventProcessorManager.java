@@ -52,6 +52,7 @@ public class DroolsComplexEventProcessorManager extends ComplexEventProcessorMan
 
 	public DroolsComplexEventProcessorManager(String instanceName, String staticRuleToLoadAtStartup, String connectionUsername, String connectionPassword) {
 		super();
+	    System.out.println("---------------------------------> uuuuuuuuuuuuuuuuuuuuu CEP");
 		logger = LogManager.getLogger(DroolsComplexEventProcessorManager.class);
 		logger.info("CEP creation ");
 		cep = CepType.DROOLS;
@@ -99,7 +100,10 @@ public class DroolsComplexEventProcessorManager extends ComplexEventProcessorMan
 	}
 
 	private void communicationSetup() throws JMSException {
+	    System.out.println("---------------------------------> uuuuuuuuuuuuuuuuuuuuu CEP get Conn");
+
 		receiverConnection = ChannelsManagementRegistry.GetNewTopicConnection(username, password);
+	    System.out.println("---------------------------------> uuuuuuuuuuuuuuuuuuuuu CEP create session");
 
 		receiverSession = ChannelsManagementRegistry.GetNewSession(receiverConnection);
 		queue = ChannelsManagementRegistry.RegisterNewCepQueue(this.cep.name()+"-"+instanceName, receiverSession, "DroolsService-"+instanceName, ServiceChannelProperties.GENERICREQUESTS, cep);
