@@ -27,7 +27,6 @@ import org.kie.internal.builder.KnowledgeBuilderFactory;
 import org.kie.internal.io.ResourceFactory;
 
 import it.cnr.isti.labsedc.glimpse_reloaded.App;
-import it.cnr.isti.labsedc.glimpse_reloaded.broker.ActiveMQBrokerManager;
 import it.cnr.isti.labsedc.glimpse_reloaded.event.GlimpseEvaluationRequestEvent;
 import it.cnr.isti.labsedc.glimpse_reloaded.listener.ServiceChannelProperties;
 import it.cnr.isti.labsedc.glimpse_reloaded.register.ChannelsManagementRegistry;
@@ -81,6 +80,7 @@ public class DroolsComplexEventProcessorManager extends ComplexEventProcessorMan
 	}
 
 	private void droolsEngineSetup() {
+		System.out.println("---------------------------------> uuuuuuuuuuuuuuuuuuuuu drools");
 
 		Resource drlToLoad = ResourceFactory.newFileResource(staticRuleToLoadAtStartup);
         kbuilder.add(drlToLoad, ResourceType.DRL);
