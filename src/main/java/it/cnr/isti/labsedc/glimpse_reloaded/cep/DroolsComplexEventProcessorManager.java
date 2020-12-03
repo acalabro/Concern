@@ -72,6 +72,8 @@ public class DroolsComplexEventProcessorManager extends ComplexEventProcessorMan
 	@Override
 	public void run() {
 		try {
+			System.out.println("---------------------------------> uuuuuuuuuuuuuuuuuuuuu dentro run");
+
 			communicationSetup();
 			droolsEngineSetup();
 		} catch (JMSException e) {
