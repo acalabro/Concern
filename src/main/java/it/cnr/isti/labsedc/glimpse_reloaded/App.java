@@ -42,7 +42,6 @@ public class App
     	factory = new ActiveMQConnectionFactory(brokerUrl);
     	username = "vera";
     	password = "griselda";
-    	Thread.sleep(5000);
     	logger.info("Starting components");
     	StartComponents(factory, brokerUrl, maxMemoryUsage, maxCacheUsage);
     }
@@ -63,7 +62,7 @@ public class App
     	channelRegistry.setConnectionFactory(factory);
 	    System.out.println("---------------------------------> uuuuuuuuuuuuuuuuuuuuu ");
 
-
+	    Thread.sleep(3000);
     	//STARTING CEP ONE
     	cep = new DroolsComplexEventProcessorManager("InstanceOne", System.getProperty("user.dir")+ "/../src/main/resources/startupRule.drl", username, password);
     	cep.start();
