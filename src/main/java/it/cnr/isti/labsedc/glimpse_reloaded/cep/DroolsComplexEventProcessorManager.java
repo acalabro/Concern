@@ -44,14 +44,19 @@ public class DroolsComplexEventProcessorManager extends ComplexEventProcessorMan
 	private String username;
 	private String password;
 
-	private static KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
+	private static KnowledgeBuilder kbuilder;
     private static Collection<KiePackage> pkgs;
     private static InternalKnowledgeBase kbase = KnowledgeBaseFactory.newKnowledgeBase();
     private static KieSession ksession;
 
 	public DroolsComplexEventProcessorManager(String instanceName, String staticRuleToLoadAtStartup, String connectionUsername, String connectionPassword) {
 		super();
-	    System.out.println("---------------------------------> uuuuuuuuuuuuuuuuuuuuu CEP");
+		try{
+			kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
+		}catch(Exception e) {
+			System.out.println("crasho qui");
+			System.out.println(e.getMessage());
+		}
 		logger = LogManager.getLogger(DroolsComplexEventProcessorManager.class);
 		logger.info("CEP creation ");
 		cep = CepType.DROOLS;

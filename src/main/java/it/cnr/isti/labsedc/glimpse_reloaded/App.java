@@ -60,9 +60,7 @@ public class App
     	logger.debug("Channels Management Registry created");
     	System.out.println("PATH: " + System.getProperty("user.dir")+ "/../src/main/resources/startupRule.drl");
     	channelRegistry.setConnectionFactory(factory);
-	    System.out.println("---------------------------------> uuuuuuuuuuuuuuuuuuuuu ");
 
-	    Thread.sleep(3000);
     	//STARTING CEP ONE
     	cep = new DroolsComplexEventProcessorManager("InstanceOne", System.getProperty("user.dir")+ "/../src/main/resources/startupRule.drl", username, password);
     	cep.start();
