@@ -54,7 +54,7 @@ public class DroolsComplexEventProcessorManager extends ComplexEventProcessorMan
 		try{
 			kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
 		}catch(Exception e) {
-			System.out.println("crasho qui");
+			System.out.println(kbuilder.hasErrors());
 			System.out.println(e.getCause() + "\n"+
 			e.getMessage());
 		}
