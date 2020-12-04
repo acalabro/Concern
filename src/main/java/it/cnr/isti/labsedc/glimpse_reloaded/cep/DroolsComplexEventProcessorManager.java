@@ -55,7 +55,8 @@ public class DroolsComplexEventProcessorManager extends ComplexEventProcessorMan
 			kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
 		}catch(Exception e) {
 			System.out.println("crasho qui");
-			System.out.println(e.getMessage());
+			System.out.println(e.getCause() + "\n"+
+			e.getMessage());
 		}
 		logger = LogManager.getLogger(DroolsComplexEventProcessorManager.class);
 		logger.info("CEP creation ");
@@ -77,8 +78,6 @@ public class DroolsComplexEventProcessorManager extends ComplexEventProcessorMan
 	@Override
 	public void run() {
 		try {
-			System.out.println("---------------------------------> uuuuuuuuuuuuuuuuuuuuu dentro run");
-
 			communicationSetup();
 			droolsEngineSetup();
 		} catch (JMSException e) {
@@ -87,8 +86,6 @@ public class DroolsComplexEventProcessorManager extends ComplexEventProcessorMan
 	}
 
 	private void droolsEngineSetup() {
-		System.out.println("---------------------------------> uuuuuuuuuuuuuuuuuuuuu drools");
-
 		Resource drlToLoad = ResourceFactory.newFileResource(staticRuleToLoadAtStartup);
         kbuilder.add(drlToLoad, ResourceType.DRL);
 
@@ -107,11 +104,7 @@ public class DroolsComplexEventProcessorManager extends ComplexEventProcessorMan
 	}
 
 	private void communicationSetup() throws JMSException {
-	    System.out.println("---------------------------------> uuuuuuuuuuuuuuuuuuuuu CEP get Conn");
-
 		receiverConnection = ChannelsManagementRegistry.GetNewTopicConnection(username, password);
-	    System.out.println("---------------------------------> uuuuuuuuuuuuuuuuuuuuu CEP create session");
-
 		receiverSession = ChannelsManagementRegistry.GetNewSession(receiverConnection);
 		queue = ChannelsManagementRegistry.RegisterNewCepQueue(this.cep.name()+"-"+instanceName, receiverSession, "DroolsService-"+instanceName, ServiceChannelProperties.GENERICREQUESTS, cep);
 		logger.info("...CEP named " + this.getInstanceName() + " creates a listening channel called: " + queue.getQueueName());
