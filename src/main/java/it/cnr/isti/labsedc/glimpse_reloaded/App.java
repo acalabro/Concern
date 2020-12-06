@@ -58,11 +58,11 @@ public class App
     	channelRegistry = new ChannelsManagementRegistry();
 
     	logger.debug("Channels Management Registry created");
-    	System.out.println("PATH: " + System.getProperty("user.dir")+ "/../src/main/resources/startupRule.drl");
+    	System.out.println("PATH: " + System.getProperty("user.dir")+ "/src/main/resources/startupRule.drl");
     	channelRegistry.setConnectionFactory(factory);
 
     	//STARTING CEP ONE
-    	cep = new DroolsComplexEventProcessorManager("InstanceOne", System.getProperty("user.dir")+ "/../src/main/resources/startupRule.drl", username, password);
+    	cep = new DroolsComplexEventProcessorManager("InstanceOne", System.getProperty("user.dir")+ "/src/main/resources/startupRule.drl", username, password);
     	cep.start();
 
     	while (!cep.cepHasCompletedStartup()) {

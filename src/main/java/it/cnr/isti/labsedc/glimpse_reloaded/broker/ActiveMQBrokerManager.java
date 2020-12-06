@@ -14,7 +14,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import it.cnr.isti.labsedc.glimpse_reloaded.App;
-import it.cnr.isti.labsedc.glimpse_reloaded.cep.DroolsComplexEventProcessorManager;
 
 public class ActiveMQBrokerManager implements BrokerManager, Runnable {
 
