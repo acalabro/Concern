@@ -16,12 +16,8 @@ import it.cnr.isti.labsedc.concern.utils.ChannelUtilities;
 
 public class App
 {
-	//private static StorageController storage;
 	private static BrokerManager broker;
 	private static ComplexEventProcessorManager cep;
-	//private static ClientManager clientMan;
-	//private static NotificationManager notificationMan;
-	//private static WebInterfaceManager web;
 	private static ServiceListenerManager lcManager;
 	private static String brokerUrl;
 	private static Long maxMemoryUsage;
