@@ -3,11 +3,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>cnr.isti.labsedc</groupId>
-  <artifactId>glimpse_reloaded</artifactId>
+  <artifactId>concern</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
-	<name>glimpse_reloaded</name>
-	<url>http://labsedc-wiki.isti.cnr.it/labsedc/tools/glimpse/public/</url>
+	<name>concern</name>
+	<url>--not yet available--</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -18,8 +18,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.5</version>
 				<configuration>
-					<source>14</source>
-					<target>14</target>
+					<source>15</source>
+					<target>15</target>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -39,7 +39,7 @@
 					<archive>
 						<manifest>
 							<addClasspath>true</addClasspath>
-							<mainClass>it.cnr.isti.labsedc.glimpse_reloaded.App</mainClass>
+							<mainClass>it.cnr.isti.labsedc.concern.App</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
@@ -47,51 +47,59 @@
 		</plugins>
 	</build>
   <dependencies>
-    <dependency>
-      	<groupId>junit</groupId>
-      	<artifactId>junit</artifactId>
-      	<version>3.8.1</version>
-      	<scope>test</scope>
-    </dependency>
-<dependency>
-    <groupId>javax.jms</groupId>
-    <artifactId>javax.jms-api</artifactId>
-    <version>2.0.1</version>
-</dependency>
-<dependency>
-    <groupId>org.apache.logging.log4j</groupId>
-    <artifactId>log4j-core</artifactId>
-    <version>2.12.1</version>
-</dependency>
-<dependency>
-    <groupId>org.apache.activemq</groupId>
-    <artifactId>activemq-broker</artifactId>
-    <version>5.16.0</version>
-</dependency>
-<dependency>
-    <groupId>mysql</groupId>
-    <artifactId>mysql-connector-java</artifactId>
-    <version>8.0.17</version>
-</dependency>
-<dependency>
-    <groupId>org.drools</groupId>
-    <artifactId>drools-core</artifactId>
-    <version>7.46.0.Final</version>
-</dependency>
-<dependency>
-    <groupId>org.drools</groupId>
-    <artifactId>drools-templates</artifactId>
-    <version>7.46.0.Final</version>
-</dependency>
-<dependency>
-    <groupId>org.drools</groupId>
-    <artifactId>drools-decisiontables</artifactId>
-    <version>7.46.0.Final</version>
-</dependency>
-<dependency>
-    <groupId>org.drools</groupId>
-    <artifactId>drools-compiler</artifactId>
-    <version>7.46.0.Final</version>
-</dependency>
+  
+  
+  <!-- DROOLS -->
+	<dependency>
+	    <groupId>org.drools</groupId>
+	    <artifactId>drools-core</artifactId>
+	    <version>7.49.0.Final</version>
+	</dependency>
+	<dependency>
+	    <groupId>org.drools</groupId>
+	    <artifactId>drools-templates</artifactId>
+	    <version>7.49.0.Final</version>
+	</dependency>
+	<dependency>
+	    <groupId>org.drools</groupId>
+	    <artifactId>drools-decisiontables</artifactId>
+	    <version>7.49.0.Final</version>
+	</dependency>
+	<dependency>
+	    <groupId>org.drools</groupId>
+	    <artifactId>drools-compiler</artifactId>
+	    <version>7.49.0.Final</version>
+	</dependency>  
+  <!-- END DROOLS -->
+  
+  <!-- BROKER/JMS -->
+  	<dependency>
+	    <groupId>javax.jms</groupId>
+	    <artifactId>javax.jms-api</artifactId>
+	    <version>2.0.1</version>
+	</dependency>
+	<dependency>
+	    <groupId>org.apache.activemq</groupId>
+	    <artifactId>activemq-broker</artifactId>
+	    <version>5.16.1</version>
+	</dependency>
+  <!-- END BROKER/JMS -->
+
+	<dependency>
+	    <groupId>mysql</groupId>
+	    <artifactId>mysql-connector-java</artifactId>
+	    <version>8.0.23</version>
+	</dependency>  
+  	<dependency>
+    	<groupId>junit</groupId>
+    	<artifactId>junit</artifactId>
+    	<version>4.13.1</version>
+    	<scope>test</scope>
+  	</dependency>
+		<dependency>
+	    <groupId>org.apache.logging.log4j</groupId>
+	    <artifactId>log4j-core</artifactId>
+	    <version>2.14.0</version>
+	</dependency>
 </dependencies>
 </project>
