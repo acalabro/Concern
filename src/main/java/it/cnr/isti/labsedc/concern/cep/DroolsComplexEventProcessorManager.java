@@ -27,7 +27,7 @@ import org.kie.internal.builder.KnowledgeBuilderFactory;
 import org.kie.internal.io.ResourceFactory;
 
 import it.cnr.isti.labsedc.concern.App;
-import it.cnr.isti.labsedc.concern.event.GlimpseEvaluationRequestEvent;
+import it.cnr.isti.labsedc.concern.event.ConcernEvaluationRequestEvent;
 import it.cnr.isti.labsedc.concern.listener.ServiceChannelProperties;
 import it.cnr.isti.labsedc.concern.register.ChannelsManagementRegistry;
 
@@ -118,7 +118,7 @@ public class DroolsComplexEventProcessorManager extends ComplexEventProcessorMan
 		if (message instanceof ObjectMessage) {
 			try {
 				ObjectMessage msg = (ObjectMessage) message;
-				GlimpseEvaluationRequestEvent<?> receivedEvent = (GlimpseEvaluationRequestEvent<?>) msg.getObject();
+				ConcernEvaluationRequestEvent<?> receivedEvent = (ConcernEvaluationRequestEvent<?>) msg.getObject();
 				logger.info("...CEP named " + this.getInstanceName() + " receives "  + receivedEvent.getCepType());
 				} catch(ClassCastException | JMSException asd) {
 					logger.error("error on casting or getting ObjectMessage to GlimpseEvaluationRequestEvent");

@@ -1,8 +1,8 @@
-import it.cnr.isti.labsedc.glimpse_reloaded.event.GlimpseBasicEvent;
+import it.cnr.isti.labsedc.concern.event.ConcernEvent;
 
 dialect "java"
 
-declare GlimpseBasicEvent
+declare ConcernEvent
     @role( event )
     @timestamp( timestamp )
 end

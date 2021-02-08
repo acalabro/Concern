@@ -1,7 +1,7 @@
 package it.cnr.isti.labsedc.concern.storage;
 
 import it.cnr.isti.labsedc.concern.App;
-import it.cnr.isti.labsedc.concern.event.Event;
+import it.cnr.isti.labsedc.concern.event.ConcernEvent;
 
 public class InfluxDBStorageController implements StorageController {
 
@@ -19,7 +19,7 @@ public class InfluxDBStorageController implements StorageController {
 	}
 
 	@Override
-	public boolean saveMessage(Event<?> message) {
+	public boolean saveMessage(ConcernEvent<?> message) {
 		// TODO Auto-generated method stub
 		return false;
 	}

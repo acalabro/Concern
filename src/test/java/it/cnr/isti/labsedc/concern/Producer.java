@@ -3,6 +3,7 @@ package it.cnr.isti.labsedc.concern;
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
 import javax.jms.JMSException;
+import javax.jms.Message;
 import javax.jms.MessageProducer;
 import javax.jms.ObjectMessage;
 import javax.jms.Queue;
@@ -11,7 +12,7 @@ import javax.jms.Session;
 import org.apache.activemq.ActiveMQConnectionFactory;
 
 import it.cnr.isti.labsedc.concern.cep.CepType;
-import it.cnr.isti.labsedc.concern.event.GlimpseEvaluationRequestEvent;
+import it.cnr.isti.labsedc.concern.event.ConcernEvaluationRequestEvent;
 import it.cnr.isti.labsedc.concern.listener.ServiceChannelProperties;
 
 public class Producer {
@@ -24,16 +25,16 @@ public class Producer {
             Queue queue = session.createQueue(queueName);
             MessageProducer producer = session.createProducer(queue);
 			ObjectMessage msg = session.createObjectMessage();
-			GlimpseEvaluationRequestEvent<String> asd = new GlimpseEvaluationRequestEvent<String>(
-					"asd",
+			ConcernEvaluationRequestEvent<String> theMessage = new ConcernEvaluationRequestEvent<String>(
+					"data payload",
 					CepType.DROOLS,
-					"asd",
+					"rulesToEvaluate",
 					ServiceChannelProperties.GENERICREQUESTS,
 					"ProducerTest",
-					"asdasdasd",
+					"checksum",
 					12331l);
-			msg.setObject(asd);
-            //Message msg = session.createTextMessage("ASD");
+			msg.setObject(theMessage);
+ //           Message msg = session.createTextMessage("ASD");
 	        producer.send(msg);
 		} catch (JMSException e) {
 			e.printStackTrace();
@@ -46,11 +47,11 @@ public class Producer {
 		testProducer(brokerUrl, "ServiceChannel-ONE", "vera", "griselda");
 		Thread.sleep(500);
 		testProducer(brokerUrl, "ServiceChannel-TWO", "vera", "griselda");
-		Thread.sleep(500);
-		testProducer(brokerUrl, "ServiceChannel-THREE", "vera", "griselda");
-		Thread.sleep(500);
-		testProducer(brokerUrl, "ServiceChannel-FOUR", "vera", "griselda");
-		Thread.sleep(500);
-		testProducer(brokerUrl, "ServiceChannel-FIVE", "vera", "griselda");
+//		Thread.sleep(500);
+//		testProducer(brokerUrl, "ServiceChannel-THREE", "vera", "griselda");
+//		Thread.sleep(500);
+//		testProducer(brokerUrl, "ServiceChannel-FOUR", "vera", "griselda");
+//		Thread.sleep(500);
+//		testProducer(brokerUrl, "ServiceChannel-FIVE", "vera", "griselda");
 	}
 }

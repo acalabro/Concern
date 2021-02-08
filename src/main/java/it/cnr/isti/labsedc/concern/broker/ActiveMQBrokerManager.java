@@ -2,7 +2,6 @@ package it.cnr.isti.labsedc.concern.broker;
 
 import java.net.URI;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.ActiveMQSslConnectionFactory;
@@ -61,11 +60,14 @@ public class ActiveMQBrokerManager implements BrokerManager, Runnable {
 			connectionFactory = new ActiveMQSslConnectionFactory(ACTIVEMQ_HOST);
 			connectionFactory.setUserName(ACTIVEMQ_LOGINNAME);
 			connectionFactory.setPassword(ACTIVEMQ_PASSWORD);
-			connectionFactory.setTrustedPackages(new ArrayList<String>(Arrays.asList("it.cnr.isti.labsedc.glimpse_reloaded.event")));
+			ArrayList<String> trustedPackages = new ArrayList<String>();
+			trustedPackages.add("it.cnr.isti.labsedc.concern.event");		
+			connectionFactory.setTrustedPackages(trustedPackages);
 			connectionFactory.createConnection();
 			logger.debug("Connection sucessfully created");
 			App.componentStarted.put(this.getClass().getSimpleName(), true);
 	    	logger.debug("Component "+ this.getClass().getSimpleName() + " loaded in registry.");
+	    	logger.debug("Component "+ this.getClass().getSimpleName() + " trustedpackages list: " + trustedPackages.get(0));
 		} catch (Exception e) {
 			logger.error(e.getCause());
 		}

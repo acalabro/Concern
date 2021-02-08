@@ -3,13 +3,13 @@ package it.cnr.isti.labsedc.concern.event;
 import it.cnr.isti.labsedc.concern.cep.CepType;
 import it.cnr.isti.labsedc.concern.listener.ServiceChannelProperties;
 
-public class GlimpseEvaluationRequestEvent<T> extends GlimpseBasicEvent<T> {
+public class ConcernEvaluationRequestEvent<T> extends ConcernAbstractEvent<T> {
 
 	private static final long serialVersionUID = 6545740721731539243L;
 	private String evaluationRule;
 	private ServiceChannelProperties propertyRequested;
 
-	public GlimpseEvaluationRequestEvent(
+	public ConcernEvaluationRequestEvent(
 			T data,
 			CepType type,
 			String evaluationRule,

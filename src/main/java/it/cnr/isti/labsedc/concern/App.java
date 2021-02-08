@@ -66,18 +66,18 @@ public class App
     		System.out.println("wait for First CEP start");
     	}
 
-    	//STARTING CEP TWO
-    	cep = new DroolsComplexEventProcessorManager("InstanceTwo", System.getProperty("user.dir")+ "/src/main/resources/startupRule.drl", username, password);
-    	cep.start();
-
-    	while (!cep.cepHasCompletedStartup()) {
-    		Thread.sleep(100);
-    		System.out.println("wait for Second CEP start");
-    	}
-
-    	//STARTING CEP THREE
-    	cep = new DroolsComplexEventProcessorManager("InstanceThree", System.getProperty("user.dir")+ "/src/main/resources/startupRule.drl", username, password);
-    	cep.start();
+//    	//STARTING CEP TWO
+//    	cep = new DroolsComplexEventProcessorManager("InstanceTwo", System.getProperty("user.dir")+ "/src/main/resources/startupRule.drl", username, password);
+//    	cep.start();
+//
+//    	while (!cep.cepHasCompletedStartup()) {
+//    		Thread.sleep(100);
+//    		System.out.println("wait for Second CEP start");
+//    	}
+//
+//    	//STARTING CEP THREE
+//    	cep = new DroolsComplexEventProcessorManager("InstanceThree", System.getProperty("user.dir")+ "/src/main/resources/startupRule.drl", username, password);
+//    	cep.start();
 
 
     	lcManager = new ServiceListenerManager(ChannelUtilities.loadChannels(), username, password);

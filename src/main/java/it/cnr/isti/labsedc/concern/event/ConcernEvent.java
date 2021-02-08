@@ -1,6 +1,6 @@
 package it.cnr.isti.labsedc.concern.event;
 
-public interface Event <T>{
+public interface ConcernEvent <T>{
 
 	public T getEventData();
 	public void setEventData(T t);
