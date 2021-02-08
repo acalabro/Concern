@@ -1,10 +1,10 @@
 package it.cnr.isti.labsedc.concern.web;
 
-import it.cnr.isti.labsedc.concern.App;
+import it.cnr.isti.labsedc.concern.ConcernApp;
 
 public class WebInterfaceManager {
 
 	public WebInterfaceManager() {
-		App.componentStarted.put(this.getClass().getSimpleName(), true);
+		ConcernApp.componentStarted.put(this.getClass().getSimpleName(), true);
 	}
 }

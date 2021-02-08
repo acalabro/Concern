@@ -26,7 +26,7 @@ import org.kie.internal.builder.KnowledgeBuilder;
 import org.kie.internal.builder.KnowledgeBuilderFactory;
 import org.kie.internal.io.ResourceFactory;
 
-import it.cnr.isti.labsedc.concern.App;
+import it.cnr.isti.labsedc.concern.ConcernApp;
 import it.cnr.isti.labsedc.concern.event.ConcernEvaluationRequestEvent;
 import it.cnr.isti.labsedc.concern.listener.ServiceChannelProperties;
 import it.cnr.isti.labsedc.concern.register.ChannelsManagementRegistry;
@@ -98,7 +98,7 @@ public class DroolsComplexEventProcessorManager extends ComplexEventProcessorMan
         ksession = kbase.newKieSession();
 		logger.info("...CEP named " + this.getInstanceName() + " created Session and fires rules " + staticRuleToLoadAtStartup + " with errors: " + kbuilder.getKnowledgePackages());
 		started  = true;
-		App.componentStarted.put(this.getClass().getSimpleName() + instanceName, true);
+		ConcernApp.componentStarted.put(this.getClass().getSimpleName() + instanceName, true);
 		ksession.fireUntilHalt();
 	}
 

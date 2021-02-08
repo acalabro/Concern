@@ -8,7 +8,7 @@ import java.util.concurrent.Executors;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import it.cnr.isti.labsedc.concern.App;
+import it.cnr.isti.labsedc.concern.ConcernApp;
 
 public class ServiceListenerManager extends Thread {
 
@@ -33,7 +33,7 @@ public class ServiceListenerManager extends Thread {
 				Runnable worker = new ServiceListenerTask(loadChannels.get(i), username, password);
 				executor.execute(worker);
 			}
-			App.componentStarted.put(this.getClass().getSimpleName(), true);
+			ConcernApp.componentStarted.put(this.getClass().getSimpleName(), true);
 			while(!ServiceListenerManager.killAll) {
 			}
 			logger.info("KILALLLLLLLL");

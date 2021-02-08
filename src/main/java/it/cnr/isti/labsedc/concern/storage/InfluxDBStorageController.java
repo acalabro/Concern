@@ -1,6 +1,6 @@
 package it.cnr.isti.labsedc.concern.storage;
 
-import it.cnr.isti.labsedc.concern.App;
+import it.cnr.isti.labsedc.concern.ConcernApp;
 import it.cnr.isti.labsedc.concern.event.ConcernEvent;
 
 public class InfluxDBStorageController implements StorageController {
@@ -8,7 +8,7 @@ public class InfluxDBStorageController implements StorageController {
 	@Override
 	public boolean connectToDB() {
 		// TODO Auto-generated method stub
-		App.componentStarted.put(this.getClass().getSimpleName(), true);
+		ConcernApp.componentStarted.put(this.getClass().getSimpleName(), true);
 		return true;
 	}
 

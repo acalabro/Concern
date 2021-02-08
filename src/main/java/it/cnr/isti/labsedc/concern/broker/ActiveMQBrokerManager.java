@@ -12,7 +12,7 @@ import org.apache.activemq.usage.SystemUsage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import it.cnr.isti.labsedc.concern.App;
+import it.cnr.isti.labsedc.concern.ConcernApp;
 
 public class ActiveMQBrokerManager implements BrokerManager, Runnable {
 
@@ -63,9 +63,10 @@ public class ActiveMQBrokerManager implements BrokerManager, Runnable {
 			ArrayList<String> trustedPackages = new ArrayList<String>();
 			trustedPackages.add("it.cnr.isti.labsedc.concern.event");		
 			connectionFactory.setTrustedPackages(trustedPackages);
+//			connectionFactory.setTrustAllPackages(true);
 			connectionFactory.createConnection();
 			logger.debug("Connection sucessfully created");
-			App.componentStarted.put(this.getClass().getSimpleName(), true);
+			ConcernApp.componentStarted.put(this.getClass().getSimpleName(), true);
 	    	logger.debug("Component "+ this.getClass().getSimpleName() + " loaded in registry.");
 	    	logger.debug("Component "+ this.getClass().getSimpleName() + " trustedpackages list: " + trustedPackages.get(0));
 		} catch (Exception e) {

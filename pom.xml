@@ -39,7 +39,7 @@
 					<archive>
 						<manifest>
 							<addClasspath>true</addClasspath>
-							<mainClass>it.cnr.isti.labsedc.concern.App</mainClass>
+							<mainClass>it.cnr.isti.labsedc.concern.ConcernApp</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
@@ -47,7 +47,6 @@
 		</plugins>
 	</build>
   <dependencies>
-  
   
   <!-- DROOLS -->
 	<dependency>
