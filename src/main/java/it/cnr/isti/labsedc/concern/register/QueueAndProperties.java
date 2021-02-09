@@ -8,13 +8,23 @@ public class QueueAndProperties {
 	private String localCepIdentifier;
 	private ServiceChannelProperties localChannelProp;
 	private CepType localCepType;
+	private String localQueueAddress;
 
-	public QueueAndProperties(String cepIdentifier, ServiceChannelProperties channelProperty, CepType cepType) {
+	public QueueAndProperties(String cepIdentifier, ServiceChannelProperties channelProperty, CepType cepType, String queueAddress) {
 		this.localChannelProp = channelProperty;
 		this.localCepIdentifier = cepIdentifier;
 		this.localCepType = cepType;
+		this.localQueueAddress = queueAddress;
 	}
 
+	public String getQueueAddress() {
+		return this.localQueueAddress;
+	}
+	
+	public void setQueueAddress(String queueAddress) {
+		this.localQueueAddress = queueAddress;
+	}
+	
 	public CepType getLocalCepType() {
 		return localCepType;
 	}
@@ -27,11 +37,10 @@ public class QueueAndProperties {
 	public void setLocalQ(String localCepIdentifier) {
 		this.localCepIdentifier = localCepIdentifier;
 	}
-	public ServiceChannelProperties getLocalProp() {
+	public ServiceChannelProperties getServiceChannelProperties() {
 		return localChannelProp;
 	}
-	public void setLocalProp(ServiceChannelProperties localChannelProp) {
+	public void setServiceChannelProperties(ServiceChannelProperties localChannelProp) {
 		this.localChannelProp = localChannelProp;
 	}
-
 }

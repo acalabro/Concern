@@ -11,17 +11,16 @@ public class RoutingUtilities {
 	private static CepType cepType;
 	private static ServiceChannelProperties requestedProperties;
 
-	public static String BestCepSelection(ConcernEvaluationRequestEvent<?> message) {
+	public static QueueAndProperties BestCepSelection(ConcernEvaluationRequestEvent<?> message) {
 
 		cepType = message.getCepType();
 		requestedProperties = message.getPropertyRequested();
-
 		QueueAndProperties localQaP;
 
 		for (int i = 0; i<ChannelsManagementRegistry.ActiveCep.size();i++) {
 			localQaP = (QueueAndProperties) ChannelsManagementRegistry.ActiveCep.keySet().toArray()[i];
-			if (cepType ==  localQaP.getLocalCepType() && requestedProperties ==  localQaP.getLocalProp()) {
-				return (String)ChannelsManagementRegistry.ActiveCep.values().toArray()[i];
+			if (cepType ==  localQaP.getLocalCepType() && requestedProperties ==  localQaP.getServiceChannelProperties()) {
+				return localQaP;
 					}
 			}
 		return null;

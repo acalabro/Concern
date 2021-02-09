@@ -16,7 +16,7 @@ import it.cnr.isti.labsedc.concern.listener.ServiceChannelProperties;
 
 public class Producer {
 
-	public static void testProducer(String brokerUrl, String queueName, String username, String password) {
+	public static void testProducer(String brokerUrl, String queueName, String username, String password, String data) {
 		try {
 			ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(username, password, brokerUrl);
             Connection connection = connectionFactory.createConnection();
@@ -24,16 +24,16 @@ public class Producer {
             Queue queue = session.createQueue(queueName);
             MessageProducer producer = session.createProducer(queue);
 			ObjectMessage msg = session.createObjectMessage();
-			ConcernEvaluationRequestEvent<String> theMessage = new ConcernEvaluationRequestEvent<String>(
-					"data payload",
+			ConcernEvaluationRequestEvent<String> asd = new ConcernEvaluationRequestEvent<String>(
+					data,
 					CepType.DROOLS,
-					"rulesToEvaluate",
+					"evaluationRule",
 					ServiceChannelProperties.GENERICREQUESTS,
 					"ProducerTest",
 					"checksum",
 					12331l);
-			msg.setObject(theMessage);
- //           Message msg = session.createTextMessage("ASD");
+			msg.setObject(asd);
+            //Message msg = session.createTextMessage("ASD");
 	        producer.send(msg);
 		} catch (JMSException e) {
 			e.printStackTrace();
@@ -43,10 +43,10 @@ public class Producer {
 	public static void main(String[] args) throws InterruptedException {
 		String brokerUrl = "tcp://localhost:61616";
 
-		testProducer(brokerUrl, "ServiceChannel-ONE", "vera", "griselda");
+		testProducer(brokerUrl, "ServiceChannel-ONE", "vera", "griselda", "messageONE");
 		Thread.sleep(500);
-		testProducer(brokerUrl, "ServiceChannel-TWO", "vera", "griselda");
-//		Thread.sleep(500);
+		testProducer(brokerUrl, "ServiceChannel-TWO", "vera", "griselda", "messageTWO");
+		Thread.sleep(500);
 //		testProducer(brokerUrl, "ServiceChannel-THREE", "vera", "griselda");
 //		Thread.sleep(500);
 //		testProducer(brokerUrl, "ServiceChannel-FOUR", "vera", "griselda");

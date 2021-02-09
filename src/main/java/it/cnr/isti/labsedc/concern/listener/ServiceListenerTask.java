@@ -16,6 +16,7 @@ import org.apache.logging.log4j.Logger;
 
 import it.cnr.isti.labsedc.concern.event.ConcernEvaluationRequestEvent;
 import it.cnr.isti.labsedc.concern.register.ChannelsManagementRegistry;
+import it.cnr.isti.labsedc.concern.register.QueueAndProperties;
 import it.cnr.isti.labsedc.concern.utils.RoutingUtilities;
 
 public class ServiceListenerTask implements Runnable, MessageListener {
@@ -26,7 +27,6 @@ public class ServiceListenerTask implements Runnable, MessageListener {
 	private String username;
 	private String password;
     private static final Logger logger = LogManager.getLogger(ServiceListenerTask.class);
-    private static MessageProducer producer;
     private static MessageConsumer consumer;
     private static Session receiverSession;
 
@@ -51,7 +51,6 @@ public class ServiceListenerTask implements Runnable, MessageListener {
 			consumer = receiverSession.createConsumer(queue);
 			//RegisterForCommunicationChannels.ServiceListeningOnWhichChannel.put(key, value)
 			logger.info("...consumer named " + consumer.toString() + " created within the executor named " + this.getChannelTaskName());
-
 			consumer.setMessageListener(this);
 			receiverConnection.start();
 		} catch (JMSException e) {
@@ -69,8 +68,7 @@ public class ServiceListenerTask implements Runnable, MessageListener {
 			try {
 				if (casted.getObject() != null && (casted.getObject() instanceof ConcernEvaluationRequestEvent<?>)) {
 					ConcernEvaluationRequestEvent<?> incomingRequest = (ConcernEvaluationRequestEvent<?>)casted.getObject();
-
-					String queueWhereToForward= RoutingUtilities.BestCepSelection(incomingRequest);
+					QueueAndProperties queueWhereToForward= RoutingUtilities.BestCepSelection(incomingRequest);
 					if (queueWhereToForward != null) {
 						forwardToCep(queueWhereToForward, message);
 					}
@@ -79,7 +77,6 @@ public class ServiceListenerTask implements Runnable, MessageListener {
 				e.printStackTrace();
 			}
 		}
-
 
 		if (message instanceof TextMessage) {
 			TextMessage msg = (TextMessage) message;
@@ -91,15 +88,17 @@ public class ServiceListenerTask implements Runnable, MessageListener {
 		}
 	}
 
-	private void forwardToCep(String queueWhereToForward, Message message) {
+	private void forwardToCep(QueueAndProperties queueWhereToForward, Message message) {
 		try {
-	        Queue queue = receiverSession.createQueue(queueWhereToForward);
-			producer = receiverSession.createProducer(queue);
-			System.out.println("Send: " + queue.getQueueName() + " ------ " + queueWhereToForward);
-			message.setJMSDestination(queue);
-			producer.send(message);
+			receiverConnection = ChannelsManagementRegistry.GetNewTopicConnection(username, password);
+            Session session = receiverConnection.createSession(false,Session.AUTO_ACKNOWLEDGE);
+            Queue queue = session.createQueue(queueWhereToForward.getQueueAddress());
+            MessageProducer producer = session.createProducer(queue);
+            ObjectMessage forwarded = (ObjectMessage) message;
+			forwarded.setJMSDestination(queue);
+            producer.send(forwarded);
+            producer.close();
 		} catch (JMSException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

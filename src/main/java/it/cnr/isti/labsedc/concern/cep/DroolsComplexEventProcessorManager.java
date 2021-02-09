@@ -49,7 +49,7 @@ public class DroolsComplexEventProcessorManager extends ComplexEventProcessorMan
     private static InternalKnowledgeBase kbase = KnowledgeBaseFactory.newKnowledgeBase();
     private static KieSession ksession;
 
-	public DroolsComplexEventProcessorManager(String instanceName, String staticRuleToLoadAtStartup, String connectionUsername, String connectionPassword) {
+	public DroolsComplexEventProcessorManager(String instanceName, String staticRuleToLoadAtStartup, String connectionUsername, String connectionPassword, CepType type) {
 		super();
 		try{
 			kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
@@ -59,7 +59,7 @@ public class DroolsComplexEventProcessorManager extends ComplexEventProcessorMan
 		}
 		logger = LogManager.getLogger(DroolsComplexEventProcessorManager.class);
 		logger.info("CEP creation ");
-		cep = CepType.DROOLS;
+		this.cep = type;
 		this.instanceName = instanceName;
 		this.staticRuleToLoadAtStartup = staticRuleToLoadAtStartup;
 		this.username = connectionUsername;
@@ -105,7 +105,7 @@ public class DroolsComplexEventProcessorManager extends ComplexEventProcessorMan
 	private void communicationSetup() throws JMSException {
 		receiverConnection = ChannelsManagementRegistry.GetNewTopicConnection(username, password);
 		receiverSession = ChannelsManagementRegistry.GetNewSession(receiverConnection);
-		queue = ChannelsManagementRegistry.RegisterNewCepQueue(this.cep.name()+"-"+instanceName, receiverSession, "DroolsService-"+instanceName, ServiceChannelProperties.GENERICREQUESTS, cep);
+		queue = ChannelsManagementRegistry.RegisterNewCepQueue(this.cep.name()+"-"+instanceName, receiverSession, this.cep.name()+"-"+instanceName, ServiceChannelProperties.GENERICREQUESTS, cep);
 		logger.info("...CEP named " + this.getInstanceName() + " creates a listening channel called: " + queue.getQueueName());
 		MessageConsumer complexEventProcessorReceiver = receiverSession.createConsumer(queue);
 		complexEventProcessorReceiver.setMessageListener(this);
@@ -119,7 +119,8 @@ public class DroolsComplexEventProcessorManager extends ComplexEventProcessorMan
 			try {
 				ObjectMessage msg = (ObjectMessage) message;
 				ConcernEvaluationRequestEvent<?> receivedEvent = (ConcernEvaluationRequestEvent<?>) msg.getObject();
-				logger.info("...CEP named " + this.getInstanceName() + " receives "  + receivedEvent.getCepType());
+				logger.info("...CEP named " + this.getInstanceName() + " receives "  + receivedEvent.getEventData());
+
 				} catch(ClassCastException | JMSException asd) {
 					logger.error("error on casting or getting ObjectMessage to GlimpseEvaluationRequestEvent");
 				}

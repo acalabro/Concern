@@ -10,9 +10,7 @@ public class ChannelUtilities {
 
 		listenerChannels.add("ServiceChannel-ONE");
 		listenerChannels.add("ServiceChannel-TWO");
-//		listenerChannels.add("ServiceChannel-THREE");
-//		listenerChannels.add("ServiceChannel-FOUR");
-//		listenerChannels.add("ServiceChannel-FIVE");
+		listenerChannels.add("ServiceChannel-THREE");
 
 		return listenerChannels;
 	}

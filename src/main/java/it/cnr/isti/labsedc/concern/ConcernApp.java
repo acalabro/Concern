@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 
 import it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager;
 import it.cnr.isti.labsedc.concern.broker.BrokerManager;
+import it.cnr.isti.labsedc.concern.cep.CepType;
 import it.cnr.isti.labsedc.concern.cep.ComplexEventProcessorManager;
 import it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager;
 import it.cnr.isti.labsedc.concern.listener.ServiceListenerManager;
@@ -16,8 +17,12 @@ import it.cnr.isti.labsedc.concern.utils.ChannelUtilities;
 
 public class ConcernApp
 {
+	//private static StorageController storage;
 	private static BrokerManager broker;
-	private static ComplexEventProcessorManager cep;
+	private static ComplexEventProcessorManager cepMan;
+	//private static ClientManager clientMan;
+	//private static NotificationManager notificationMan;
+	//private static WebInterfaceManager web;
 	private static ServiceListenerManager lcManager;
 	private static String brokerUrl;
 	private static Long maxMemoryUsage;
@@ -58,27 +63,30 @@ public class ConcernApp
     	channelRegistry.setConnectionFactory(factory);
 
     	//STARTING CEP ONE
-    	cep = new DroolsComplexEventProcessorManager("InstanceOne", System.getProperty("user.dir")+ "/src/main/resources/startupRule.drl", username, password);
-    	cep.start();
+    	cepMan = new DroolsComplexEventProcessorManager(
+    			"InstanceOne",
+    			System.getProperty("user.dir")+ "/src/main/resources/startupRule.drl",
+    			username, 
+    			password, CepType.DROOLS);
+    	cepMan.start();
 
-    	while (!cep.cepHasCompletedStartup()) {
+    	while (!cepMan.cepHasCompletedStartup()) {
     		Thread.sleep(100);
     		System.out.println("wait for First CEP start");
     	}
 
-//    	//STARTING CEP TWO
-//    	cep = new DroolsComplexEventProcessorManager("InstanceTwo", System.getProperty("user.dir")+ "/src/main/resources/startupRule.drl", username, password);
-//    	cep.start();
-//
-//    	while (!cep.cepHasCompletedStartup()) {
-//    		Thread.sleep(100);
-//    		System.out.println("wait for Second CEP start");
-//    	}
-//
-//    	//STARTING CEP THREE
-//    	cep = new DroolsComplexEventProcessorManager("InstanceThree", System.getProperty("user.dir")+ "/src/main/resources/startupRule.drl", username, password);
-//    	cep.start();
+    	//STARTING CEP TWO
+    	cepMan = new DroolsComplexEventProcessorManager(
+    			"InstanceTwo", 
+    			System.getProperty("user.dir")+ "/src/main/resources/startupRule.drl", 
+    			username, 
+    			password, CepType.DROOLS);
+    	cepMan.start();
 
+    	while (!cepMan.cepHasCompletedStartup()) {
+    		Thread.sleep(100);
+    		System.out.println("wait for Second CEP start");
+    	}
 
     	lcManager = new ServiceListenerManager(ChannelUtilities.loadChannels(), username, password);
     	lcManager.start();

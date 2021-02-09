@@ -66,7 +66,7 @@ public class ChannelsManagementRegistry {
 	}
 
 	public static TopicConnection GetNewTopicConnection(String username, String password) throws JMSException {
-		ChannelsManagementRegistry.connectionFactory.setTrustedPackages(new ArrayList<String>(Arrays.asList("it.cnr.isti.labsedc.glimpse_reloaded.event,it.cnr.isti.labsedc.glimpse_reloaded.cep,it.cnr.isti.labsedc.glimpse_reloaded.listener".split(","))));
+		ChannelsManagementRegistry.connectionFactory.setTrustedPackages(new ArrayList<String>(Arrays.asList("it.cnr.isti.labsedc.concern.event,it.cnr.isti.labsedc.concern.cep,it.cnr.isti.labsedc.concern.listener".split(","))));
 		ChannelsManagementRegistry.connectionFactory.setUserName(username);
 		ChannelsManagementRegistry.connectionFactory.setUserName(password);
 		return  ChannelsManagementRegistry.connectionFactory.createTopicConnection();
@@ -94,7 +94,7 @@ public class ChannelsManagementRegistry {
 	public static Queue RegisterNewCepQueue(String CepIdentifier, Session receiverSession, String queueName,
 			ServiceChannelProperties channelProperties, CepType cepType) throws JMSException {
 		Queue queue = receiverSession.createQueue(queueName);
-		ChannelsManagementRegistry.ActiveCep.put(new QueueAndProperties(CepIdentifier,channelProperties, cepType), queueName);
+		ChannelsManagementRegistry.ActiveCep.put(new QueueAndProperties(CepIdentifier,channelProperties, cepType, queueName), queueName);
 		return queue;
 	}
 }

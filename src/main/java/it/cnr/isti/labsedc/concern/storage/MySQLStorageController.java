@@ -3,7 +3,7 @@ package it.cnr.isti.labsedc.concern.storage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import it.cnr.isti.labsedc.concern.event.ConcernEvent;
+import it.cnr.isti.labsedc.concern.event.Event;
 
 public class MySQLStorageController implements StorageController {
 
@@ -27,7 +27,7 @@ public class MySQLStorageController implements StorageController {
 	}
 
 	@Override
-	public boolean saveMessage(ConcernEvent<?> message) {
+	public boolean saveMessage(Event<?> message) {
 		// TODO Auto-generated method stub
 		return false;
 	}
