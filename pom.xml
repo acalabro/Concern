@@ -1,13 +1,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-
   <groupId>cnr.isti.labsedc</groupId>
-  <artifactId>glimpse_reloaded</artifactId>
+  <artifactId>concern</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
-	<name>glimpse_reloaded</name>
-	<url>http://labsedc-wiki.isti.cnr.it/labsedc/tools/glimpse/public/</url>
+	<name>concern</name>
+	<url>--tbd--</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -39,7 +38,7 @@
 					<archive>
 						<manifest>
 							<addClasspath>true</addClasspath>
-							<mainClass>it.cnr.isti.labsedc.glimpse_reloaded.App</mainClass>
+							<mainClass>it.cnr.isti.labsedc.concern.GlimpseApp</mainClass>
 						</manifest>
 					</archive>
 				</configuration>

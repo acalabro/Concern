@@ -1,4 +1,4 @@
-import it.cnr.isti.labsedc.glimpse_reloaded.event.GlimpseBasicEvent;
+import it.cnr.isti.labsedc.concern.event.GlimpseBasicEvent;
 
 dialect "java"
 
