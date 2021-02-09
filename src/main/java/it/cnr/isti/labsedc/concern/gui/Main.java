@@ -15,7 +15,7 @@ import java.awt.Window.Type;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
-import it.cnr.isti.labsedc.concern.GlimpseApp;
+import it.cnr.isti.labsedc.concern.ConcernApp;
 
 import java.awt.Font;
 
@@ -89,7 +89,7 @@ public class Main {
 				try {
 					runButton.setEnabled(false);
 					progressBar.setIndeterminate(true);
-					GlimpseApp.main(null);
+					ConcernApp.main(null);
 					} catch (InterruptedException e) {
 					e.printStackTrace();
 				}

@@ -26,8 +26,8 @@ import org.kie.internal.builder.KnowledgeBuilder;
 import org.kie.internal.builder.KnowledgeBuilderFactory;
 import org.kie.internal.io.ResourceFactory;
 
-import it.cnr.isti.labsedc.concern.GlimpseApp;
-import it.cnr.isti.labsedc.concern.event.GlimpseEvaluationRequestEvent;
+import it.cnr.isti.labsedc.concern.ConcernApp;
+import it.cnr.isti.labsedc.concern.event.ConcernEvaluationRequestEvent;
 import it.cnr.isti.labsedc.concern.listener.ServiceChannelProperties;
 import it.cnr.isti.labsedc.concern.register.ChannelsManagementRegistry;
 
@@ -98,7 +98,7 @@ public class DroolsComplexEventProcessorManager extends ComplexEventProcessorMan
         ksession = kbase.newKieSession();
 		logger.info("...CEP named " + this.getInstanceName() + " created Session and fires rules " + staticRuleToLoadAtStartup + " with errors: " + kbuilder.getKnowledgePackages());
 		started  = true;
-		GlimpseApp.componentStarted.put(this.getClass().getSimpleName() + instanceName, true);
+		ConcernApp.componentStarted.put(this.getClass().getSimpleName() + instanceName, true);
 		ksession.fireUntilHalt();
 	}
 
@@ -118,7 +118,7 @@ public class DroolsComplexEventProcessorManager extends ComplexEventProcessorMan
 		if (message instanceof ObjectMessage) {
 			try {
 				ObjectMessage msg = (ObjectMessage) message;
-				GlimpseEvaluationRequestEvent<?> receivedEvent = (GlimpseEvaluationRequestEvent<?>) msg.getObject();
+				ConcernEvaluationRequestEvent<?> receivedEvent = (ConcernEvaluationRequestEvent<?>) msg.getObject();
 				logger.info("...CEP named " + this.getInstanceName() + " receives "  + receivedEvent.getEventData());
 				} catch(ClassCastException | JMSException asd) {
 					logger.error("error on casting or getting ObjectMessage to GlimpseEvaluationRequestEvent");

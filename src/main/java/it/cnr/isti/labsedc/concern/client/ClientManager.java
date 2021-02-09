@@ -1,11 +1,11 @@
 package it.cnr.isti.labsedc.concern.client;
 
-import it.cnr.isti.labsedc.concern.GlimpseApp;
+import it.cnr.isti.labsedc.concern.ConcernApp;
 
 public class ClientManager {
 
 	public ClientManager() {
-		GlimpseApp.componentStarted.put(this.getClass().getSimpleName(), true);
+		ConcernApp.componentStarted.put(this.getClass().getSimpleName(), true);
 	}
 
 }

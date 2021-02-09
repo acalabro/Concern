@@ -13,7 +13,7 @@ import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import it.cnr.isti.labsedc.concern.GlimpseApp;
+import it.cnr.isti.labsedc.concern.ConcernApp;
 import it.cnr.isti.labsedc.concern.cep.CepType;
 import it.cnr.isti.labsedc.concern.listener.ServiceChannelProperties;
 
@@ -52,7 +52,7 @@ public class ChannelsManagementRegistry {
 		//channels available for probes
     	logger.debug(this.getClass().getSimpleName() + " started");
 
-		GlimpseApp.componentStarted.put(this.getClass().getSimpleName(), true);
+		ConcernApp.componentStarted.put(this.getClass().getSimpleName(), true);
 
     	logger.debug(this.getClass().getSimpleName() + " loaded in registry.");
 	}

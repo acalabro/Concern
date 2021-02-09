@@ -1,10 +1,10 @@
 package it.cnr.isti.labsedc.concern.notification;
 
-import it.cnr.isti.labsedc.concern.GlimpseApp;
+import it.cnr.isti.labsedc.concern.ConcernApp;
 
 public class NotificationManager {
 
 	public NotificationManager() {
-		GlimpseApp.componentStarted.put(this.getClass().getSimpleName(), true);
+		ConcernApp.componentStarted.put(this.getClass().getSimpleName(), true);
 	}
 }

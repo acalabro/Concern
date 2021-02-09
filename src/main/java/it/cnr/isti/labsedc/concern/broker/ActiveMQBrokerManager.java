@@ -13,7 +13,7 @@ import org.apache.activemq.usage.SystemUsage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import it.cnr.isti.labsedc.concern.GlimpseApp;
+import it.cnr.isti.labsedc.concern.ConcernApp;
 
 public class ActiveMQBrokerManager implements BrokerManager, Runnable {
 
@@ -63,7 +63,7 @@ public class ActiveMQBrokerManager implements BrokerManager, Runnable {
 			connectionFactory.setPassword(ACTIVEMQ_PASSWORD);
 			connectionFactory.createConnection();
 			logger.debug("Connection sucessfully created");
-			GlimpseApp.componentStarted.put(this.getClass().getSimpleName(), true);
+			ConcernApp.componentStarted.put(this.getClass().getSimpleName(), true);
 	    	logger.debug("Component "+ this.getClass().getSimpleName() + " loaded in registry.");
 		} catch (Exception e) {
 			logger.error(e.getCause());

@@ -15,7 +15,7 @@ import it.cnr.isti.labsedc.concern.listener.ServiceListenerManager;
 import it.cnr.isti.labsedc.concern.register.ChannelsManagementRegistry;
 import it.cnr.isti.labsedc.concern.utils.ChannelUtilities;
 
-public class GlimpseApp
+public class ConcernApp
 {
 	//private static StorageController storage;
 	private static BrokerManager broker;
@@ -51,11 +51,11 @@ public class GlimpseApp
 
 		//storage = new InfluxDBStorageController();
 	    broker = new ActiveMQBrokerManager(brokerUrl, maxMemoryUsage, maxCacheUsage, username, password);
-	    logger = LogManager.getLogger(GlimpseApp.class);
-    	logger.debug(GlimpseApp.class.getSimpleName() + " is launching the broker.");
+	    logger = LogManager.getLogger(ConcernApp.class);
+    	logger.debug(ConcernApp.class.getSimpleName() + " is launching the broker.");
     	broker.run();
 
-    	logger.debug(GlimpseApp.class.getSimpleName() + " broker launched.");
+    	logger.debug(ConcernApp.class.getSimpleName() + " broker launched.");
     	channelRegistry = new ChannelsManagementRegistry();
 
     	logger.debug("Channels Management Registry created");

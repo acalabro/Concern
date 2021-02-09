@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import it.cnr.isti.labsedc.concern.cep.CepType;
 
-public abstract class GlimpseBasicEvent<T> implements Event<T>, Serializable {
+public abstract class ConcernBasicEvent<T> implements Event<T>, Serializable {
 
 	private static final long serialVersionUID = 7077313246352116557L;
 	private String checksum;
@@ -14,7 +14,7 @@ public abstract class GlimpseBasicEvent<T> implements Event<T>, Serializable {
 	private T data;
 
 
-	public GlimpseBasicEvent(T data,CepType type,String senderID, String checksum, long timestamp) {
+	public ConcernBasicEvent(T data,CepType type,String senderID, String checksum, long timestamp) {
 		this.setEventData(data);
 		this.setTimestamp(timestamp);
 		this.setCepType(type);

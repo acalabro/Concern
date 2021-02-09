@@ -14,7 +14,7 @@ import javax.jms.TopicConnection;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import it.cnr.isti.labsedc.concern.event.GlimpseEvaluationRequestEvent;
+import it.cnr.isti.labsedc.concern.event.ConcernEvaluationRequestEvent;
 import it.cnr.isti.labsedc.concern.register.ChannelsManagementRegistry;
 import it.cnr.isti.labsedc.concern.register.QueueAndProperties;
 import it.cnr.isti.labsedc.concern.utils.RoutingUtilities;
@@ -66,8 +66,8 @@ public class ServiceListenerTask implements Runnable, MessageListener {
 		if (message instanceof ObjectMessage) {
 			ObjectMessage casted = (ObjectMessage)message;
 			try {
-				if (casted.getObject() != null && (casted.getObject() instanceof GlimpseEvaluationRequestEvent<?>)) {
-					GlimpseEvaluationRequestEvent<?> incomingRequest = (GlimpseEvaluationRequestEvent<?>)casted.getObject();
+				if (casted.getObject() != null && (casted.getObject() instanceof ConcernEvaluationRequestEvent<?>)) {
+					ConcernEvaluationRequestEvent<?> incomingRequest = (ConcernEvaluationRequestEvent<?>)casted.getObject();
 
 					QueueAndProperties queueWhereToForward= RoutingUtilities.BestCepSelection(incomingRequest);
 					if (queueWhereToForward != null) {

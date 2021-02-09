@@ -11,7 +11,7 @@ import javax.jms.Session;
 import org.apache.activemq.ActiveMQConnectionFactory;
 
 import it.cnr.isti.labsedc.concern.cep.CepType;
-import it.cnr.isti.labsedc.concern.event.GlimpseEvaluationRequestEvent;
+import it.cnr.isti.labsedc.concern.event.ConcernEvaluationRequestEvent;
 import it.cnr.isti.labsedc.concern.listener.ServiceChannelProperties;
 
 public class Producer {
@@ -24,7 +24,7 @@ public class Producer {
             Queue queue = session.createQueue(queueName);
             MessageProducer producer = session.createProducer(queue);
 			ObjectMessage msg = session.createObjectMessage();
-			GlimpseEvaluationRequestEvent<String> asd = new GlimpseEvaluationRequestEvent<String>(
+			ConcernEvaluationRequestEvent<String> asd = new ConcernEvaluationRequestEvent<String>(
 					data,
 					CepType.DROOLS,
 					"evaluationRule",
