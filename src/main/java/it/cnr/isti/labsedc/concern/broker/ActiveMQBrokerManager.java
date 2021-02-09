@@ -67,7 +67,7 @@ public class ActiveMQBrokerManager implements BrokerManager, Runnable {
 			logger.error(e.getCause());
 		}
 	}
-	
+
 	public static void StopActiveMQBroker() {
 		try {
 			broker.stop();

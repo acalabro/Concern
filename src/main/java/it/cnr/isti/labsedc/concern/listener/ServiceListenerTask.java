@@ -68,7 +68,6 @@ public class ServiceListenerTask implements Runnable, MessageListener {
 			try {
 				if (casted.getObject() != null && (casted.getObject() instanceof ConcernEvaluationRequestEvent<?>)) {
 					ConcernEvaluationRequestEvent<?> incomingRequest = (ConcernEvaluationRequestEvent<?>)casted.getObject();
-
 					QueueAndProperties queueWhereToForward= RoutingUtilities.BestCepSelection(incomingRequest);
 					if (queueWhereToForward != null) {
 						forwardToCep(queueWhereToForward, message);

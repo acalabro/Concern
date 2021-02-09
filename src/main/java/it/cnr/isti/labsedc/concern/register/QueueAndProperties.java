@@ -43,5 +43,4 @@ public class QueueAndProperties {
 	public void setServiceChannelProperties(ServiceChannelProperties localChannelProp) {
 		this.localChannelProp = localChannelProp;
 	}
-
 }

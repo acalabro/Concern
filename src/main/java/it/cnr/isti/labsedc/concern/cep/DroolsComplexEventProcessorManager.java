@@ -120,6 +120,7 @@ public class DroolsComplexEventProcessorManager extends ComplexEventProcessorMan
 				ObjectMessage msg = (ObjectMessage) message;
 				ConcernEvaluationRequestEvent<?> receivedEvent = (ConcernEvaluationRequestEvent<?>) msg.getObject();
 				logger.info("...CEP named " + this.getInstanceName() + " receives "  + receivedEvent.getEventData());
+
 				} catch(ClassCastException | JMSException asd) {
 					logger.error("error on casting or getting ObjectMessage to GlimpseEvaluationRequestEvent");
 				}
