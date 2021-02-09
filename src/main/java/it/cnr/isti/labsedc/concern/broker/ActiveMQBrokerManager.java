@@ -1,8 +1,6 @@
 package it.cnr.isti.labsedc.concern.broker;
 
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.ActiveMQSslConnectionFactory;
