@@ -61,7 +61,6 @@ public class ActiveMQBrokerManager implements BrokerManager, Runnable {
 			connectionFactory = new ActiveMQSslConnectionFactory(ACTIVEMQ_HOST);
 			connectionFactory.setUserName(ACTIVEMQ_LOGINNAME);
 			connectionFactory.setPassword(ACTIVEMQ_PASSWORD);
-			connectionFactory.setTrustedPackages(new ArrayList<String>(Arrays.asList("it.cnr.isti.labsedc.concern.event")));
 			connectionFactory.createConnection();
 			logger.debug("Connection sucessfully created");
 			GlimpseApp.componentStarted.put(this.getClass().getSimpleName(), true);
