@@ -7,9 +7,9 @@ import javax.jms.Message;
 import javax.jms.MessageConsumer;
 import javax.jms.MessageListener;
 import javax.jms.ObjectMessage;
-import javax.jms.Queue;
 import javax.jms.Session;
 import javax.jms.TextMessage;
+import javax.jms.Topic;
 import javax.jms.TopicConnection;
 
 import org.apache.activemq.broker.ConnectionContext;
@@ -37,7 +37,7 @@ public class DroolsComplexEventProcessorManager extends ComplexEventProcessorMan
 
     private static Logger logger = LogManager.getLogger(DroolsComplexEventProcessorManager.class);
 	private TopicConnection receiverConnection;
-	private Queue queue;
+	private Topic topic;
 	private Session receiverSession;
 	private CepType cep;
 	private String instanceName;
@@ -110,9 +110,9 @@ public class DroolsComplexEventProcessorManager extends ComplexEventProcessorMan
 	private void communicationSetup() throws JMSException {
 		receiverConnection = ChannelsManagementRegistry.GetNewTopicConnection(username, password);
 		receiverSession = ChannelsManagementRegistry.GetNewSession(receiverConnection);
-		queue = ChannelsManagementRegistry.RegisterNewCepQueue(this.cep.name()+"-"+instanceName, receiverSession, this.cep.name()+"-"+instanceName, ChannelProperties.GENERICREQUESTS, cep);
-		logger.info("...CEP named " + this.getInstanceName() + " creates a listening channel called: " + queue.getQueueName());
-		MessageConsumer complexEventProcessorReceiver = receiverSession.createConsumer(queue);
+		topic = ChannelsManagementRegistry.RegisterNewCepTopic(this.cep.name()+"-"+instanceName, receiverSession, this.cep.name()+"-"+instanceName, ChannelProperties.GENERICREQUESTS, cep);
+		logger.info("...CEP named " + this.getInstanceName() + " creates a listening channel called: " + topic.getTopicName());
+		MessageConsumer complexEventProcessorReceiver = receiverSession.createConsumer(topic);
 		complexEventProcessorReceiver.setMessageListener(this);
 		receiverConnection.start();
 	}

@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 import javax.jms.JMSException;
-import javax.jms.Queue;
+import javax.jms.Topic;
 import javax.jms.Session;
 import javax.jms.TopicConnection;
 
@@ -20,8 +20,8 @@ import it.cnr.isti.labsedc.concern.eventListener.ChannelProperties;
 public class ChannelsManagementRegistry {
 
 	private static Logger logger ;
-	public static HashMap<String, QueueAndProperties> ActiveQueues;
-	public static HashMap<QueueAndProperties, String> ActiveCep;
+	public static HashMap<String, TopicAndProperties> ActiveTopics;
+	public static HashMap<TopicAndProperties, String> ActiveCep;
 	public static HashMap<ChannelProperties, String> ActiveServicesChannel;
 	public static HashMap<Session, TopicConnection> ActiveSessions;
 	public static HashMap<String, String> ConsumersChannels;
@@ -33,11 +33,11 @@ public class ChannelsManagementRegistry {
 		logger = LogManager.getLogger(ChannelsManagementRegistry.class);
 
     	logger.debug("into " + this.getClass().getSimpleName());
-		ActiveQueues = new HashMap<String, QueueAndProperties>();
-		//creator and queue name
+		ActiveTopics = new HashMap<String, TopicAndProperties>();
+		//creator and topic name
 
-		ActiveCep = new HashMap<QueueAndProperties, String>();
-		//cep available on the infrastructure- the string is the queueName
+		ActiveCep = new HashMap<TopicAndProperties, String>();
+		//cep available on the infrastructure- the string is the topicName
 
 		ActiveServicesChannel = new HashMap<ChannelProperties, String>();
 		//channel on which the system will listen for incoming messages organized by service (requests to forward to a specific cep)
@@ -79,22 +79,22 @@ public class ChannelsManagementRegistry {
 		return session;
 	}
 
-	public static Queue GetNewSessionQueue(String creator, Session receiverSession, String queueName, ChannelProperties property) throws JMSException {
-		Queue queue = receiverSession.createQueue(queueName);
-		//ChannelsManagementRegistry.ActiveQueues.put(creator,new QueueAndProperties(queueName,property));
-		return queue;
+	public static Topic GetNewSessionTopic(String creator, Session receiverSession, String topicName, ChannelProperties property) throws JMSException {
+		Topic topic = receiverSession.createTopic(topicName);
+		//ChannelsManagementRegistry.ActiveTopics.put(creator,new TopicAndProperties(topicName,property));
+		return topic;
 	}
 
 	public static void LogDrop() {
-		for (int i = 0; i<ActiveQueues.size();i++) {
-			logger.info(ActiveQueues.values().toArray()[i].toString());
+		for (int i = 0; i<ActiveTopics.size();i++) {
+			logger.info(ActiveTopics.values().toArray()[i].toString());
 		}
 	}
 
-	public static Queue RegisterNewCepQueue(String CepIdentifier, Session receiverSession, String queueName,
+	public static Topic RegisterNewCepTopic(String CepIdentifier, Session receiverSession, String topicName,
 			ChannelProperties channelProperties, CepType cepType) throws JMSException {
-		Queue queue = receiverSession.createQueue(queueName);
-		ChannelsManagementRegistry.ActiveCep.put(new QueueAndProperties(CepIdentifier,channelProperties, cepType, queueName), queueName);
-		return queue;
+		Topic topic = receiverSession.createTopic(topicName);
+		ChannelsManagementRegistry.ActiveCep.put(new TopicAndProperties(CepIdentifier,channelProperties, cepType, topicName), topicName);
+		return topic;
 	}
 }

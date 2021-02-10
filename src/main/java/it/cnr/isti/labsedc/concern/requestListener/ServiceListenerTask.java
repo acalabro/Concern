@@ -6,9 +6,9 @@ import javax.jms.MessageConsumer;
 import javax.jms.MessageListener;
 import javax.jms.MessageProducer;
 import javax.jms.ObjectMessage;
-import javax.jms.Queue;
 import javax.jms.Session;
 import javax.jms.TextMessage;
+import javax.jms.Topic;
 import javax.jms.TopicConnection;
 
 import org.apache.logging.log4j.LogManager;
@@ -17,7 +17,7 @@ import org.apache.logging.log4j.Logger;
 import it.cnr.isti.labsedc.concern.event.ConcernEvaluationRequestEvent;
 import it.cnr.isti.labsedc.concern.eventListener.ChannelProperties;
 import it.cnr.isti.labsedc.concern.register.ChannelsManagementRegistry;
-import it.cnr.isti.labsedc.concern.register.QueueAndProperties;
+import it.cnr.isti.labsedc.concern.register.TopicAndProperties;
 import it.cnr.isti.labsedc.concern.utils.RoutingUtilities;
 
 public class ServiceListenerTask implements Runnable, MessageListener {
@@ -48,8 +48,8 @@ public class ServiceListenerTask implements Runnable, MessageListener {
 			receiverConnection = ChannelsManagementRegistry.GetNewTopicConnection(username, password);
 			receiverSession = ChannelsManagementRegistry.GetNewSession(receiverConnection);
 
-			Queue queue = ChannelsManagementRegistry.GetNewSessionQueue(this.toString(), receiverSession,serviceChannelName, ChannelProperties.GENERICREQUESTS);
-			consumer = receiverSession.createConsumer(queue);
+			Topic topic = ChannelsManagementRegistry.GetNewSessionTopic(this.toString(), receiverSession,serviceChannelName, ChannelProperties.GENERICREQUESTS);
+			consumer = receiverSession.createConsumer(topic);
 			//RegisterForCommunicationChannels.ServiceListeningOnWhichChannel.put(key, value)
 			logger.info("...service listener named " + consumer.toString() + " created within the executor named " + this.getChannelTaskName());
 			consumer.setMessageListener(this);
@@ -69,9 +69,9 @@ public class ServiceListenerTask implements Runnable, MessageListener {
 			try {
 				if (casted.getObject() != null && (casted.getObject() instanceof ConcernEvaluationRequestEvent<?>)) {
 					ConcernEvaluationRequestEvent<?> incomingRequest = (ConcernEvaluationRequestEvent<?>)casted.getObject();
-					QueueAndProperties queueWhereToForward= RoutingUtilities.BestCepSelectionForRules(incomingRequest);
-					if (queueWhereToForward != null) {
-						forwardToCep(queueWhereToForward, message);
+					TopicAndProperties topicWhereToForward= RoutingUtilities.BestCepSelectionForRules(incomingRequest);
+					if (topicWhereToForward != null) {
+						forwardToCep(topicWhereToForward, message);
 					}
 				}
 			} catch (JMSException e) {
@@ -89,14 +89,14 @@ public class ServiceListenerTask implements Runnable, MessageListener {
 		}
 	}
 
-	private void forwardToCep(QueueAndProperties queueWhereToForward, Message message) {
+	private void forwardToCep(TopicAndProperties queueWhereToForward, Message message) {
 		try {
 			receiverConnection = ChannelsManagementRegistry.GetNewTopicConnection(username, password);
             Session session = receiverConnection.createSession(false,Session.AUTO_ACKNOWLEDGE);
-            Queue queue = session.createQueue(queueWhereToForward.getQueueAddress());
-            MessageProducer producer = session.createProducer(queue);
+            Topic topic = session.createTopic(queueWhereToForward.getTopicAddress());
+            MessageProducer producer = session.createProducer(topic);
             ObjectMessage forwarded = (ObjectMessage) message;
-			forwarded.setJMSDestination(queue);
+			forwarded.setJMSDestination(topic);
             producer.send(forwarded);
             producer.close();
 		} catch (JMSException e) {
