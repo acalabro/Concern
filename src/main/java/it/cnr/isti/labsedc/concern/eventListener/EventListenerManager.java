@@ -1,4 +1,4 @@
-package it.cnr.isti.labsedc.concern.listener;
+package it.cnr.isti.labsedc.concern.eventListener;
 
 import java.util.List;
 import java.util.Vector;
@@ -10,15 +10,15 @@ import org.apache.logging.log4j.Logger;
 
 import it.cnr.isti.labsedc.concern.ConcernApp;
 
-public class ServiceListenerManager extends Thread {
+public class EventListenerManager extends Thread {
 
 	private Vector<String> loadChannels;
 	private String username;
 	private String password;
 	private static boolean killAll = true;
-    private static final Logger logger = LogManager.getLogger(ServiceListenerManager.class);
+    private static final Logger logger = LogManager.getLogger(EventListenerManager.class);
 
-	public ServiceListenerManager(Vector<String> loadChannels, String connectionUsername, String connectionPassword) {
+	public EventListenerManager(Vector<String> loadChannels, String connectionUsername, String connectionPassword) {
 		this.loadChannels = loadChannels;
 		this.username = connectionUsername;
 		this.password = connectionPassword;
@@ -26,15 +26,15 @@ public class ServiceListenerManager extends Thread {
 
 	public void run() {
 
-			ServiceListenerManager.killAll = false;
+			EventListenerManager.killAll = false;
 			ExecutorService executor = Executors.newFixedThreadPool(loadChannels.size());
-			logger.info("Creating executors");
+			logger.info("Creating event listerner");
 			for (int i = 0; i< loadChannels.size(); i++) {
-				Runnable worker = new ServiceListenerTask(loadChannels.get(i), username, password);
+				Runnable worker = new EventListenerTask(loadChannels.get(i), username, password);
 				executor.execute(worker);
 			}
 			ConcernApp.componentStarted.put(this.getClass().getSimpleName(), true);
-			while(!ServiceListenerManager.killAll) {
+			while(!EventListenerManager.killAll) {
 			}
 			logger.info("KILALLLLLLLL");
 			executor.shutdown();
@@ -46,7 +46,7 @@ public class ServiceListenerManager extends Thread {
 	}
 
 	public static void killAllServiceListeners() {
-		ServiceListenerManager.killAll = true;
+		EventListenerManager.killAll = true;
 	}
 
 }

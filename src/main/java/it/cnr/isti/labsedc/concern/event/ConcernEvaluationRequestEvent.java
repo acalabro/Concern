@@ -1,19 +1,19 @@
 package it.cnr.isti.labsedc.concern.event;
 
 import it.cnr.isti.labsedc.concern.cep.CepType;
-import it.cnr.isti.labsedc.concern.listener.ServiceChannelProperties;
+import it.cnr.isti.labsedc.concern.eventListener.ChannelProperties;
 
   public class ConcernEvaluationRequestEvent<T> extends ConcernBasicEvent<T> {
     
 	private static final long serialVersionUID = 6545740721731539243L;
 	private String evaluationRule;
-	private ServiceChannelProperties propertyRequested;
+	private ChannelProperties propertyRequested;
 
 	public ConcernEvaluationRequestEvent(
 			T data,
 			CepType type,
 			String evaluationRule,
-			ServiceChannelProperties propertyRequested,
+			ChannelProperties propertyRequested,
 			String senderID,
 			String checksum,
 			long timestamp) {
@@ -22,11 +22,11 @@ import it.cnr.isti.labsedc.concern.listener.ServiceChannelProperties;
 		this.setPropertyRequested(propertyRequested);
 	}
 
-	public ServiceChannelProperties getPropertyRequested() {
+	public ChannelProperties getPropertyRequested() {
 		return propertyRequested;
 	}
 
-	public void setPropertyRequested(ServiceChannelProperties propertyRequested) {
+	public void setPropertyRequested(ChannelProperties propertyRequested) {
 		this.propertyRequested = propertyRequested;
 	}
 

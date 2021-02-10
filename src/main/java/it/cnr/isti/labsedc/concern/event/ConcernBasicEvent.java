@@ -13,8 +13,12 @@ public abstract class ConcernBasicEvent<T> implements Event<T>, Serializable {
 	private long timestamp;
 	private T data;
 
-
-	public ConcernBasicEvent(T data,CepType type,String senderID, String checksum, long timestamp) {
+	public ConcernBasicEvent(
+			T data,
+			CepType type,
+			String senderID,
+			String checksum, 
+			long timestamp) {
 		this.setEventData(data);
 		this.setTimestamp(timestamp);
 		this.setCepType(type);

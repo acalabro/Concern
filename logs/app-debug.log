@@ -1,0 +1,291 @@
+2021-02-09T19:35:24.794+0100 [main] INFO  it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Start SSL Broker
+2021-02-09T19:35:24.807+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Creating TrasportConnector
+2021-02-09T19:35:24.984+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Waiting for broker start
+2021-02-09T19:35:24.984+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - broker started
+2021-02-09T19:35:24.985+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Enabling SSL ConnectionFactory
+2021-02-09T19:35:25.017+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Connection sucessfully created
+2021-02-09T19:35:25.017+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Component ActiveMQBrokerManager loaded in registry.
+2021-02-09T19:35:25.214+0100 [main] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - CEP creation 
+2021-02-09T19:35:25.242+0100 [Thread-3] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - ...CEP named InstanceOne creates a listening channel called: DROOLS-InstanceOne
+2021-02-09T19:35:25.622+0100 [Thread-3] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - ...CEP named InstanceOne created Session and fires rules /home/acalabro/workspace/Concern/src/main/resources/startupRule.drl with errors: [[Package name=defaultpkg], [Package name=it.cnr.isti.labsedc.concern.event]]
+2021-02-09T19:35:25.718+0100 [main] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - CEP creation 
+2021-02-09T19:35:25.722+0100 [Thread-5] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - ...CEP named InstanceTwo creates a listening channel called: DROOLS-InstanceTwo
+2021-02-09T19:35:25.742+0100 [Thread-5] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - ...CEP named InstanceTwo created Session and fires rules /home/acalabro/workspace/Concern/src/main/resources/startupRule.drl with errors: [[Package name=defaultpkg], [Package name=it.cnr.isti.labsedc.concern.event]]
+2021-02-09T19:35:25.820+0100 [Thread-7] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerManager - Creating executors
+2021-02-09T19:35:25.821+0100 [pool-4-thread-1] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...within the executor named ServiceChannel-ONE
+2021-02-09T19:35:25.822+0100 [pool-4-thread-3] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...within the executor named ServiceChannel-THREE
+2021-02-09T19:35:25.822+0100 [pool-4-thread-2] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...within the executor named ServiceChannel-TWO
+2021-02-09T19:35:25.827+0100 [pool-4-thread-1] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...consumer named ActiveMQMessageConsumer { value=ID:X1-43183-1612895724828-6:3:2:1, started=false } created within the executor named ServiceChannel-ONE
+2021-02-09T19:35:25.828+0100 [pool-4-thread-3] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...consumer named ActiveMQMessageConsumer { value=ID:X1-43183-1612895724828-6:4:2:1, started=false } created within the executor named ServiceChannel-THREE
+2021-02-09T19:35:25.831+0100 [pool-4-thread-2] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...consumer named ActiveMQMessageConsumer { value=ID:X1-43183-1612895724828-6:5:2:1, started=false } created within the executor named ServiceChannel-TWO
+2021-02-09T19:35:31.114+0100 [ActiveMQ Session Task-1] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - ...CEP named InstanceOne receives messageONE
+2021-02-09T19:35:31.605+0100 [ActiveMQ Session Task-1] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - ...CEP named InstanceOne receives messageTWO
+2021-02-10T09:46:52.925+0100 [main] INFO  it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Start SSL Broker
+2021-02-10T09:46:52.935+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Creating TrasportConnector
+2021-02-10T09:46:53.108+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Waiting for broker start
+2021-02-10T09:46:53.109+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - broker started
+2021-02-10T09:46:53.109+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Enabling SSL ConnectionFactory
+2021-02-10T09:46:53.147+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Connection sucessfully created
+2021-02-10T09:46:53.148+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Component ActiveMQBrokerManager loaded in registry.
+2021-02-10T09:46:53.342+0100 [main] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - CEP creation 
+2021-02-10T09:46:53.361+0100 [Thread-3] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - ...CEP named InstanceOne creates a listening channel called: DROOLS-InstanceOne
+2021-02-10T09:46:53.567+0100 [Thread-3] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - ...CEP named InstanceOne created Session and fires rules /home/acalabro/workspace/Concern/src/main/resources/startupRule.drl with errors: [[Package name=defaultpkg], [Package name=it.cnr.isti.labsedc.concern.event]]
+2021-02-10T09:46:53.646+0100 [main] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - CEP creation 
+2021-02-10T09:46:53.649+0100 [Thread-5] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - ...CEP named InstanceTwo creates a listening channel called: DROOLS-InstanceTwo
+2021-02-10T09:46:53.661+0100 [Thread-5] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - ...CEP named InstanceTwo created Session and fires rules /home/acalabro/workspace/Concern/src/main/resources/startupRule.drl with errors: [[Package name=defaultpkg], [Package name=it.cnr.isti.labsedc.concern.event]]
+2021-02-10T09:46:53.748+0100 [Thread-7] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerManager - Creating executors
+2021-02-10T09:46:53.749+0100 [pool-4-thread-2] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...within the executor named ServiceChannel-TWO
+2021-02-10T09:46:53.749+0100 [pool-4-thread-1] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...within the executor named ServiceChannel-ONE
+2021-02-10T09:46:53.749+0100 [pool-4-thread-3] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...within the executor named ServiceChannel-THREE
+2021-02-10T09:46:53.758+0100 [pool-4-thread-1] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...consumer named ActiveMQMessageConsumer { value=ID:X1-43299-1612946812950-6:3:2:1, started=false } created within the executor named ServiceChannel-ONE
+2021-02-10T09:46:53.759+0100 [pool-4-thread-2] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...consumer named ActiveMQMessageConsumer { value=ID:X1-43299-1612946812950-6:4:2:1, started=false } created within the executor named ServiceChannel-TWO
+2021-02-10T09:46:53.759+0100 [pool-4-thread-3] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...consumer named ActiveMQMessageConsumer { value=ID:X1-43299-1612946812950-6:5:2:1, started=false } created within the executor named ServiceChannel-THREE
+2021-02-10T10:18:22.157+0100 [main] INFO  it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Start SSL Broker
+2021-02-10T10:18:22.173+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Creating TrasportConnector
+2021-02-10T10:18:22.369+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Waiting for broker start
+2021-02-10T10:18:22.369+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - broker started
+2021-02-10T10:18:22.369+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Enabling SSL ConnectionFactory
+2021-02-10T10:18:22.407+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Connection sucessfully created
+2021-02-10T10:18:22.408+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Component ActiveMQBrokerManager loaded in registry.
+2021-02-10T10:18:22.411+0100 [Thread-2] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerManager - Creating executors
+2021-02-10T10:18:22.416+0100 [Thread-3] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerManager - Creating event listerner
+2021-02-10T10:18:22.421+0100 [pool-3-thread-1] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerTask - ...within the executor named EventChannel-ONE
+2021-02-10T10:18:22.427+0100 [pool-3-thread-2] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerTask - ...within the executor named EventChannel-TWO
+2021-02-10T10:18:22.429+0100 [pool-3-thread-3] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerTask - ...within the executor named EventChannel-THREE
+2021-02-10T10:18:22.441+0100 [pool-2-thread-1] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...within the serviceListener named ServiceChannel-ONE
+2021-02-10T10:18:22.448+0100 [pool-2-thread-2] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...within the serviceListener named ServiceChannel-TWO
+2021-02-10T10:18:22.456+0100 [pool-2-thread-3] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...within the serviceListener named ServiceChannel-THREE
+2021-02-10T10:18:22.564+0100 [pool-2-thread-2] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...service listener named ActiveMQMessageConsumer { value=ID:X1-42337-1612948702199-6:5:2:1, started=false } created within the executor named ServiceChannel-TWO
+2021-02-10T10:18:22.564+0100 [pool-2-thread-1] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...service listener named ActiveMQMessageConsumer { value=ID:X1-42337-1612948702199-6:4:2:1, started=false } created within the executor named ServiceChannel-ONE
+2021-02-10T10:18:22.564+0100 [pool-2-thread-3] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...service listener named ActiveMQMessageConsumer { value=ID:X1-42337-1612948702199-6:6:2:1, started=false } created within the executor named ServiceChannel-THREE
+2021-02-10T10:18:22.567+0100 [pool-3-thread-1] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerTask - ...eventListener named ActiveMQMessageConsumer { value=ID:X1-42337-1612948702199-6:2:2:1, started=false } created within the executor named EventChannel-ONE
+2021-02-10T10:18:22.569+0100 [pool-3-thread-2] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerTask - ...eventListener named ActiveMQMessageConsumer { value=ID:X1-42337-1612948702199-6:2:2:2, started=false } created within the executor named EventChannel-TWO
+2021-02-10T10:18:22.592+0100 [pool-3-thread-3] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerTask - ...eventListener named ActiveMQMessageConsumer { value=ID:X1-42337-1612948702199-6:2:2:3, started=true } created within the executor named EventChannel-THREE
+2021-02-10T10:18:22.732+0100 [main] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - CEP creation 
+2021-02-10T10:18:22.739+0100 [Thread-11] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - ...CEP named InstanceOne creates a listening channel called: DROOLS-InstanceOne
+2021-02-10T10:18:23.075+0100 [Thread-11] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - ...CEP named InstanceOne created Session and fires rules /home/acalabro/workspace/Concern/src/main/resources/startupRule.drl with errors: [[Package name=defaultpkg], [Package name=it.cnr.isti.labsedc.concern.event]]
+2021-02-10T10:18:23.137+0100 [main] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - CEP creation 
+2021-02-10T10:18:23.156+0100 [Thread-13] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - ...CEP named InstanceTwo creates a listening channel called: DROOLS-InstanceTwo
+2021-02-10T10:18:23.199+0100 [Thread-13] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - ...CEP named InstanceTwo created Session and fires rules /home/acalabro/workspace/Concern/src/main/resources/startupRule.drl with errors: [[Package name=defaultpkg], [Package name=it.cnr.isti.labsedc.concern.event]]
+2021-02-10T11:01:42.443+0100 [main] INFO  it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Start SSL Broker
+2021-02-10T11:01:42.460+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Creating TrasportConnector
+2021-02-10T11:01:42.676+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Waiting for broker start
+2021-02-10T11:01:42.676+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - broker started
+2021-02-10T11:01:42.677+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Enabling SSL ConnectionFactory
+2021-02-10T11:01:42.733+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Connection sucessfully created
+2021-02-10T11:01:42.733+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Component ActiveMQBrokerManager loaded in registry.
+2021-02-10T11:01:42.736+0100 [Thread-2] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerManager - Creating executors
+2021-02-10T11:01:42.739+0100 [pool-2-thread-1] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...within the serviceListener named ServiceChannel-ONE
+2021-02-10T11:01:42.742+0100 [pool-2-thread-2] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...within the serviceListener named ServiceChannel-TWO
+2021-02-10T11:01:42.743+0100 [pool-2-thread-3] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...within the serviceListener named ServiceChannel-THREE
+2021-02-10T11:01:42.753+0100 [Thread-3] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerManager - Creating event listerner
+2021-02-10T11:01:42.802+0100 [pool-3-thread-1] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerTask - ...within the executor named EventChannel-ONE
+2021-02-10T11:01:42.848+0100 [pool-3-thread-2] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerTask - ...within the executor named EventChannel-TWO
+2021-02-10T11:01:42.873+0100 [pool-3-thread-3] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerTask - ...within the executor named EventChannel-THREE
+2021-02-10T11:01:42.903+0100 [pool-3-thread-1] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerTask - ...eventListener named ActiveMQMessageConsumer { value=ID:X1-44503-1612951302486-6:4:2:1, started=false } created within the executor named EventChannel-ONE
+2021-02-10T11:01:42.906+0100 [pool-2-thread-3] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...service listener named ActiveMQMessageConsumer { value=ID:X1-44503-1612951302486-6:2:2:2, started=false } created within the executor named ServiceChannel-THREE
+2021-02-10T11:01:42.910+0100 [pool-2-thread-2] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...service listener named ActiveMQMessageConsumer { value=ID:X1-44503-1612951302486-6:2:2:1, started=false } created within the executor named ServiceChannel-TWO
+2021-02-10T11:01:42.926+0100 [pool-3-thread-2] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerTask - ...eventListener named ActiveMQMessageConsumer { value=ID:X1-44503-1612951302486-6:5:2:1, started=false } created within the executor named EventChannel-TWO
+2021-02-10T11:01:42.929+0100 [pool-3-thread-3] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerTask - ...eventListener named ActiveMQMessageConsumer { value=ID:X1-44503-1612951302486-6:6:2:1, started=false } created within the executor named EventChannel-THREE
+2021-02-10T11:01:42.931+0100 [pool-2-thread-1] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...service listener named ActiveMQMessageConsumer { value=ID:X1-44503-1612951302486-6:2:2:3, started=true } created within the executor named ServiceChannel-ONE
+2021-02-10T11:01:43.133+0100 [main] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - CEP creation 
+2021-02-10T11:01:43.149+0100 [Thread-11] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - ...CEP named InstanceOne creates a listening channel called: DROOLS-InstanceOne
+2021-02-10T11:01:43.596+0100 [Thread-11] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - ...CEP named InstanceOne created Session and fires rules /home/acalabro/workspace/Concern/src/main/resources/startupRule.drl with errors: [[Package name=defaultpkg], [Package name=it.cnr.isti.labsedc.concern.event]]
+2021-02-10T11:01:43.640+0100 [main] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - CEP creation 
+2021-02-10T11:01:43.653+0100 [Thread-13] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - ...CEP named InstanceTwo creates a listening channel called: DROOLS-InstanceTwo
+2021-02-10T11:01:43.682+0100 [Thread-13] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - ...CEP named InstanceTwo created Session and fires rules /home/acalabro/workspace/Concern/src/main/resources/startupRule.drl with errors: [[Package name=defaultpkg], [Package name=it.cnr.isti.labsedc.concern.event]]
+2021-02-10T11:04:47.861+0100 [main] INFO  it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Start SSL Broker
+2021-02-10T11:04:47.878+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Creating TrasportConnector
+2021-02-10T11:04:48.066+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Waiting for broker start
+2021-02-10T11:04:48.067+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - broker started
+2021-02-10T11:04:48.067+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Enabling SSL ConnectionFactory
+2021-02-10T11:04:48.107+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Connection sucessfully created
+2021-02-10T11:04:48.108+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Component ActiveMQBrokerManager loaded in registry.
+2021-02-10T11:04:48.110+0100 [Thread-2] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerManager - Creating executors
+2021-02-10T11:04:48.112+0100 [pool-2-thread-1] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...within the serviceListener named ServiceChannel-ONE
+2021-02-10T11:04:48.119+0100 [pool-2-thread-2] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...within the serviceListener named ServiceChannel-TWO
+2021-02-10T11:04:48.128+0100 [Thread-3] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerManager - Creating event listerner
+2021-02-10T11:04:48.138+0100 [pool-2-thread-3] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...within the serviceListener named ServiceChannel-THREE
+2021-02-10T11:04:48.152+0100 [pool-3-thread-1] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerTask - ...within the executor named EventChannel-ONE
+2021-02-10T11:04:48.183+0100 [pool-3-thread-2] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerTask - ...within the executor named EventChannel-TWO
+2021-02-10T11:04:48.209+0100 [pool-3-thread-3] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerTask - ...within the executor named EventChannel-THREE
+2021-02-10T11:04:48.242+0100 [pool-3-thread-2] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerTask - ...eventListener named ActiveMQMessageConsumer { value=ID:X1-40921-1612951487902-6:5:2:1, started=false } created within the executor named EventChannel-TWO
+2021-02-10T11:04:48.243+0100 [pool-3-thread-1] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerTask - ...eventListener named ActiveMQMessageConsumer { value=ID:X1-40921-1612951487902-6:4:2:1, started=false } created within the executor named EventChannel-ONE
+2021-02-10T11:04:48.245+0100 [pool-3-thread-3] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerTask - ...eventListener named ActiveMQMessageConsumer { value=ID:X1-40921-1612951487902-6:6:2:1, started=false } created within the executor named EventChannel-THREE
+2021-02-10T11:04:48.247+0100 [pool-2-thread-1] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...service listener named ActiveMQMessageConsumer { value=ID:X1-40921-1612951487902-6:1:2:2, started=false } created within the executor named ServiceChannel-ONE
+2021-02-10T11:04:48.252+0100 [pool-2-thread-2] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...service listener named ActiveMQMessageConsumer { value=ID:X1-40921-1612951487902-6:1:2:3, started=true } created within the executor named ServiceChannel-TWO
+2021-02-10T11:04:48.253+0100 [pool-2-thread-3] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...service listener named ActiveMQMessageConsumer { value=ID:X1-40921-1612951487902-6:1:2:1, started=true } created within the executor named ServiceChannel-THREE
+2021-02-10T11:04:48.462+0100 [main] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - CEP creation 
+2021-02-10T11:04:48.484+0100 [Thread-11] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - ...CEP named InstanceOne creates a listening channel called: DROOLS-InstanceOne
+2021-02-10T11:04:48.886+0100 [Thread-11] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - ...CEP named InstanceOne created Session and fires rules /home/acalabro/workspace/Concern/src/main/resources/startupRule.drl with errors: [[Package name=defaultpkg], [Package name=it.cnr.isti.labsedc.concern.event]]
+2021-02-10T11:04:48.971+0100 [main] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - CEP creation 
+2021-02-10T11:04:48.978+0100 [Thread-13] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - ...CEP named InstanceTwo creates a listening channel called: DROOLS-InstanceTwo
+2021-02-10T11:04:49.010+0100 [Thread-13] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - ...CEP named InstanceTwo created Session and fires rules /home/acalabro/workspace/Concern/src/main/resources/startupRule.drl with errors: [[Package name=defaultpkg], [Package name=it.cnr.isti.labsedc.concern.event]]
+2021-02-10T11:05:35.098+0100 [main] INFO  it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Start SSL Broker
+2021-02-10T11:05:35.114+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Creating TrasportConnector
+2021-02-10T11:05:35.314+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Waiting for broker start
+2021-02-10T11:05:35.314+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - broker started
+2021-02-10T11:05:35.314+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Enabling SSL ConnectionFactory
+2021-02-10T11:05:35.361+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Connection sucessfully created
+2021-02-10T11:05:35.361+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Component ActiveMQBrokerManager loaded in registry.
+2021-02-10T11:05:35.364+0100 [Thread-2] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerManager - Creating executors
+2021-02-10T11:05:35.381+0100 [pool-2-thread-1] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...within the serviceListener named ServiceChannel-ONE
+2021-02-10T11:05:35.385+0100 [Thread-3] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerManager - Creating event listerner
+2021-02-10T11:05:35.387+0100 [pool-2-thread-2] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...within the serviceListener named ServiceChannel-TWO
+2021-02-10T11:05:35.406+0100 [pool-2-thread-3] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...within the serviceListener named ServiceChannel-THREE
+2021-02-10T11:05:35.481+0100 [pool-3-thread-1] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerTask - ...within the executor named EventChannel-ONE
+2021-02-10T11:05:35.481+0100 [pool-3-thread-2] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerTask - ...within the executor named EventChannel-TWO
+2021-02-10T11:05:35.504+0100 [pool-3-thread-3] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerTask - ...within the executor named EventChannel-THREE
+2021-02-10T11:05:35.617+0100 [pool-3-thread-2] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerTask - ...eventListener named ActiveMQMessageConsumer { value=ID:X1-41103-1612951535136-6:5:2:1, started=false } created within the executor named EventChannel-TWO
+2021-02-10T11:05:35.618+0100 [pool-2-thread-1] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...service listener named ActiveMQMessageConsumer { value=ID:X1-41103-1612951535136-6:1:2:1, started=false } created within the executor named ServiceChannel-ONE
+2021-02-10T11:05:35.619+0100 [pool-2-thread-3] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...service listener named ActiveMQMessageConsumer { value=ID:X1-41103-1612951535136-6:3:2:1, started=false } created within the executor named ServiceChannel-THREE
+2021-02-10T11:05:35.619+0100 [pool-2-thread-2] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...service listener named ActiveMQMessageConsumer { value=ID:X1-41103-1612951535136-6:2:2:1, started=false } created within the executor named ServiceChannel-TWO
+2021-02-10T11:05:35.630+0100 [pool-3-thread-1] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerTask - ...eventListener named ActiveMQMessageConsumer { value=ID:X1-41103-1612951535136-6:4:2:1, started=false } created within the executor named EventChannel-ONE
+2021-02-10T11:05:35.640+0100 [pool-3-thread-3] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerTask - ...eventListener named ActiveMQMessageConsumer { value=ID:X1-41103-1612951535136-6:6:2:1, started=false } created within the executor named EventChannel-THREE
+2021-02-10T11:05:35.780+0100 [main] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - CEP creation 
+2021-02-10T11:05:35.792+0100 [Thread-11] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - ...CEP named InstanceOne creates a listening channel called: DROOLS-InstanceOne
+2021-02-10T11:05:36.283+0100 [Thread-11] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - ...CEP named InstanceOne created Session and fires rules /home/acalabro/workspace/Concern/src/main/resources/startupRule.drl with errors: [[Package name=defaultpkg], [Package name=it.cnr.isti.labsedc.concern.event]]
+2021-02-10T11:05:36.286+0100 [main] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - CEP creation 
+2021-02-10T11:05:36.313+0100 [Thread-13] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - ...CEP named InstanceTwo creates a listening channel called: DROOLS-InstanceTwo
+2021-02-10T11:05:36.352+0100 [Thread-13] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - ...CEP named InstanceTwo created Session and fires rules /home/acalabro/workspace/Concern/src/main/resources/startupRule.drl with errors: [[Package name=defaultpkg], [Package name=it.cnr.isti.labsedc.concern.event]]
+2021-02-10T11:07:37.579+0100 [main] INFO  it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Start SSL Broker
+2021-02-10T11:07:37.598+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Creating TrasportConnector
+2021-02-10T11:07:37.787+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Waiting for broker start
+2021-02-10T11:07:37.787+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - broker started
+2021-02-10T11:07:37.787+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Enabling SSL ConnectionFactory
+2021-02-10T11:07:37.822+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Connection sucessfully created
+2021-02-10T11:07:37.822+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Component ActiveMQBrokerManager loaded in registry.
+2021-02-10T11:07:37.825+0100 [Thread-2] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerManager - Creating executors
+2021-02-10T11:07:37.832+0100 [Thread-3] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerManager - Creating event listerner
+2021-02-10T11:07:37.836+0100 [pool-2-thread-1] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...within the serviceListener named ServiceChannel-ONE
+2021-02-10T11:07:37.837+0100 [pool-2-thread-2] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...within the serviceListener named ServiceChannel-TWO
+2021-02-10T11:07:37.844+0100 [pool-2-thread-3] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...within the serviceListener named ServiceChannel-THREE
+2021-02-10T11:07:37.838+0100 [pool-3-thread-1] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerTask - ...within the executor named EventChannel-ONE
+2021-02-10T11:07:37.843+0100 [pool-3-thread-2] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerTask - ...within the executor named EventChannel-TWO
+2021-02-10T11:07:37.870+0100 [pool-3-thread-3] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerTask - ...within the executor named EventChannel-THREE
+2021-02-10T11:07:38.003+0100 [pool-3-thread-3] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerTask - ...eventListener named ActiveMQMessageConsumer { value=ID:X1-37107-1612951657627-6:6:2:1, started=false } created within the executor named EventChannel-THREE
+2021-02-10T11:07:38.005+0100 [pool-2-thread-2] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...service listener named ActiveMQMessageConsumer { value=ID:X1-37107-1612951657627-6:3:2:1, started=false } created within the executor named ServiceChannel-TWO
+2021-02-10T11:07:38.007+0100 [pool-2-thread-1] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...service listener named ActiveMQMessageConsumer { value=ID:X1-37107-1612951657627-6:4:2:2, started=false } created within the executor named ServiceChannel-ONE
+2021-02-10T11:07:38.007+0100 [pool-3-thread-2] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerTask - ...eventListener named ActiveMQMessageConsumer { value=ID:X1-37107-1612951657627-6:2:2:1, started=false } created within the executor named EventChannel-TWO
+2021-02-10T11:07:38.009+0100 [pool-3-thread-1] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerTask - ...eventListener named ActiveMQMessageConsumer { value=ID:X1-37107-1612951657627-6:2:2:2, started=false } created within the executor named EventChannel-ONE
+2021-02-10T11:07:38.010+0100 [pool-2-thread-3] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...service listener named ActiveMQMessageConsumer { value=ID:X1-37107-1612951657627-6:4:2:1, started=true } created within the executor named ServiceChannel-THREE
+2021-02-10T11:07:38.164+0100 [main] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - CEP creation 
+2021-02-10T11:07:38.174+0100 [Thread-11] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - ...CEP named InstanceOne creates a listening channel called: DROOLS-InstanceOne
+2021-02-10T11:07:38.523+0100 [Thread-11] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - ...CEP named InstanceOne created Session and fires rules /home/acalabro/workspace/Concern/src/main/resources/startupRule.drl with errors: [[Package name=defaultpkg], [Package name=it.cnr.isti.labsedc.concern.event]]
+2021-02-10T11:07:38.568+0100 [main] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - CEP creation 
+2021-02-10T11:07:38.580+0100 [Thread-13] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - ...CEP named InstanceTwo creates a listening channel called: DROOLS-InstanceTwo
+2021-02-10T11:07:38.609+0100 [Thread-13] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - ...CEP named InstanceTwo created Session and fires rules /home/acalabro/workspace/Concern/src/main/resources/startupRule.drl with errors: [[Package name=defaultpkg], [Package name=it.cnr.isti.labsedc.concern.event]]
+2021-02-10T11:07:44.093+0100 [ActiveMQ Session Task-1] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - ...CEP named InstanceOne receives messageONE
+2021-02-10T11:07:44.586+0100 [ActiveMQ Session Task-1] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - ...CEP named InstanceOne receives messageTWO
+2021-02-10T11:14:47.117+0100 [main] INFO  it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Start SSL Broker
+2021-02-10T11:14:47.139+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Creating TrasportConnector
+2021-02-10T11:14:47.345+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Waiting for broker start
+2021-02-10T11:14:47.345+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - broker started
+2021-02-10T11:14:47.346+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Enabling SSL ConnectionFactory
+2021-02-10T11:14:47.391+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Connection sucessfully created
+2021-02-10T11:14:47.391+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Component ActiveMQBrokerManager loaded in registry.
+2021-02-10T11:14:47.394+0100 [Thread-2] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerManager - Creating executors
+2021-02-10T11:14:47.400+0100 [Thread-3] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerManager - Creating event listerner
+2021-02-10T11:14:47.402+0100 [pool-2-thread-1] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...within the serviceListener named ServiceChannel-ONE
+2021-02-10T11:14:47.402+0100 [pool-2-thread-2] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...within the serviceListener named ServiceChannel-TWO
+2021-02-10T11:14:47.406+0100 [pool-2-thread-3] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...within the serviceListener named ServiceChannel-THREE
+2021-02-10T11:14:47.416+0100 [pool-3-thread-1] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerTask - ...within the executor named EventChannel-ONE
+2021-02-10T11:14:47.480+0100 [pool-3-thread-2] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerTask - ...within the executor named EventChannel-TWO
+2021-02-10T11:14:47.500+0100 [pool-3-thread-3] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerTask - ...within the executor named EventChannel-THREE
+2021-02-10T11:14:47.582+0100 [pool-2-thread-3] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...service listener named ActiveMQMessageConsumer { value=ID:X1-42531-1612952087168-6:2:2:1, started=false } created within the executor named ServiceChannel-THREE
+2021-02-10T11:14:47.583+0100 [pool-2-thread-2] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...service listener named ActiveMQMessageConsumer { value=ID:X1-42531-1612952087168-6:1:2:1, started=false } created within the executor named ServiceChannel-TWO
+2021-02-10T11:14:47.583+0100 [pool-2-thread-1] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...service listener named ActiveMQMessageConsumer { value=ID:X1-42531-1612952087168-6:3:2:1, started=false } created within the executor named ServiceChannel-ONE
+2021-02-10T11:14:47.582+0100 [pool-3-thread-2] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerTask - ...eventListener named ActiveMQMessageConsumer { value=ID:X1-42531-1612952087168-6:5:2:1, started=false } created within the executor named EventChannel-TWO
+2021-02-10T11:14:47.587+0100 [pool-3-thread-3] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerTask - ...eventListener named ActiveMQMessageConsumer { value=ID:X1-42531-1612952087168-6:6:2:1, started=false } created within the executor named EventChannel-THREE
+2021-02-10T11:14:47.587+0100 [pool-3-thread-1] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerTask - ...eventListener named ActiveMQMessageConsumer { value=ID:X1-42531-1612952087168-6:4:2:1, started=false } created within the executor named EventChannel-ONE
+2021-02-10T11:14:47.680+0100 [main] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - CEP creation 
+2021-02-10T11:14:47.703+0100 [Thread-11] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - ...CEP named InstanceOne creates a listening channel called: DROOLS-InstanceOne
+2021-02-10T11:14:48.113+0100 [Thread-11] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - ...CEP named InstanceOne created Session and fires rules /home/acalabro/workspace/Concern/src/main/resources/startupRule.drl with errors: [[Package name=defaultpkg], [Package name=it.cnr.isti.labsedc.concern.event]]
+2021-02-10T11:14:48.184+0100 [main] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - CEP creation 
+2021-02-10T11:14:48.190+0100 [Thread-13] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - ...CEP named InstanceTwo creates a listening channel called: DROOLS-InstanceTwo
+2021-02-10T11:14:48.216+0100 [Thread-13] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - ...CEP named InstanceTwo created Session and fires rules /home/acalabro/workspace/Concern/src/main/resources/startupRule.drl with errors: [[Package name=defaultpkg], [Package name=it.cnr.isti.labsedc.concern.event]]
+2021-02-10T11:15:17.220+0100 [main] INFO  it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Start SSL Broker
+2021-02-10T11:15:17.237+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Creating TrasportConnector
+2021-02-10T11:15:17.436+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Waiting for broker start
+2021-02-10T11:15:17.437+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - broker started
+2021-02-10T11:15:17.437+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Enabling SSL ConnectionFactory
+2021-02-10T11:15:17.480+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Connection sucessfully created
+2021-02-10T11:15:17.481+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Component ActiveMQBrokerManager loaded in registry.
+2021-02-10T11:15:17.483+0100 [Thread-2] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerManager - Creating executors
+2021-02-10T11:15:17.484+0100 [Thread-3] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerManager - Creating event listerner
+2021-02-10T11:15:17.486+0100 [pool-2-thread-1] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...within the serviceListener named ServiceChannel-ONE
+2021-02-10T11:15:17.486+0100 [pool-2-thread-2] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...within the serviceListener named ServiceChannel-TWO
+2021-02-10T11:15:17.488+0100 [pool-2-thread-3] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...within the serviceListener named ServiceChannel-THREE
+2021-02-10T11:15:17.520+0100 [pool-3-thread-1] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerTask - ...within the executor named EventChannel-ONE
+2021-02-10T11:15:17.527+0100 [pool-3-thread-3] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerTask - ...within the executor named EventChannel-THREE
+2021-02-10T11:15:17.540+0100 [pool-3-thread-2] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerTask - ...within the executor named EventChannel-TWO
+2021-02-10T11:15:17.634+0100 [pool-3-thread-3] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerTask - ...eventListener named ActiveMQMessageConsumer { value=ID:X1-40069-1612952117265-6:5:2:1, started=false } created within the executor named EventChannel-THREE
+2021-02-10T11:15:17.634+0100 [pool-2-thread-1] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...service listener named ActiveMQMessageConsumer { value=ID:X1-40069-1612952117265-6:2:2:1, started=false } created within the executor named ServiceChannel-ONE
+2021-02-10T11:15:17.635+0100 [pool-3-thread-2] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerTask - ...eventListener named ActiveMQMessageConsumer { value=ID:X1-40069-1612952117265-6:6:2:1, started=false } created within the executor named EventChannel-TWO
+2021-02-10T11:15:17.637+0100 [pool-3-thread-1] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerTask - ...eventListener named ActiveMQMessageConsumer { value=ID:X1-40069-1612952117265-6:4:2:1, started=false } created within the executor named EventChannel-ONE
+2021-02-10T11:15:17.637+0100 [pool-2-thread-3] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...service listener named ActiveMQMessageConsumer { value=ID:X1-40069-1612952117265-6:2:2:2, started=false } created within the executor named ServiceChannel-THREE
+2021-02-10T11:15:17.639+0100 [pool-2-thread-2] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...service listener named ActiveMQMessageConsumer { value=ID:X1-40069-1612952117265-6:2:2:3, started=false } created within the executor named ServiceChannel-TWO
+2021-02-10T11:15:17.859+0100 [main] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - CEP creation 
+2021-02-10T11:15:17.874+0100 [Thread-11] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - ...CEP named InstanceOne creates a listening channel called: DROOLS-InstanceOne
+2021-02-10T11:15:18.249+0100 [Thread-11] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - ...CEP named InstanceOne created Session and fires rules /home/acalabro/workspace/Concern/src/main/resources/startupRule.drl with errors: [[Package name=defaultpkg], [Package name=it.cnr.isti.labsedc.concern.event]]
+2021-02-10T11:15:18.263+0100 [main] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - CEP creation 
+2021-02-10T11:15:18.293+0100 [Thread-13] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - ...CEP named InstanceTwo creates a listening channel called: DROOLS-InstanceTwo
+2021-02-10T11:15:18.319+0100 [Thread-13] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - ...CEP named InstanceTwo created Session and fires rules /home/acalabro/workspace/Concern/src/main/resources/startupRule.drl with errors: [[Package name=defaultpkg], [Package name=it.cnr.isti.labsedc.concern.event]]
+2021-02-10T11:16:12.882+0100 [main] INFO  it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Start SSL Broker
+2021-02-10T11:16:12.899+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Creating TrasportConnector
+2021-02-10T11:16:13.094+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Waiting for broker start
+2021-02-10T11:16:13.095+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - broker started
+2021-02-10T11:16:13.095+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Enabling SSL ConnectionFactory
+2021-02-10T11:16:13.139+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Connection sucessfully created
+2021-02-10T11:16:13.139+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Component ActiveMQBrokerManager loaded in registry.
+2021-02-10T11:16:13.141+0100 [Thread-2] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerManager - Creating executors
+2021-02-10T11:16:13.142+0100 [Thread-3] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerManager - Creating event listerner
+2021-02-10T11:16:13.143+0100 [pool-2-thread-1] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...within the serviceListener named ServiceChannel-ONE
+2021-02-10T11:16:13.143+0100 [pool-2-thread-2] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...within the serviceListener named ServiceChannel-TWO
+2021-02-10T11:16:13.145+0100 [pool-3-thread-1] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerTask - ...within the executor named EventChannel-ONE
+2021-02-10T11:16:13.147+0100 [pool-3-thread-2] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerTask - ...within the executor named EventChannel-TWO
+2021-02-10T11:16:13.144+0100 [pool-2-thread-3] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...within the serviceListener named ServiceChannel-THREE
+2021-02-10T11:16:13.152+0100 [pool-3-thread-3] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerTask - ...within the executor named EventChannel-THREE
+2021-02-10T11:16:13.292+0100 [pool-3-thread-2] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerTask - ...eventListener named ActiveMQMessageConsumer { value=ID:X1-46753-1612952172926-6:6:2:1, started=false } created within the executor named EventChannel-TWO
+2021-02-10T11:16:13.293+0100 [pool-3-thread-1] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerTask - ...eventListener named ActiveMQMessageConsumer { value=ID:X1-46753-1612952172926-6:3:2:1, started=false } created within the executor named EventChannel-ONE
+2021-02-10T11:16:13.295+0100 [pool-3-thread-3] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerTask - ...eventListener named ActiveMQMessageConsumer { value=ID:X1-46753-1612952172926-6:6:2:2, started=false } created within the executor named EventChannel-THREE
+2021-02-10T11:16:13.296+0100 [pool-2-thread-3] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...service listener named ActiveMQMessageConsumer { value=ID:X1-46753-1612952172926-6:1:2:1, started=false } created within the executor named ServiceChannel-THREE
+2021-02-10T11:16:13.297+0100 [pool-2-thread-1] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...service listener named ActiveMQMessageConsumer { value=ID:X1-46753-1612952172926-6:1:2:2, started=false } created within the executor named ServiceChannel-ONE
+2021-02-10T11:16:13.305+0100 [pool-2-thread-2] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...service listener named ActiveMQMessageConsumer { value=ID:X1-46753-1612952172926-6:1:2:3, started=true } created within the executor named ServiceChannel-TWO
+2021-02-10T11:16:13.593+0100 [main] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - CEP creation 
+2021-02-10T11:16:13.598+0100 [Thread-11] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - ...CEP named InstanceOne creates a listening channel called: DROOLS-InstanceOne
+2021-02-10T11:16:13.958+0100 [Thread-11] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - ...CEP named InstanceOne created Session and fires rules /home/acalabro/workspace/Concern/src/main/resources/startupRule.drl with errors: [[Package name=defaultpkg], [Package name=it.cnr.isti.labsedc.concern.event]]
+2021-02-10T11:16:13.997+0100 [main] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - CEP creation 
+2021-02-10T11:16:14.004+0100 [Thread-13] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - ...CEP named InstanceTwo creates a listening channel called: DROOLS-InstanceTwo
+2021-02-10T11:16:14.054+0100 [Thread-13] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - ...CEP named InstanceTwo created Session and fires rules /home/acalabro/workspace/Concern/src/main/resources/startupRule.drl with errors: [[Package name=defaultpkg], [Package name=it.cnr.isti.labsedc.concern.event]]
+2021-02-10T11:17:48.432+0100 [ActiveMQ Session Task-1] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - ...CEP named InstanceOne receives messageONE
+2021-02-10T11:17:49.992+0100 [ActiveMQ Session Task-1] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - ...CEP named InstanceOne receives messageTWO
+2021-02-10T11:19:39.434+0100 [main] INFO  it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Start SSL Broker
+2021-02-10T11:19:39.450+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Creating TrasportConnector
+2021-02-10T11:19:39.651+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Waiting for broker start
+2021-02-10T11:19:39.652+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - broker started
+2021-02-10T11:19:39.652+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Enabling SSL ConnectionFactory
+2021-02-10T11:19:39.690+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Connection sucessfully created
+2021-02-10T11:19:39.691+0100 [main] DEBUG it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager - Component ActiveMQBrokerManager loaded in registry.
+2021-02-10T11:19:39.693+0100 [Thread-2] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerManager - Creating executors
+2021-02-10T11:19:39.694+0100 [Thread-3] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerManager - Creating event listerner
+2021-02-10T11:19:39.696+0100 [pool-2-thread-1] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...within the serviceListener named ServiceChannel-ONE
+2021-02-10T11:19:39.700+0100 [pool-2-thread-2] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...within the serviceListener named ServiceChannel-TWO
+2021-02-10T11:19:39.701+0100 [pool-3-thread-1] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerTask - ...within the executor named EventChannel-ONE
+2021-02-10T11:19:39.708+0100 [pool-2-thread-3] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...within the serviceListener named ServiceChannel-THREE
+2021-02-10T11:19:39.713+0100 [pool-3-thread-2] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerTask - ...within the executor named EventChannel-TWO
+2021-02-10T11:19:39.732+0100 [pool-3-thread-3] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerTask - ...within the executor named EventChannel-THREE
+2021-02-10T11:19:39.895+0100 [pool-3-thread-2] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerTask - ...eventListener named ActiveMQMessageConsumer { value=ID:X1-41113-1612952379476-6:5:2:1, started=false } created within the executor named EventChannel-TWO
+2021-02-10T11:19:39.896+0100 [pool-2-thread-2] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...service listener named ActiveMQMessageConsumer { value=ID:X1-41113-1612952379476-6:2:2:1, started=false } created within the executor named ServiceChannel-TWO
+2021-02-10T11:19:39.896+0100 [pool-2-thread-3] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...service listener named ActiveMQMessageConsumer { value=ID:X1-41113-1612952379476-6:4:2:1, started=false } created within the executor named ServiceChannel-THREE
+2021-02-10T11:19:39.897+0100 [pool-3-thread-3] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerTask - ...eventListener named ActiveMQMessageConsumer { value=ID:X1-41113-1612952379476-6:6:2:1, started=false } created within the executor named EventChannel-THREE
+2021-02-10T11:19:39.898+0100 [pool-2-thread-1] INFO  it.cnr.isti.labsedc.concern.requestListener.ServiceListenerTask - ...service listener named ActiveMQMessageConsumer { value=ID:X1-41113-1612952379476-6:1:2:1, started=false } created within the executor named ServiceChannel-ONE
+2021-02-10T11:19:39.900+0100 [pool-3-thread-1] INFO  it.cnr.isti.labsedc.concern.eventListener.EventListenerTask - ...eventListener named ActiveMQMessageConsumer { value=ID:X1-41113-1612952379476-6:5:2:2, started=true } created within the executor named EventChannel-ONE
+2021-02-10T11:19:39.995+0100 [main] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - CEP creation 
+2021-02-10T11:19:40.002+0100 [Thread-11] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - ...CEP named InstanceOne creates a listening channel called: DROOLS-InstanceOne
+2021-02-10T11:19:40.410+0100 [Thread-11] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - ...CEP named InstanceOne created Session and fires rules /home/acalabro/workspace/Concern/src/main/resources/startupRule.drl with errors: [[Package name=defaultpkg], [Package name=it.cnr.isti.labsedc.concern.event]]
+2021-02-10T11:19:40.499+0100 [main] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - CEP creation 
+2021-02-10T11:19:40.504+0100 [Thread-13] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - ...CEP named InstanceTwo creates a listening channel called: DROOLS-InstanceTwo
+2021-02-10T11:19:40.529+0100 [Thread-13] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - ...CEP named InstanceTwo created Session and fires rules /home/acalabro/workspace/Concern/src/main/resources/startupRule.drl with errors: [[Package name=defaultpkg], [Package name=it.cnr.isti.labsedc.concern.event]]
+2021-02-10T11:22:38.939+0100 [ActiveMQ Session Task-1] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - ...CEP named InstanceOne receives messageCANONE
+2021-02-10T11:22:42.944+0100 [ActiveMQ Session Task-1] INFO  it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager - ...CEP named InstanceOne receives messageCANTWO

@@ -1,16 +1,16 @@
 package it.cnr.isti.labsedc.concern.register;
 
 import it.cnr.isti.labsedc.concern.cep.CepType;
-import it.cnr.isti.labsedc.concern.listener.ServiceChannelProperties;
+import it.cnr.isti.labsedc.concern.eventListener.ChannelProperties;
 
 public class QueueAndProperties {
 
 	private String localCepIdentifier;
-	private ServiceChannelProperties localChannelProp;
+	private ChannelProperties localChannelProp;
 	private CepType localCepType;
 	private String localQueueAddress;
 
-	public QueueAndProperties(String cepIdentifier, ServiceChannelProperties channelProperty, CepType cepType, String queueAddress) {
+	public QueueAndProperties(String cepIdentifier, ChannelProperties channelProperty, CepType cepType, String queueAddress) {
 		this.localChannelProp = channelProperty;
 		this.localCepIdentifier = cepIdentifier;
 		this.localCepType = cepType;
@@ -37,10 +37,10 @@ public class QueueAndProperties {
 	public void setLocalQ(String localCepIdentifier) {
 		this.localCepIdentifier = localCepIdentifier;
 	}
-	public ServiceChannelProperties getServiceChannelProperties() {
+	public ChannelProperties getServiceChannelProperties() {
 		return localChannelProp;
 	}
-	public void setServiceChannelProperties(ServiceChannelProperties localChannelProp) {
+	public void setServiceChannelProperties(ChannelProperties localChannelProp) {
 		this.localChannelProp = localChannelProp;
 	}
 }

@@ -11,19 +11,17 @@ import it.cnr.isti.labsedc.concern.broker.BrokerManager;
 import it.cnr.isti.labsedc.concern.cep.CepType;
 import it.cnr.isti.labsedc.concern.cep.ComplexEventProcessorManager;
 import it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager;
-import it.cnr.isti.labsedc.concern.listener.ServiceListenerManager;
+import it.cnr.isti.labsedc.concern.eventListener.EventListenerManager;
 import it.cnr.isti.labsedc.concern.register.ChannelsManagementRegistry;
+import it.cnr.isti.labsedc.concern.requestListener.ServiceListenerManager;
 import it.cnr.isti.labsedc.concern.utils.ChannelUtilities;
 
 public class ConcernApp
 {
-	//private static StorageController storage;
 	private static BrokerManager broker;
 	private static ComplexEventProcessorManager cepMan;
-	//private static ClientManager clientMan;
-	//private static NotificationManager notificationMan;
-	//private static WebInterfaceManager web;
-	private static ServiceListenerManager lcManager;
+	private static ServiceListenerManager serviceListenerManager;
+	private static EventListenerManager eventListenerManager;
 	private static String brokerUrl;
 	private static Long maxMemoryUsage;
 	private static Long maxCacheUsage;
@@ -62,6 +60,12 @@ public class ConcernApp
     	System.out.println("PATH: " + System.getProperty("user.dir")+ "/src/main/resources/startupRule.drl");
     	channelRegistry.setConnectionFactory(factory);
 
+    	serviceListenerManager = new ServiceListenerManager(ChannelUtilities.loadServiceChannels(), username, password);
+    	serviceListenerManager.start();
+    	
+    	eventListenerManager = new EventListenerManager(ChannelUtilities.loadEventChannels(), username, password);
+    	eventListenerManager.start();
+    	
     	//STARTING CEP ONE
     	cepMan = new DroolsComplexEventProcessorManager(
     			"InstanceOne",
@@ -87,9 +91,6 @@ public class ConcernApp
     		Thread.sleep(100);
     		System.out.println("wait for Second CEP start");
     	}
-
-    	lcManager = new ServiceListenerManager(ChannelUtilities.loadChannels(), username, password);
-    	lcManager.start();
 
     	/*
     	clientMan = new ClientManager();

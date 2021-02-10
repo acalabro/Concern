@@ -4,14 +4,25 @@ import java.util.Vector;
 
 public class ChannelUtilities {
 
-	public static Vector<String> loadChannels() {
+	public static Vector<String> loadServiceChannels() {
 
-		Vector<String> listenerChannels = new Vector<String>();
+		Vector<String> serviceListenerChannels = new Vector<String>();
 
-		listenerChannels.add("ServiceChannel-ONE");
-		listenerChannels.add("ServiceChannel-TWO");
-		listenerChannels.add("ServiceChannel-THREE");
+		serviceListenerChannels.add("ServiceChannel-ONE");
+		serviceListenerChannels.add("ServiceChannel-TWO");
+		serviceListenerChannels.add("ServiceChannel-THREE");
 
-		return listenerChannels;
+		return serviceListenerChannels;
+	}
+	
+	public static Vector<String> loadEventChannels() {
+
+		Vector<String> eventListenerChannels = new Vector<String>();
+
+		eventListenerChannels.add("EventChannel-ONE");
+		eventListenerChannels.add("EventChannel-TWO");
+		eventListenerChannels.add("EventChannel-THREE");
+
+		return eventListenerChannels;
 	}
 }

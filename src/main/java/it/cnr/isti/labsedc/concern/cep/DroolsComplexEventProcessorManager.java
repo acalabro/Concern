@@ -27,8 +27,9 @@ import org.kie.internal.builder.KnowledgeBuilderFactory;
 import org.kie.internal.io.ResourceFactory;
 
 import it.cnr.isti.labsedc.concern.ConcernApp;
+import it.cnr.isti.labsedc.concern.event.ConcernCANbusEvent;
 import it.cnr.isti.labsedc.concern.event.ConcernEvaluationRequestEvent;
-import it.cnr.isti.labsedc.concern.listener.ServiceChannelProperties;
+import it.cnr.isti.labsedc.concern.eventListener.ChannelProperties;
 import it.cnr.isti.labsedc.concern.register.ChannelsManagementRegistry;
 
 public class DroolsComplexEventProcessorManager extends ComplexEventProcessorManager implements MessageListener, MessageAuthorizationPolicy {
@@ -105,7 +106,7 @@ public class DroolsComplexEventProcessorManager extends ComplexEventProcessorMan
 	private void communicationSetup() throws JMSException {
 		receiverConnection = ChannelsManagementRegistry.GetNewTopicConnection(username, password);
 		receiverSession = ChannelsManagementRegistry.GetNewSession(receiverConnection);
-		queue = ChannelsManagementRegistry.RegisterNewCepQueue(this.cep.name()+"-"+instanceName, receiverSession, this.cep.name()+"-"+instanceName, ServiceChannelProperties.GENERICREQUESTS, cep);
+		queue = ChannelsManagementRegistry.RegisterNewCepQueue(this.cep.name()+"-"+instanceName, receiverSession, this.cep.name()+"-"+instanceName, ChannelProperties.GENERICREQUESTS, cep);
 		logger.info("...CEP named " + this.getInstanceName() + " creates a listening channel called: " + queue.getQueueName());
 		MessageConsumer complexEventProcessorReceiver = receiverSession.createConsumer(queue);
 		complexEventProcessorReceiver.setMessageListener(this);
@@ -117,11 +118,18 @@ public class DroolsComplexEventProcessorManager extends ComplexEventProcessorMan
 
 		if (message instanceof ObjectMessage) {
 			try {
-				ObjectMessage msg = (ObjectMessage) message;
-				ConcernEvaluationRequestEvent<?> receivedEvent = (ConcernEvaluationRequestEvent<?>) msg.getObject();
-				logger.info("...CEP named " + this.getInstanceName() + " receives "  + receivedEvent.getEventData());
-
-				} catch(ClassCastException | JMSException asd) {
+					ObjectMessage msg = (ObjectMessage) message;
+					if (msg.getObject() instanceof ConcernCANbusEvent<?>) {
+						ConcernCANbusEvent<?> receivedEvent = (ConcernCANbusEvent<?>) msg.getObject();
+						logger.info("...CEP named " + this.getInstanceName() + " receives "  + receivedEvent.getEventData());
+					}	
+				
+					if (msg.getObject() instanceof ConcernEvaluationRequestEvent<?>) {		
+					ConcernEvaluationRequestEvent<?> receivedEvent = (ConcernEvaluationRequestEvent<?>) msg.getObject();
+					logger.info("...CEP named " + this.getInstanceName() + " receives "  + receivedEvent.getEventData());
+	
+					} 
+				}catch(ClassCastException | JMSException asd) {
 					logger.error("error on casting or getting ObjectMessage to GlimpseEvaluationRequestEvent");
 				}
 		}
