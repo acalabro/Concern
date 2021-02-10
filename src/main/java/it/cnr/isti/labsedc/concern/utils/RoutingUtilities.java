@@ -1,5 +1,7 @@
 package it.cnr.isti.labsedc.concern.utils;
 
+import java.util.Random;
+
 import it.cnr.isti.labsedc.concern.cep.CepType;
 import it.cnr.isti.labsedc.concern.event.ConcernBasicEvent;
 import it.cnr.isti.labsedc.concern.event.ConcernEvaluationRequestEvent;
@@ -31,9 +33,13 @@ public class RoutingUtilities {
 
 		cepType = message.getCepType();
 		TopicAndProperties localQaP;
-
-		for (int i = 0; i<ChannelsManagementRegistry.ActiveCep.size();i++) {
-			localQaP = (TopicAndProperties) ChannelsManagementRegistry.ActiveCep.keySet().toArray()[i];
+		int maxSize = ChannelsManagementRegistry.ActiveCep.size();
+		for (int i = 0; i<maxSize;i++) {
+			Random rand = new Random();
+			int theRand = rand.ints(0, maxSize)
+		      .findFirst()
+		      .getAsInt();
+			localQaP = (TopicAndProperties) ChannelsManagementRegistry.ActiveCep.keySet().toArray()[theRand];
 			if (cepType ==  localQaP.getLocalCepType()) {
 				return localQaP;
 					}
