@@ -43,9 +43,9 @@ public class Consumer {
 	public static void main(String[] args) throws InterruptedException {
 		String brokerUrl = "tcp://localhost:61616";
 
-		testConsumer(brokerUrl, "ServiceChannel-ONE", "vera", "griselda", "messageONE");
+		testConsumer(brokerUrl, "ServiceChannel-ONE", "vera", "griselda", "Evaluation Rule ONE");
 		Thread.sleep(500);
-		testConsumer(brokerUrl, "ServiceChannel-TWO", "vera", "griselda", "messageTWO");
+		testConsumer(brokerUrl, "ServiceChannel-TWO", "vera", "griselda", "Evaluation Rule TWO");
 		Thread.sleep(500);
 //		testProducer(brokerUrl, "ServiceChannel-THREE", "vera", "griselda");
 //		Thread.sleep(500);

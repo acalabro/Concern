@@ -23,17 +23,22 @@ public class Probe {
             Queue queue = session.createQueue(queueName);
             MessageProducer producer = session.createProducer(queue);
 			ObjectMessage msg = session.createObjectMessage();
-			ConcernCANbusEvent<String> event = new ConcernCANbusEvent<String>(
-					canData,
+			ConcernCANbusEvent<String> event;
+			
+			for (int i = 0; i<1000; i++) {
+				event = new ConcernCANbusEvent<String>(
+					canData+i,
 					CepType.DROOLS,
 					"senderProbeName",
 					"checksum",
 					12331l,
 					"canAddress");
 			
-			msg.setObject(event);
-	        producer.send(msg);
-		} catch (JMSException e) {
+				msg.setObject(event);
+				producer.send(msg);
+				Thread.sleep(100);
+			}
+		} catch (JMSException | InterruptedException e) {
 			e.printStackTrace();
 		}
 	}
@@ -42,9 +47,9 @@ public class Probe {
 		String brokerUrl = "tcp://localhost:61616";
 
 		testProbe(brokerUrl, "EventChannel-ONE", "vera", "griselda", "messageCANONE");
-		Thread.sleep(500);
-		testProbe(brokerUrl, "EventChannel-TWO", "vera", "griselda", "messageCANTWO");
-		Thread.sleep(500);
+//		Thread.sleep(500);
+//		testProbe(brokerUrl, "EventChannel-TWO", "vera", "griselda", "messageCANTWO");
+//		Thread.sleep(500);
 //		testProducer(brokerUrl, "ServiceChannel-THREE", "vera", "griselda");
 //		Thread.sleep(500);
 //		testProducer(brokerUrl, "ServiceChannel-FOUR", "vera", "griselda");

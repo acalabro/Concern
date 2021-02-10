@@ -99,5 +99,26 @@
 	    <artifactId>log4j-core</artifactId>
 	    <version>2.14.0</version>
 	</dependency>
-</dependencies>
+	<dependency>
+		<groupId>it.cnr.isti.labsedc</groupId>
+		<artifactId>ComplexEventException</artifactId>
+		<version>0.0.1</version>
+		<scope>system</scope>
+		<systemPath>${basedir}/lib/ComplexEventException-0.0.1-SNAPSHOT.jar</systemPath>
+	</dependency>
+	<dependency>
+		<groupId>it.cnr.isti.labsedc</groupId>
+		<artifactId>ComplexEventResponse</artifactId>
+		<version>0.0.1</version>
+		<scope>system</scope>
+		<systemPath>${basedir}/lib/ComplexEventResponse-0.0.1-SNAPSHOT.jar</systemPath>
+	</dependency>
+	<dependency>
+		<groupId>it.cnr.isti.labsedc</groupId>
+		<artifactId>ComplexEventRule</artifactId>
+		<version>0.0.1</version>
+		<scope>system</scope>
+		<systemPath>${basedir}/lib/ComplexEventRule-0.0.1-SNAPSHOT.jar</systemPath>
+	</dependency>
+	</dependencies>
 </project>
