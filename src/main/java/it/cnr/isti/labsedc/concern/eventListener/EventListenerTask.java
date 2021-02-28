@@ -14,7 +14,7 @@ import javax.jms.TopicConnection;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import it.cnr.isti.labsedc.concern.event.ConcernBasicEvent;
+import it.cnr.isti.labsedc.concern.event.ConcernAbstractEvent;
 import it.cnr.isti.labsedc.concern.register.ChannelsManagementRegistry;
 import it.cnr.isti.labsedc.concern.register.TopicAndProperties;
 import it.cnr.isti.labsedc.concern.utils.RoutingUtilities;
@@ -66,8 +66,8 @@ public class EventListenerTask implements Runnable, MessageListener {
 		if (message instanceof ObjectMessage) {
 			ObjectMessage casted = (ObjectMessage)message;
 			try {
-				if (casted.getObject() != null && (casted.getObject() instanceof ConcernBasicEvent<?>)) {
-					ConcernBasicEvent<?> incomingRequest = (ConcernBasicEvent<?>)casted.getObject();
+				if (casted.getObject() != null && (casted.getObject() instanceof ConcernAbstractEvent<?>)) {
+					ConcernAbstractEvent<?> incomingRequest = (ConcernAbstractEvent<?>)casted.getObject();
 					TopicAndProperties topicWhereToForward= RoutingUtilities.BestCepSelectionForEvents(incomingRequest);
 					if (topicWhereToForward != null) {
 						forwardEventToCEP(topicWhereToForward, message);

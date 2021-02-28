@@ -3,7 +3,7 @@ package it.cnr.isti.labsedc.concern.utils;
 import java.util.Random;
 
 import it.cnr.isti.labsedc.concern.cep.CepType;
-import it.cnr.isti.labsedc.concern.event.ConcernBasicEvent;
+import it.cnr.isti.labsedc.concern.event.ConcernAbstractEvent;
 import it.cnr.isti.labsedc.concern.event.ConcernEvaluationRequestEvent;
 import it.cnr.isti.labsedc.concern.eventListener.ChannelProperties;
 import it.cnr.isti.labsedc.concern.register.ChannelsManagementRegistry;
@@ -29,7 +29,7 @@ public class RoutingUtilities {
 		return null;
 		}
 	
-	public static TopicAndProperties BestCepSelectionForEvents(ConcernBasicEvent<?> message) {
+	public static TopicAndProperties BestCepSelectionForEvents(ConcernAbstractEvent<?> message) {
 
 		cepType = message.getCepType();
 		TopicAndProperties localQaP;

@@ -25,7 +25,7 @@ public class Probe {
 			ObjectMessage msg = session.createObjectMessage();
 			ConcernCANbusEvent<String> event;
 			
-			for (int i = 0; i<5000; i++) {
+			for (int i = 0; i<50; i++) {
 				event = new ConcernCANbusEvent<String>(
 					canData+i,
 					CepType.DROOLS,

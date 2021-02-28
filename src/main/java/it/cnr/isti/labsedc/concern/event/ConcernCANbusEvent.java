@@ -2,7 +2,7 @@ package it.cnr.isti.labsedc.concern.event;
 
 import it.cnr.isti.labsedc.concern.cep.CepType;
 
-public class ConcernCANbusEvent<T> extends ConcernBasicEvent<T> {
+public class ConcernCANbusEvent<T> extends ConcernAbstractEvent<T> {
 
 	private static final long serialVersionUID = 1L;
 	private String canAddress;
