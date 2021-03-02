@@ -1,25 +1,27 @@
 package it.cnr.isti.labsedc.concern.utils;
 
+import java.util.Random;
+
 import it.cnr.isti.labsedc.concern.cep.CepType;
-import it.cnr.isti.labsedc.concern.event.ConcernBasicEvent;
+import it.cnr.isti.labsedc.concern.event.ConcernAbstractEvent;
 import it.cnr.isti.labsedc.concern.event.ConcernEvaluationRequestEvent;
 import it.cnr.isti.labsedc.concern.eventListener.ChannelProperties;
 import it.cnr.isti.labsedc.concern.register.ChannelsManagementRegistry;
-import it.cnr.isti.labsedc.concern.register.QueueAndProperties;
+import it.cnr.isti.labsedc.concern.register.TopicAndProperties;
 
 public class RoutingUtilities {
 
 	private static CepType cepType;
 	private static ChannelProperties requestedProperties;
 
-	public static QueueAndProperties BestCepSelectionForRules(ConcernEvaluationRequestEvent<?> message) {
+	public static TopicAndProperties BestCepSelectionForRules(ConcernEvaluationRequestEvent<?> message) {
 
 		cepType = message.getCepType();
 		requestedProperties = message.getPropertyRequested();
-		QueueAndProperties localQaP;
+		TopicAndProperties localQaP;
 
 		for (int i = 0; i<ChannelsManagementRegistry.ActiveCep.size();i++) {
-			localQaP = (QueueAndProperties) ChannelsManagementRegistry.ActiveCep.keySet().toArray()[i];
+			localQaP = (TopicAndProperties) ChannelsManagementRegistry.ActiveCep.keySet().toArray()[i];
 			if (cepType ==  localQaP.getLocalCepType() && requestedProperties ==  localQaP.getServiceChannelProperties()) {
 				return localQaP;
 					}
@@ -27,13 +29,17 @@ public class RoutingUtilities {
 		return null;
 		}
 	
-	public static QueueAndProperties BestCepSelectionForEvents(ConcernBasicEvent<?> message) {
+	public static TopicAndProperties BestCepSelectionForEvents(ConcernAbstractEvent<?> message) {
 
 		cepType = message.getCepType();
-		QueueAndProperties localQaP;
-
-		for (int i = 0; i<ChannelsManagementRegistry.ActiveCep.size();i++) {
-			localQaP = (QueueAndProperties) ChannelsManagementRegistry.ActiveCep.keySet().toArray()[i];
+		TopicAndProperties localQaP;
+		int maxSize = ChannelsManagementRegistry.ActiveCep.size();
+		for (int i = 0; i<maxSize;i++) {
+			Random rand = new Random();
+			int theRand = rand.ints(0, maxSize)
+		      .findFirst()
+		      .getAsInt();
+			localQaP = (TopicAndProperties) ChannelsManagementRegistry.ActiveCep.keySet().toArray()[theRand];
 			if (cepType ==  localQaP.getLocalCepType()) {
 				return localQaP;
 					}

@@ -6,7 +6,7 @@ import javax.jms.MessageConsumer;
 import javax.jms.MessageListener;
 import javax.jms.MessageProducer;
 import javax.jms.ObjectMessage;
-import javax.jms.Queue;
+import javax.jms.Topic;
 import javax.jms.Session;
 import javax.jms.TextMessage;
 import javax.jms.TopicConnection;
@@ -14,9 +14,9 @@ import javax.jms.TopicConnection;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import it.cnr.isti.labsedc.concern.event.ConcernBasicEvent;
+import it.cnr.isti.labsedc.concern.event.ConcernAbstractEvent;
 import it.cnr.isti.labsedc.concern.register.ChannelsManagementRegistry;
-import it.cnr.isti.labsedc.concern.register.QueueAndProperties;
+import it.cnr.isti.labsedc.concern.register.TopicAndProperties;
 import it.cnr.isti.labsedc.concern.utils.RoutingUtilities;
 
 public class EventListenerTask implements Runnable, MessageListener {
@@ -47,7 +47,7 @@ public class EventListenerTask implements Runnable, MessageListener {
 			receiverConnection = ChannelsManagementRegistry.GetNewTopicConnection(username, password);
 			receiverSession = ChannelsManagementRegistry.GetNewSession(receiverConnection);
 
-			Queue queue = ChannelsManagementRegistry.GetNewSessionQueue(this.toString(), receiverSession,eventChannelName, ChannelProperties.EVENTS);
+			Topic queue = ChannelsManagementRegistry.GetNewSessionTopic(this.toString(), receiverSession,eventChannelName, ChannelProperties.EVENTS);
 			consumer = receiverSession.createConsumer(queue);
 			//RegisterForCommunicationChannels.ServiceListeningOnWhichChannel.put(key, value)
 			logger.info("...eventListener named " + consumer.toString() + " created within the executor named " + this.getEventChannelName());
@@ -66,11 +66,11 @@ public class EventListenerTask implements Runnable, MessageListener {
 		if (message instanceof ObjectMessage) {
 			ObjectMessage casted = (ObjectMessage)message;
 			try {
-				if (casted.getObject() != null && (casted.getObject() instanceof ConcernBasicEvent<?>)) {
-					ConcernBasicEvent<?> incomingRequest = (ConcernBasicEvent<?>)casted.getObject();
-					QueueAndProperties queueWhereToForward= RoutingUtilities.BestCepSelectionForEvents(incomingRequest);
-					if (queueWhereToForward != null) {
-						forwardEventToCEP(queueWhereToForward, message);
+				if (casted.getObject() != null && (casted.getObject() instanceof ConcernAbstractEvent<?>)) {
+					ConcernAbstractEvent<?> incomingRequest = (ConcernAbstractEvent<?>)casted.getObject();
+					TopicAndProperties topicWhereToForward= RoutingUtilities.BestCepSelectionForEvents(incomingRequest);
+					if (topicWhereToForward != null) {
+						forwardEventToCEP(topicWhereToForward, message);
 					}
 				}
 			} catch (JMSException e) {
@@ -88,14 +88,14 @@ public class EventListenerTask implements Runnable, MessageListener {
 		}
 	}
 
-	private void forwardEventToCEP(QueueAndProperties queueWhereToForward, Message message) {
+	private void forwardEventToCEP(TopicAndProperties topicWhereToForward, Message message) {
 		try {
 			receiverConnection = ChannelsManagementRegistry.GetNewTopicConnection(username, password);
             Session session = receiverConnection.createSession(false,Session.AUTO_ACKNOWLEDGE);
-            Queue queue = session.createQueue(queueWhereToForward.getQueueAddress());
-            MessageProducer producer = session.createProducer(queue);
+            Topic topic = session.createTopic(topicWhereToForward.getTopicAddress());
+            MessageProducer producer = session.createProducer(topic);
             ObjectMessage forwarded = (ObjectMessage) message;
-			forwarded.setJMSDestination(queue);
+			forwarded.setJMSDestination(topic);
             producer.send(forwarded);
             producer.close();
 		} catch (JMSException e) {

@@ -5,8 +5,8 @@ import javax.jms.ConnectionFactory;
 import javax.jms.JMSException;
 import javax.jms.MessageProducer;
 import javax.jms.ObjectMessage;
-import javax.jms.Queue;
 import javax.jms.Session;
+import javax.jms.Topic;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 
@@ -16,13 +16,13 @@ import it.cnr.isti.labsedc.concern.eventListener.ChannelProperties;
 
 public class Consumer {
 
-	public static void testConsumer(String brokerUrl, String queueName, String username, String password, String data) {
+	public static void testConsumer(String brokerUrl, String topicName, String username, String password, String data) {
 		try {
 			ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(username, password, brokerUrl);
             Connection connection = connectionFactory.createConnection();
             Session session = connection.createSession(false,Session.AUTO_ACKNOWLEDGE);
-            Queue queue = session.createQueue(queueName);
-            MessageProducer producer = session.createProducer(queue);
+            Topic topic = session.createTopic(topicName);
+            MessageProducer producer = session.createProducer(topic);
 			ObjectMessage msg = session.createObjectMessage();
 			ConcernEvaluationRequestEvent<String> asd = new ConcernEvaluationRequestEvent<String>(
 					data,

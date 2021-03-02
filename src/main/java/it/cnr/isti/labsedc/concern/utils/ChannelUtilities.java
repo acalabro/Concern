@@ -22,6 +22,7 @@ public class ChannelUtilities {
 		eventListenerChannels.add("EventChannel-ONE");
 		eventListenerChannels.add("EventChannel-TWO");
 		eventListenerChannels.add("EventChannel-THREE");
+		eventListenerChannels.add("EventChannel-FOUR");
 
 		return eventListenerChannels;
 	}

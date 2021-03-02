@@ -3,7 +3,7 @@ package it.cnr.isti.labsedc.concern.event;
 import it.cnr.isti.labsedc.concern.cep.CepType;
 import it.cnr.isti.labsedc.concern.eventListener.ChannelProperties;
 
-  public class ConcernEvaluationRequestEvent<T> extends ConcernBasicEvent<T> {
+  public class ConcernEvaluationRequestEvent<T> extends ConcernAbstractEvent<T> {
     
 	private static final long serialVersionUID = 6545740721731539243L;
 	private String evaluationRule;

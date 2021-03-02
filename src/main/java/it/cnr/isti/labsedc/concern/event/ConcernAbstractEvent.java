@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import it.cnr.isti.labsedc.concern.cep.CepType;
 
-public abstract class ConcernAbstractEvent<T> implements ConcernEvent<T>, Serializable {
+public abstract class ConcernAbstractEvent<T> implements Event<T>, Serializable {
 
 	private static final long serialVersionUID = 7077313246352116557L;
 	private String checksum;
@@ -13,8 +13,12 @@ public abstract class ConcernAbstractEvent<T> implements ConcernEvent<T>, Serial
 	private long timestamp;
 	private T data;
 
-
-	public ConcernAbstractEvent(T data,CepType type,String senderID, String checksum, long timestamp) {
+	public ConcernAbstractEvent(
+			T data,
+			CepType type,
+			String senderID,
+			String checksum, 
+			long timestamp) {
 		this.setEventData(data);
 		this.setTimestamp(timestamp);
 		this.setCepType(type);
