@@ -14,6 +14,7 @@ import it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager;
 import it.cnr.isti.labsedc.concern.eventListener.EventListenerManager;
 import it.cnr.isti.labsedc.concern.register.ChannelsManagementRegistry;
 import it.cnr.isti.labsedc.concern.requestListener.ServiceListenerManager;
+import it.cnr.isti.labsedc.concern.storage.MySQLStorageController;
 import it.cnr.isti.labsedc.concern.utils.ChannelUtilities;
 
 public class ConcernApp
@@ -32,6 +33,7 @@ public class ConcernApp
 	public static HashMap<String, Boolean> componentStarted = new HashMap<String, Boolean>();
 	private static String username;
 	private static String password;
+	private static MySQLStorageController storageManager;
 
     public static void main( String[] args ) throws InterruptedException
     {
@@ -60,11 +62,16 @@ public class ConcernApp
     	System.out.println("PATH: " + System.getProperty("user.dir")+ "/src/main/resources/startupRule.drl");
     	channelRegistry.setConnectionFactory(factory);
 
+    	storageManager = new MySQLStorageController();
+    	storageManager.connectToDB();
+    	
     	serviceListenerManager = new ServiceListenerManager(ChannelUtilities.loadServiceChannels(), username, password);
     	serviceListenerManager.start();
     	
-    	eventListenerManager = new EventListenerManager(ChannelUtilities.loadEventChannels(), username, password);
+    	eventListenerManager = new EventListenerManager(ChannelUtilities.loadEventChannels(), username, password, storageManager);
     	eventListenerManager.start();
+    	
+
     	
     	//STARTING CEP ONE
     	cepMan = new DroolsComplexEventProcessorManager(
@@ -75,8 +82,8 @@ public class ConcernApp
     	cepMan.start();
 
     	while (!cepMan.cepHasCompletedStartup()) {
-    		Thread.sleep(100);
     		System.out.println("wait for First CEP start");
+    		Thread.sleep(100);
     	}
 
     	//STARTING CEP TWO
@@ -88,8 +95,8 @@ public class ConcernApp
     	cepMan.start();
 
     	while (!cepMan.cepHasCompletedStartup()) {
-    		Thread.sleep(100);
     		System.out.println("wait for Second CEP start");
+    		Thread.sleep(100);
     	}
 
     	/*

@@ -43,15 +43,16 @@ public class Probe {
 	}
 
 	public static void main(String[] args) throws InterruptedException {
-		String brokerUrl = "tcp://localhost:61616";
-
-		testProbe(brokerUrl, "EventChannel-ONE", "vera", "griselda", "messageCANONE");
+		//String brokerUrl = "tcp://localhost:61616";
+		String brokerUrl = "tcp://146.48.84.178:61616";
+		
+		testProbe(brokerUrl, "EventChannel-ONE", "bieco", "usecasewp5!", "messageCANONE");
 //		Thread.sleep(500);
-		testProbe(brokerUrl, "EventChannel-TWO", "vera", "griselda", "messageCANTWO");
+		testProbe(brokerUrl, "EventChannel-TWO", "bieco", "usecasewp5!", "messageCANTWO");
 //		Thread.sleep(500);
-		testProbe(brokerUrl, "EventChannel-THREE", "vera", "griselda", "messageCANTHREE");
+		testProbe(brokerUrl, "EventChannel-THREE", "bieco", "usecasewp5!", "messageCANTHREE");
 //		Thread.sleep(500);
-		testProbe(brokerUrl, "EventChannel-FOUR", "vera", "griselda", "messageCANFOUR");
+		testProbe(brokerUrl, "EventChannel-FOUR", "bieco", "usecasewp5!", "messageCANFOUR");
 //		Thread.sleep(500);
 //		testProducer(brokerUrl, "ServiceChannel-FIVE", "vera", "griselda");
 	}
