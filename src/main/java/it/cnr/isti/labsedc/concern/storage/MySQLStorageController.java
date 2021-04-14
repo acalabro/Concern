@@ -70,7 +70,7 @@ public class MySQLStorageController implements StorageController {
 	@Override
 	public boolean saveMessage(Event<?> message) {
 		try {
-			 String query = " insert into event (senderID, timestamp, eventData, eventDataClassName  )"
+			 String query = " insert into event (senderID, timestamp, data, dataClassName  )"
 				        + " values (?, ?, ?, ?)";
 	
 				      // create the mysql insert preparedstatement

@@ -11,7 +11,6 @@ import javax.jms.Topic;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 
-import it.cnr.isti.labsedc.concern.cep.CepType;
 import it.cnr.isti.labsedc.concern.event.ConcernEvaluationRequestEvent;
 
 public class ConcernAbstractConsumer implements ConcernConsumer {
@@ -27,11 +26,11 @@ public class ConcernAbstractConsumer implements ConcernConsumer {
 	}
 
 	@Override
-	public void init(String brokerUrl, String topicChannel, String username, String password) throws JMSException {
+	public void init(String brokerUrl, String username, String password) throws JMSException {
 		connectionFactory = new ActiveMQConnectionFactory(username, password, brokerUrl);
         connection = connectionFactory.createConnection();
         session = connection.createSession(false,Session.AUTO_ACKNOWLEDGE);
-        topic = session.createTopic(topicChannel);
+
 	}
 	@Override
 	public void onMessage(Message message) {
@@ -40,9 +39,10 @@ public class ConcernAbstractConsumer implements ConcernConsumer {
 	}
 
 	@Override
-	public void sendEvaluationRequest(String serviceChannel, CepType cepType, ConcernEvaluationRequestEvent<String> evaluationRequests)
+	public void sendEvaluationRequest(String serviceChannel, ConcernEvaluationRequestEvent<String> evaluationRequests)
 			throws JMSException {
-        producer = session.createProducer(topic);
+        topic = session.createTopic(serviceChannel);
+		producer = session.createProducer(topic);
 		ObjectMessage msg = session.createObjectMessage();
 		msg.setObject(evaluationRequests);
         producer.send(msg);

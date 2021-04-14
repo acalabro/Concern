@@ -6,19 +6,19 @@ import it.cnr.isti.labsedc.concern.eventListener.ChannelProperties;
   public class ConcernEvaluationRequestEvent<T> extends ConcernAbstractEvent<T> {
     
 	private static final long serialVersionUID = 6545740721731539243L;
-	private String evaluationRule;
+	private String evaluationRuleName;
 	private ChannelProperties propertyRequested;
 
 	public ConcernEvaluationRequestEvent(
 			T data,
 			CepType type,
-			String evaluationRule,
+			String evaluationRuleName,
 			ChannelProperties propertyRequested,
 			String senderID,
 			String checksum,
 			long timestamp) {
 		super(data, type, senderID, checksum, timestamp);
-		this.setEvaluationRule(evaluationRule);
+		this.setEvaluationRuleName(evaluationRuleName);
 		this.setPropertyRequested(propertyRequested);
 	}
 
@@ -30,11 +30,11 @@ import it.cnr.isti.labsedc.concern.eventListener.ChannelProperties;
 		this.propertyRequested = propertyRequested;
 	}
 
-	public String getEvaluationRule() {
-		return evaluationRule;
+	public String getEvaluationRuleName() {
+		return evaluationRuleName;
 	}
 
-	public void setEvaluationRule(String evaluationRule) {
-		this.evaluationRule = evaluationRule;
+	public void setEvaluationRuleName(String evaluationRuleName) {
+		this.evaluationRuleName = evaluationRuleName;
 	}
 }
