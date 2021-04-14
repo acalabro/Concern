@@ -17,6 +17,7 @@ import org.apache.logging.log4j.Logger;
 import it.cnr.isti.labsedc.concern.event.ConcernAbstractEvent;
 import it.cnr.isti.labsedc.concern.register.ChannelsManagementRegistry;
 import it.cnr.isti.labsedc.concern.register.TopicAndProperties;
+import it.cnr.isti.labsedc.concern.storage.StorageController;
 import it.cnr.isti.labsedc.concern.utils.RoutingUtilities;
 
 public class EventListenerTask implements Runnable, MessageListener {
@@ -26,14 +27,16 @@ public class EventListenerTask implements Runnable, MessageListener {
 	private TopicConnection receiverConnection;
 	private String username;
 	private String password;
+	private StorageController storageManager;
     private static final Logger logger = LogManager.getLogger(EventListenerTask.class);
     private static MessageConsumer consumer;
     private static Session receiverSession;
 
-	public EventListenerTask(String eventChannelName, String connectionUsername, String connectionPassword) {
+	public EventListenerTask(String eventChannelName, String connectionUsername, String connectionPassword, StorageController storageManager) {
 		this.eventChannelName = eventChannelName;
 		this.username = connectionUsername;
 		this.password = connectionPassword;
+		this.storageManager = storageManager;
 	}
 
 	public String getEventChannelName() {
@@ -71,6 +74,7 @@ public class EventListenerTask implements Runnable, MessageListener {
 					TopicAndProperties topicWhereToForward= RoutingUtilities.BestCepSelectionForEvents(incomingRequest);
 					if (topicWhereToForward != null) {
 						forwardEventToCEP(topicWhereToForward, message);
+						storageManager.saveMessage(incomingRequest);
 					}
 				}
 			} catch (JMSException e) {
