@@ -46,7 +46,7 @@ public class ChannelsManagementRegistry {
 		//map the session associated to a connection
 
 		ConsumersChannels = new HashMap<String, String>();
-		//map the consumer that requests an evaluation and are waiting for a response on that channel dinamically created
+		//map the consumer that requests an evaluation and are waiting for a response on that channel dynamically created
 
 		ProbesChannels = new HashMap<String, String>();
 		//channels available for probes
@@ -96,5 +96,9 @@ public class ChannelsManagementRegistry {
 		Topic topic = receiverSession.createTopic(topicName);
 		ChannelsManagementRegistry.ActiveCep.put(new TopicAndProperties(CepIdentifier,channelProperties, cepType, topicName), topicName);
 		return topic;
+	}
+	
+	public static String getConsumerChannel(String consumerName) {
+		return ConsumersChannels.get(consumerName);
 	}
 }

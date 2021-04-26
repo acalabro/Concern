@@ -30,6 +30,7 @@ public class Probe {
 					canData+i,
 					CepType.DROOLS,
 					"senderProbeName",
+					"sessionID",
 					"checksum",
 					System.currentTimeMillis(),
 					"canAddress");

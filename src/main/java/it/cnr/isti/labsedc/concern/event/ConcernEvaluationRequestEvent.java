@@ -15,9 +15,10 @@ import it.cnr.isti.labsedc.concern.eventListener.ChannelProperties;
 			String evaluationRuleName,
 			ChannelProperties propertyRequested,
 			String senderID,
+			String sessionID,
 			String checksum,
 			long timestamp) {
-		super(data, type, senderID, checksum, timestamp);
+		super(data, type, senderID, sessionID, checksum, timestamp);
 		this.setEvaluationRuleName(evaluationRuleName);
 		this.setPropertyRequested(propertyRequested);
 	}

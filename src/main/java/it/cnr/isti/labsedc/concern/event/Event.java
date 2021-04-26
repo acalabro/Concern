@@ -8,5 +8,7 @@ public interface Event <T>{
 	public void setTimestamp(long timestamp);
 	public String getSenderID();
 	public void setSenderID(String senderID);
+	public String getSessionID();
+	public void setSessionID(String sessionID);
 
 }

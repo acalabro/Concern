@@ -12,10 +12,11 @@ public class ConcernArduinoEvent<T> extends ConcernAbstractEvent<T> {
 			CepType type, 
 			String senderID, 
 			String checksum, 
+			String sessionID,
 			long timestamp, 
 			String relayStatus) {
-		super(sensorData, type, senderID, checksum, timestamp);
-		this.relayStatus = relayStatus;		
+		super(sensorData, type, senderID, sessionID, checksum, timestamp);
+		this.relayStatus = relayStatus;	
 	}
 
 	public void setRelayStatus(String relayStatus) {
@@ -25,5 +26,4 @@ public class ConcernArduinoEvent<T> extends ConcernAbstractEvent<T> {
 	public String getRelayStstus() {
 		return this.relayStatus;
 	}
-
 }

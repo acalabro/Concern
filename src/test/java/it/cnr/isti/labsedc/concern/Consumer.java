@@ -17,7 +17,7 @@ public class Consumer {
 			cons.init(brokerUrl,"vera", "griselda");
 			ConcernEvaluationRequestEvent<String> ruleToEvaluate = 
 					new ConcernEvaluationRequestEvent<String>(
-							"theRule",CepType.DROOLS, "An example rule", ChannelProperties.GENERICREQUESTS, "Consumer-ONE", "283423094skndlsfdn", System.currentTimeMillis());
+							"theRule",CepType.DROOLS, "An example rule", ChannelProperties.GENERICREQUESTS, "Consumer-ONE", "sessionID", "283423094skndlsfdn", System.currentTimeMillis());
 			cons.sendEvaluationRequest("ServiceChannel-ONE", ruleToEvaluate);
 		} catch (JMSException e) {
 			e.printStackTrace();

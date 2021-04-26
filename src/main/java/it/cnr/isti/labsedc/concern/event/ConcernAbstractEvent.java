@@ -11,18 +11,21 @@ public abstract class ConcernAbstractEvent<T> implements Event<T>, Serializable 
 	private String sender;
 	private CepType cepType;
 	private long timestamp;
+	private String sessionID;
 	private T data;
 
 	public ConcernAbstractEvent(
 			T data,
 			CepType type,
 			String senderID,
+			String sessionID,
 			String checksum, 
 			long timestamp) {
 		this.setEventData(data);
 		this.setTimestamp(timestamp);
 		this.setCepType(type);
 		this.setSenderID(senderID);
+		this.setSessionID(sessionID);
 		this.setChecksum(checksum);
 	}
 
@@ -63,5 +66,11 @@ public abstract class ConcernAbstractEvent<T> implements Event<T>, Serializable 
 
 	public void setChecksum(String checksum) {
 		this.checksum = checksum;
+	}
+	public String getSessionID() {
+		return sessionID;
+	}
+	public void setSessionID(String sessionID) {
+		this.sessionID = sessionID;
 	}
 }

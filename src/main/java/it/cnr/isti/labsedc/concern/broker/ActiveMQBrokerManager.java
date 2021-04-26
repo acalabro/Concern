@@ -2,6 +2,9 @@ package it.cnr.isti.labsedc.concern.broker;
 
 import java.net.URI;
 
+import javax.jms.Connection;
+import javax.jms.JMSException;
+
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.ActiveMQSslConnectionFactory;
 import org.apache.activemq.broker.BrokerService;
@@ -18,6 +21,7 @@ public class ActiveMQBrokerManager implements BrokerManager, Runnable {
 	private static BrokerService broker;
 	private static TransportConnector connector;
 	private static ActiveMQConnectionFactory connectionFactory;
+	private static Connection conn;
 	private static long ACTIVEMQ_MEMORY_USAGE = 0;
 	private static long ACTIVEMQ_TEMP_USAGE = 0;
 	private static String ACTIVEMQ_HOST;
@@ -56,16 +60,23 @@ public class ActiveMQBrokerManager implements BrokerManager, Runnable {
 			logger.debug("broker started");
 
 			logger.debug("Enabling SSL ConnectionFactory");
-			connectionFactory = new ActiveMQSslConnectionFactory(ACTIVEMQ_HOST);
-			connectionFactory.setUserName(ACTIVEMQ_LOGINNAME);
-			connectionFactory.setPassword(ACTIVEMQ_PASSWORD);
-			connectionFactory.createConnection();
+			conn = singletonActiveMQ();
 			logger.debug("Connection sucessfully created");
 			ConcernApp.componentStarted.put(this.getClass().getSimpleName(), true);
 	    	logger.debug("Component "+ this.getClass().getSimpleName() + " loaded in registry.");
 		} catch (Exception e) {
 			logger.error(e.getCause());
 		}
+	}
+
+	public static Connection singletonActiveMQ() throws JMSException {
+		if (connectionFactory == null) {
+		connectionFactory = new ActiveMQSslConnectionFactory(ACTIVEMQ_HOST);
+		connectionFactory.setUserName(ACTIVEMQ_LOGINNAME);
+		connectionFactory.setPassword(ACTIVEMQ_PASSWORD);
+		conn = connectionFactory.createConnection();
+		}
+		return conn;
 	}
 
 	public static void StopActiveMQBroker() {

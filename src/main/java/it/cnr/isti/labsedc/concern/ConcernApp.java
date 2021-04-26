@@ -12,6 +12,7 @@ import it.cnr.isti.labsedc.concern.cep.CepType;
 import it.cnr.isti.labsedc.concern.cep.ComplexEventProcessorManager;
 import it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager;
 import it.cnr.isti.labsedc.concern.eventListener.EventListenerManager;
+import it.cnr.isti.labsedc.concern.notification.NotificationManager;
 import it.cnr.isti.labsedc.concern.register.ChannelsManagementRegistry;
 import it.cnr.isti.labsedc.concern.requestListener.ServiceListenerManager;
 import it.cnr.isti.labsedc.concern.storage.MySQLStorageController;
@@ -23,17 +24,19 @@ public class ConcernApp
 	private static ComplexEventProcessorManager cepMan;
 	private static ServiceListenerManager serviceListenerManager;
 	private static EventListenerManager eventListenerManager;
+	private static NotificationManager notificationManager;
+	private static ChannelsManagementRegistry channelRegistry;
+	private static MySQLStorageController storageManager;
+	
 	private static String brokerUrl;
 	private static Long maxMemoryUsage;
 	private static Long maxCacheUsage;
-	private static ChannelsManagementRegistry channelRegistry;
-	private static ActiveMQConnectionFactory factory;
+	public static ActiveMQConnectionFactory factory;
     public static Logger logger = LogManager.getRootLogger();
 	private static final boolean SHUTDOWN = false;
 	public static HashMap<String, Boolean> componentStarted = new HashMap<String, Boolean>();
 	private static String username;
 	private static String password;
-	private static MySQLStorageController storageManager;
 
     public static void main( String[] args ) throws InterruptedException
     {
@@ -71,7 +74,8 @@ public class ConcernApp
     	eventListenerManager = new EventListenerManager(ChannelUtilities.loadEventChannels(), username, password, storageManager);
     	eventListenerManager.start();
     	
-
+    	notificationManager = new NotificationManager();
+    	notificationManager.start();
     	
     	//STARTING CEP ONE
     	cepMan = new DroolsComplexEventProcessorManager(
