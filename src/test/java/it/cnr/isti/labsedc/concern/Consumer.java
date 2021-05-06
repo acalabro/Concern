@@ -10,11 +10,12 @@ import it.cnr.it.labsedc.concern.consumer.ConcernAbstractConsumer;
 public class Consumer {
 
 	public static void main(String[] args) throws InterruptedException {
-		String brokerUrl = "tcp://localhost:61616";
+		//String brokerUrl = "tcp://localhost:61616";
+		String brokerUrl = "tcp://146.48.84.187:61616";
 
 		ConcernAbstractConsumer cons = new ConcernAbstractConsumer();
 		try {
-			cons.init(brokerUrl,"vera", "griselda");
+			cons.init(brokerUrl,"vera", "griselda!!");
 			ConcernEvaluationRequestEvent<String> ruleToEvaluate = 
 					new ConcernEvaluationRequestEvent<String>(
 							"theRule",CepType.DROOLS, "An example rule", ChannelProperties.GENERICREQUESTS, "Consumer-ONE", "sessionID", "283423094skndlsfdn", System.currentTimeMillis());

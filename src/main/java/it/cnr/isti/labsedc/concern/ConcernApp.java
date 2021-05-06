@@ -37,6 +37,7 @@ public class ConcernApp
 	public static HashMap<String, Boolean> componentStarted = new HashMap<String, Boolean>();
 	private static String username;
 	private static String password;
+	private static boolean LOCALBROKER = false;
 
     public static void main( String[] args ) throws InterruptedException
     {
@@ -53,13 +54,16 @@ public class ConcernApp
 	public static void StartComponents(ActiveMQConnectionFactory factory, String brokerUrl, long maxMemoryUsage, long maxCacheUsage) throws InterruptedException {
 
 		//storage = new InfluxDBStorageController();
-	    broker = new ActiveMQBrokerManager(brokerUrl, maxMemoryUsage, maxCacheUsage, username, password);
-	    logger = LogManager.getLogger(ConcernApp.class);
-    	logger.debug(ConcernApp.class.getSimpleName() + " is launching the broker.");
-    	broker.run();
-
-    	logger.debug(ConcernApp.class.getSimpleName() + " broker launched.");
-    	channelRegistry = new ChannelsManagementRegistry();
+		if (LOCALBROKER) {
+			broker = new ActiveMQBrokerManager(brokerUrl, maxMemoryUsage, maxCacheUsage, username, password);
+			logger = LogManager.getLogger(ConcernApp.class);
+			logger.debug(ConcernApp.class.getSimpleName() + " is launching the broker.");
+			broker.run();
+			logger.debug(ConcernApp.class.getSimpleName() + " broker launched.");
+		} else
+			factory = new ActiveMQConnectionFactory(username, password, brokerUrl);		
+		
+		channelRegistry = new ChannelsManagementRegistry();
 
     	logger.debug("Channels Management Registry created");
     	System.out.println("PATH: " + System.getProperty("user.dir")+ "/src/main/resources/startupRule.drl");

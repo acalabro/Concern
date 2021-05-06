@@ -68,7 +68,7 @@ public class ChannelsManagementRegistry {
 	public static TopicConnection GetNewTopicConnection(String username, String password) throws JMSException {
 		ChannelsManagementRegistry.connectionFactory.setTrustedPackages(new ArrayList<String>(Arrays.asList("it.cnr.isti.labsedc.concern.event,it.cnr.isti.labsedc.concern.cep,it.cnr.isti.labsedc.concern.eventListener,it.cnr.isti.labsedc.concern.requestListener".split(","))));
 		ChannelsManagementRegistry.connectionFactory.setUserName(username);
-		ChannelsManagementRegistry.connectionFactory.setUserName(password);
+		ChannelsManagementRegistry.connectionFactory.setPassword(password);
 		return  ChannelsManagementRegistry.connectionFactory.createTopicConnection();
 	}
 

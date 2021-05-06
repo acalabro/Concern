@@ -18,14 +18,26 @@ public class Probe {
 	public static void testProbe(String brokerUrl, String topicName, String username, String password, String canData) {
 		try {
 			ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(username, password, brokerUrl);
-            Connection connection = connectionFactory.createConnection();
+			System.out.println("setup conn");
+			//ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(brokerUrl);
+			Connection connection = connectionFactory.createConnection();
+			System.out.println("connessione creata");
+
             Session session = connection.createSession(false,Session.AUTO_ACKNOWLEDGE);
+			System.out.println("sessione creata");
+
             Topic topic = session.createTopic(topicName);
-            MessageProducer producer = session.createProducer(topic);
+			System.out.println("topic creato");
+
+            MessageProducer producer = session.createProducer(topic);     
+			System.out.println("producer creato");
+
 			ObjectMessage msg = session.createObjectMessage();
+			System.out.println("messaggio creato");
+
 			ConcernCANbusEvent<String> event;
 			
-			for (int i = 0; i<50; i++) {
+			for (int i = 0; i<500000 ; i++) {
 				event = new ConcernCANbusEvent<String>(
 					canData+i,
 					CepType.DROOLS,
@@ -33,10 +45,12 @@ public class Probe {
 					"sessionID",
 					"checksum",
 					System.currentTimeMillis(),
-					"canAddress");
+					"canParamenterName");
 			
 				msg.setObject(event);
 				producer.send(msg);
+				System.out.println("invio evento");
+
 			}
 		} catch (JMSException e) {
 			e.printStackTrace();
@@ -48,9 +62,15 @@ public class Probe {
 		//String brokerUrl = "tcp://146.48.84.178:61616";
 		
 		testProbe(brokerUrl, "EventChannel-ONE", "vera", "griselda", "messageCANONE");
-//		
-		Thread.sleep(500);
-		testProbe(brokerUrl, "EventChannel-TWO", "vera", "griselda", "messageCANTWO");
-//		Thread.sleep(500);
+//		testProbe(brokerUrl, "EventChannel-ONE", "system", "sedclab1234!!_", "messageCANONE");
+//		System.out.println("asdasd1");
+//		testProbe(brokerUrl, "EventChannel-ONE", "admin", "sedclab1234!!_", "messageCANONE");
+//		System.out.println("asdasdadsasdasd2");
+//		testProbe(brokerUrl, "EventChannel-ONE", "guest", "testingBieco#@\"", "messageCANONE");
+//		System.out.println("asdasdadsasdasdadsasdasdasd3");
+		
+		//Thread.sleep(500);
+		//testProbe(brokerUrl, "EventChannel-TWO", "vera", "griselda", "messageCANTWO");
+		//Thread.sleep(500);
 	}
 }

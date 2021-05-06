@@ -42,13 +42,7 @@ public class NotificationManager extends Thread {
 	@Override
 	public void run() {
 
-		try {		
-			logger.info("Instanciating session singleton");
-
-			session = ActiveMQBrokerManager.singletonActiveMQ().createSession(false,Session.AUTO_ACKNOWLEDGE);
-		} catch (JMSException e) {
-			
-		}
+	//TODO:
 		
 	}
 }
