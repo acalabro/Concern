@@ -58,8 +58,8 @@ public class Probe {
 	}
 
 	public static void main(String[] args) throws InterruptedException {
-		String brokerUrl = "tcp://localhost:61616";
-		//String brokerUrl = "tcp://146.48.84.178:61616";
+		//String brokerUrl = "tcp://localhost:61616";
+		String brokerUrl = "tcp://sedc-nethd.isti.cnr.it:49195";
 		
 		testProbe(brokerUrl, "EventChannel-ONE", "vera", "griselda", "messageCANONE");
 //		testProbe(brokerUrl, "EventChannel-ONE", "system", "sedclab1234!!_", "messageCANONE");

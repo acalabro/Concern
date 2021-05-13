@@ -15,7 +15,7 @@ public class Consumer {
 
 		ConcernAbstractConsumer cons = new ConcernAbstractConsumer();
 		try {
-			cons.init(brokerUrl,"vera", "griselda!!");
+			cons.init(brokerUrl,"vera", "griselda");
 			ConcernEvaluationRequestEvent<String> ruleToEvaluate = 
 					new ConcernEvaluationRequestEvent<String>(
 							"theRule",CepType.DROOLS, "An example rule", ChannelProperties.GENERICREQUESTS, "Consumer-ONE", "sessionID", "283423094skndlsfdn", System.currentTimeMillis());

@@ -41,7 +41,7 @@ public class ConcernApp
 
     public static void main( String[] args ) throws InterruptedException
     {
-    	brokerUrl = "tcp://localhost:61616";
+    	brokerUrl = "tcp://sedc-nethd.isti.cnr.it:49195";
     	maxMemoryUsage = 128000l;
     	maxCacheUsage = 128000l;
     	factory = new ActiveMQConnectionFactory(brokerUrl);

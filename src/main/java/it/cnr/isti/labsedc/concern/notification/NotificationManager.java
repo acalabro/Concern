@@ -10,7 +10,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import it.cnr.isti.labsedc.concern.ConcernApp;
-import it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager;
 import it.cnr.isti.labsedc.concern.register.ChannelsManagementRegistry;
 
 public class NotificationManager extends Thread {
