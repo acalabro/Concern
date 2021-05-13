@@ -82,7 +82,7 @@ public class ServiceListenerTask implements Runnable, MessageListener {
 		if (message instanceof TextMessage) {
 			TextMessage msg = (TextMessage) message;
 			try {
-				logger.info("EventListenerTask " + this.serviceChannelName + " receives TextMessage: " + msg.getText());
+				logger.info("EventListenerTask " + this.serviceChannelName + " receives a TextMessage: " + msg.getText());
 			} catch (JMSException e) {
 				e.printStackTrace();
 			}

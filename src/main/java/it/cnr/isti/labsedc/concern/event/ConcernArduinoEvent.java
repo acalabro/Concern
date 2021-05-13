@@ -8,14 +8,16 @@ public class ConcernArduinoEvent<T> extends ConcernAbstractEvent<T> {
 	private String relayStatus;
 	
 	public ConcernArduinoEvent(
-			T sensorData, 
-			CepType type, 
-			String senderID, 
-			String checksum, 
+			long timestamp,
+			String senderID,
+			String destinationID,
 			String sessionID,
-			long timestamp, 
+			String checksum,
+			String name,
+			T ruleData,
+			CepType type,
 			String relayStatus) {
-		super(sensorData, type, senderID, sessionID, checksum, timestamp);
+		super(timestamp, senderID, destinationID, sessionID, checksum, name, ruleData, type);
 		this.relayStatus = relayStatus;	
 	}
 

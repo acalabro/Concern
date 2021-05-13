@@ -77,8 +77,8 @@ public class MySQLStorageController implements StorageController {
 				      PreparedStatement preparedStmt = MySQLStorageController.con.prepareStatement(query);
 				      preparedStmt.setString (1, message.getSenderID());
 				      preparedStmt.setLong (2, message.getTimestamp());
-				      preparedStmt.setObject(3, message.getEventData());
-				      preparedStmt.setString(4, message.getEventData().getClass().getCanonicalName());
+				      preparedStmt.setObject(3, message.getData());
+				      preparedStmt.setString(4, message.getData().getClass().getCanonicalName());
 				      // execute the preparedstatement
 				      preparedStmt.execute();
 				      return true;

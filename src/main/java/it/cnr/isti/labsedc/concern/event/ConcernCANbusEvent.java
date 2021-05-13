@@ -8,14 +8,16 @@ public class ConcernCANbusEvent<T> extends ConcernAbstractEvent<T> {
 	private String canAddress;
 	
 	public ConcernCANbusEvent(
-			T canData, 
-			CepType type, 
-			String senderID, 
+			long timestamp,
+			String senderID,
+			String destinationID,
 			String sessionID,
-			String checksum, 
-			long timestamp, 
+			String checksum,
+			String name,
+			T canData,
+			CepType type,
 			String canAddress) {
-		super(canData, type, senderID, sessionID, checksum, timestamp);
+		super(timestamp, senderID, destinationID, sessionID, checksum, name, canData, type);
 		this.canAddress = canAddress;		
 	}
 

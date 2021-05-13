@@ -208,14 +208,14 @@ public class EsperComplexEventProcessorManager extends ComplexEventProcessorMana
 		
 		
 		
-		logger.info("...CEP named " + this.getInstanceName() + " receives rules "  + receivedEvent.getEventData() + " and load it into the knowledgeBase");
+		logger.info("...CEP named " + this.getInstanceName() + " receives rules "  + receivedEvent.getData() + " and load it into the knowledgeBase");
 	}
 
 	private void insertEvent(ConcernCANbusEvent<?> receivedEvent) {
 		if (eventStream != null && receivedEvent != null) {
 			eventStream.insert(receivedEvent);
 	
-			logger.info("...CEP named " + this.getInstanceName() + " insert event "  + receivedEvent.getEventData() +" in the stream");
+			logger.info("...CEP named " + this.getInstanceName() + " insert event "  + receivedEvent.getData() +" in the stream");
 			}			
 	}
 

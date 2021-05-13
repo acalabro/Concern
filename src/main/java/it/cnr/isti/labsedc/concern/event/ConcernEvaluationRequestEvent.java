@@ -10,15 +10,17 @@ import it.cnr.isti.labsedc.concern.eventListener.ChannelProperties;
 	private ChannelProperties propertyRequested;
 
 	public ConcernEvaluationRequestEvent(
-			T data,
-			CepType type,
-			String evaluationRuleName,
-			ChannelProperties propertyRequested,
+			long timestamp,
 			String senderID,
+			String destinationID,
 			String sessionID,
 			String checksum,
-			long timestamp) {
-		super(data, type, senderID, sessionID, checksum, timestamp);
+			String name,
+			T ruleData,
+			CepType type,
+			String evaluationRuleName,
+			ChannelProperties propertyRequested) {
+		super(timestamp, senderID, destinationID, sessionID, checksum, name, ruleData, type);
 		this.setEvaluationRuleName(evaluationRuleName);
 		this.setPropertyRequested(propertyRequested);
 	}

@@ -37,11 +37,12 @@ public class ConcernApp
 	public static HashMap<String, Boolean> componentStarted = new HashMap<String, Boolean>();
 	private static String username;
 	private static String password;
-	private static boolean LOCALBROKER = false;
+	private static boolean LOCALBROKER = true;
 
     public static void main( String[] args ) throws InterruptedException
     {
-    	brokerUrl = "tcp://sedc-nethd.isti.cnr.it:49195";
+    	//brokerUrl = "tcp://sedc-nethd.isti.cnr.it:49195";
+    	brokerUrl = "tcp://localhost:61616";
     	maxMemoryUsage = 128000l;
     	maxCacheUsage = 128000l;
     	factory = new ActiveMQConnectionFactory(brokerUrl);
@@ -94,18 +95,18 @@ public class ConcernApp
     		Thread.sleep(100);
     	}
 
-    	//STARTING CEP TWO
-    	cepMan = new DroolsComplexEventProcessorManager(
-    			"InstanceTwo", 
-    			System.getProperty("user.dir")+ "/src/main/resources/startupRule.drl", 
-    			username, 
-    			password, CepType.DROOLS);
-    	cepMan.start();
-
-    	while (!cepMan.cepHasCompletedStartup()) {
-    		System.out.println("wait for Second CEP start");
-    		Thread.sleep(100);
-    	}
+//    	//STARTING CEP TWO
+//    	cepMan = new DroolsComplexEventProcessorManager(
+//    			"InstanceTwo", 
+//    			System.getProperty("user.dir")+ "/src/main/resources/startupRule.drl", 
+//    			username, 
+//    			password, CepType.DROOLS);
+//    	cepMan.start();
+//
+//    	while (!cepMan.cepHasCompletedStartup()) {
+//    		System.out.println("wait for Second CEP start");
+//    		Thread.sleep(100);
+//    	}
 
     	/*
     	clientMan = new ClientManager();
