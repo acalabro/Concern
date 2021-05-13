@@ -25,17 +25,19 @@ public class NotificationManager extends Thread {
 	}
 	
 	public static void NotifyToConsumer(String consumerName, String violationMessage) {
-		try {
-			logger.info("Creating response topic");
-			topic = session.createTopic(ChannelsManagementRegistry.getConsumerChannel(consumerName));
+		logger.info(violationMessage);
 
-        MessageProducer producer = session.createProducer(topic);
-		TextMessage msg = session.createTextMessage(violationMessage);
-		producer.send(msg);
-		} catch (JMSException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			logger.info("Creating response topic");
+//			topic = session.createTopic(ChannelsManagementRegistry.getConsumerChannel(consumerName));
+//
+//        MessageProducer producer = session.createProducer(topic);
+//		TextMessage msg = session.createTextMessage(violationMessage);
+//		producer.send(msg);
+//		} catch (JMSException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 
 	@Override

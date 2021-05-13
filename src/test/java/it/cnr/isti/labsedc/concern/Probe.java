@@ -39,9 +39,9 @@ public class Probe {
 		String brokerUrl = "tcp://localhost:61616";
 		//String brokerUrl = "tcp://sedc-nethd.isti.cnr.it:49195";
 		
-		testProbe(brokerUrl, "EventChannel-ONE", "vera", "griselda", "SLA Alert", "evento1");
+		testProbe(brokerUrl, "DROOLS-InstanceOne", "vera", "griselda", "SLA Alert", "evento1");
 		Thread.sleep(1000);
-		testProbe(brokerUrl, "EventChannel-ONE", "vera", "griselda", "load_one", "evento2");
+		testProbe(brokerUrl, "DROOLS-InstanceOne", "vera", "griselda", "load_one", "evento2");
 		System.out.println("SENT");
 	}
 }

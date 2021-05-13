@@ -22,6 +22,7 @@ public class Consumer {
 									+ "package it.cnr.isti.labsedc.concern.event;\n"
 									+ "import it.cnr.isti.labsedc.concern.event.ConcernAbstractEvent;\n"
 									+ "import it.cnr.isti.labsedc.concern.event.ConcernArduinoEvent;\n"
+									+ "import it.cnr.isti.labsedc.concern.notification.NotificationManager;\n"
 									+ "\n"
 									+ "dialect \"java\"\n"
 									+ "\n"
@@ -42,12 +43,12 @@ public class Consumer {
 									+ "			this.getName == \"load_one\",\n"
 									+ "			this after[0,10s] $aEvent);\n"
 									+ "		then\n"
-									+ "			System.out.println(\"retracted\");	\n"
+									+ "			NotificationManager.NotifyToConsumer(\"consumerName\", \"retracted\");	\n"
 									+ "			retract($aEvent);\n"
 									+ "			retract($bEvent);	\n"
 									+ "		end"
 									+ "", CepType.DROOLS, "monitor a after b", ChannelProperties.GENERICREQUESTS);
-			cons.sendEvaluationRequest("ServiceChannel-ONE", ruleToEvaluate);
+			cons.sendEvaluationRequest("DROOLS-InstanceOne", ruleToEvaluate);
 		} catch (JMSException e) {
 			e.printStackTrace();
 		}

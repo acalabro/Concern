@@ -73,11 +73,11 @@ public class ConcernApp
     	storageManager = new MySQLStorageController();
     	storageManager.connectToDB();
     	
-    	serviceListenerManager = new ServiceListenerManager(ChannelUtilities.loadServiceChannels(), username, password);
-    	serviceListenerManager.start();
+    	//serviceListenerManager = new ServiceListenerManager(ChannelUtilities.loadServiceChannels(), username, password);
+    	//serviceListenerManager.start();
     	
-    	eventListenerManager = new EventListenerManager(ChannelUtilities.loadEventChannels(), username, password, storageManager);
-    	eventListenerManager.start();
+    	//eventListenerManager = new EventListenerManager(ChannelUtilities.loadEventChannels(), username, password, storageManager);
+    	//eventListenerManager.start();
     	
     	notificationManager = new NotificationManager();
     	notificationManager.start();
