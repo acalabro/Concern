@@ -18,7 +18,7 @@ import it.cnr.isti.labsedc.concern.requestListener.ServiceListenerManager;
 import it.cnr.isti.labsedc.concern.storage.MySQLStorageController;
 import it.cnr.isti.labsedc.concern.utils.ChannelUtilities;
 
-public class ConcernApp
+public class ConcernApp 
 {
 	private static BrokerManager broker;
 	private static ComplexEventProcessorManager cepMan;
