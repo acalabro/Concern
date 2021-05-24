@@ -52,5 +52,6 @@ public class Consumer {
 		} catch (JMSException e) {
 			e.printStackTrace();
 		}
+		System.out.println("Rule to be monitored Sent");
 	}
 }

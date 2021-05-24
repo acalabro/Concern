@@ -25,7 +25,8 @@ public class Probe {
 			ObjectMessage msg = session.createObjectMessage();
 			ConcernArduinoEvent<String> event = new ConcernArduinoEvent<String>(
 					System.currentTimeMillis(), 
-					"senderA", "EventChannel-ONE", "sessionA", 
+					new Exception().getStackTrace()[1].getClassName(),
+					"EventChannel-ONE", "sessionA", 
 					"checksum",
 					canData, eventName, CepType.DROOLS,"open");
 				msg.setObject(event);
@@ -38,10 +39,17 @@ public class Probe {
 	public static void main(String[] args) throws InterruptedException {
 		String brokerUrl = "tcp://localhost:61616";
 		//String brokerUrl = "tcp://sedc-nethd.isti.cnr.it:49195";
-		
+		printHello();
 		testProbe(brokerUrl, "DROOLS-InstanceOne", "vera", "griselda", "SLA Alert", "evento1");
 		Thread.sleep(1000);
 		testProbe(brokerUrl, "DROOLS-InstanceOne", "vera", "griselda", "load_one", "evento2");
 		System.out.println("SENT");
+	}
+
+	private static void printHello() {
+System.out.println("  _     _    __   _  _  _  _  _ \n"
+		+ " /_`| |/_`/|//   /_//_// //_)/_`\n"
+		+ "/_, |//_,/ |/   /  / \\/_//_)/_, \n"
+		+ "                                \n");	
 	}
 }
