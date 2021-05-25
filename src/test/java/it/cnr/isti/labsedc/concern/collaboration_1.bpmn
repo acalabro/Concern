@@ -3,6 +3,11 @@
 <bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:ext="http://org.eclipse.bpmn2/ext" xmlns:xs="http://www.w3.org/2001/XMLSchema" id="Definitions_1" exporter="org.eclipse.bpmn2.modeler.core" exporterVersion="1.5.2.SNAPSHOT-v20200602-1600-B1" targetNamespace="http://org.eclipse.bpmn2/default/collaboration">
   <bpmn2:collaboration id="Collaboration_1" name="Default Collaboration">
     <bpmn2:participant id="Participant_1" name="Initiating Pool" processRef="Process_1"/>
+    <bpmn2:participant id="Participant_2" name="Default Pool" processRef="Process_2">
+      <bpmn2:extensionElements>
+        <ext:style/>
+      </bpmn2:extensionElements>
+    </bpmn2:participant>
   </bpmn2:collaboration>
   <bpmn2:process id="Process_1" name="Initiating Process" definitionalCollaborationRef="Collaboration_1" isExecutable="false">
     <bpmn2:ioSpecification id="InputOutputSpecification_1">
@@ -89,6 +94,7 @@
       <bpmn2:incoming>SequenceFlow_3</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_2</bpmn2:outgoing>
       <bpmn2:outgoing>SequenceFlow_14</bpmn2:outgoing>
+      <bpmn2:outgoing>SequenceFlow_27</bpmn2:outgoing>
     </bpmn2:parallelGateway>
     <bpmn2:sequenceFlow id="SequenceFlow_14" sourceRef="ParallelGateway_1" targetRef="UserTask_6"/>
     <bpmn2:exclusiveGateway id="ExclusiveGateway_3" name="Exclusive Gateway 3" gatewayDirection="Diverging">
@@ -119,6 +125,10 @@
     </bpmn2:inclusiveGateway>
     <bpmn2:sequenceFlow id="SequenceFlow_25" sourceRef="UserTask_10" targetRef="InclusiveGateway_3"/>
     <bpmn2:sequenceFlow id="SequenceFlow_26" sourceRef="InclusiveGateway_3" targetRef="UserTask_5"/>
+    <bpmn2:serviceTask id="ServiceTask_5" name="Predictive Simulator setup">
+      <bpmn2:incoming>SequenceFlow_27</bpmn2:incoming>
+    </bpmn2:serviceTask>
+    <bpmn2:sequenceFlow id="SequenceFlow_27" sourceRef="ParallelGateway_1" targetRef="ServiceTask_5"/>
     <bpmn2:association id="Association_1" sourceRef="DataInput_1" targetRef="UserTask_1"/>
     <bpmn2:association id="Association_4" sourceRef="DataOutput_3" targetRef="UserTask_2"/>
     <bpmn2:association id="Association_19" sourceRef="DataInput_10" targetRef="UserTask_5"/>
@@ -168,6 +178,7 @@ CE Manager</bpmn2:text>
     <bpmn2:association id="Association_15" sourceRef="TextAnnotation_5" targetRef="StartEvent_1"/>
     <bpmn2:association id="Association_17" sourceRef="DataInput_4" targetRef="ServiceTask_1"/>
   </bpmn2:process>
+  <bpmn2:process id="Process_2" name="Default Pool Process" definitionalCollaborationRef="Collaboration_1" isExecutable="false"/>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1" name="Default Collaboration Diagram">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1">
       <bpmndi:BPMNShape id="BPMNShape_1" bpmnElement="Participant_1" isHorizontal="false">
@@ -366,6 +377,12 @@ CE Manager</bpmn2:text>
         <dc:Bounds height="50.0" width="36.0" x="850.0" y="490.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_69">
           <dc:Bounds height="42.0" width="78.0" x="829.0" y="540.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_ServiceTask_5" bpmnElement="ServiceTask_5" isExpanded="true">
+        <dc:Bounds height="50.0" width="110.0" x="905.0" y="181.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_71" labelStyle="BPMNLabelStyle_1">
+          <dc:Bounds height="28.0" width="87.0" x="916.0" y="192.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_1" bpmnElement="SequenceFlow_1" sourceElement="BPMNShape_StartEvent_1" targetElement="BPMNShape_ExclusiveGateway_3">
@@ -598,6 +615,12 @@ CE Manager</bpmn2:text>
         <di:waypoint xsi:type="dc:Point" x="868.0" y="429.0"/>
         <di:waypoint xsi:type="dc:Point" x="900.0" y="429.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_70"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_27" bpmnElement="SequenceFlow_27" sourceElement="BPMNShape_ParallelGateway_1" targetElement="BPMNShape_ServiceTask_5">
+        <di:waypoint xsi:type="dc:Point" x="826.0" y="276.0"/>
+        <di:waypoint xsi:type="dc:Point" x="826.0" y="206.0"/>
+        <di:waypoint xsi:type="dc:Point" x="905.0" y="206.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_72"/>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
     <bpmndi:BPMNLabelStyle id="BPMNLabelStyle_1">
