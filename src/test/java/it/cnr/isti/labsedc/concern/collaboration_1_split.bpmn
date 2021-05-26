@@ -253,9 +253,9 @@ CE Manager</bpmn2:text>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_DataInput_4" bpmnElement="DataInput_10">
-        <dc:Bounds height="50.0" width="36.0" x="846.0" y="123.0"/>
+        <dc:Bounds height="50.0" width="36.0" x="825.0" y="139.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_28">
-          <dc:Bounds height="28.0" width="54.0" x="837.0" y="173.0"/>
+          <dc:Bounds height="28.0" width="54.0" x="816.0" y="189.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_DataInput_5" bpmnElement="DataInput_11">
@@ -283,15 +283,15 @@ CE Manager</bpmn2:text>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_UserTask_6" bpmnElement="UserTask_6" isExpanded="true">
-        <dc:Bounds height="50.0" width="110.0" x="1230.0" y="204.0"/>
+        <dc:Bounds height="50.0" width="110.0" x="1238.0" y="204.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_13" labelStyle="BPMNLabelStyle_1">
-          <dc:Bounds height="42.0" width="87.0" x="1241.0" y="208.0"/>
+          <dc:Bounds height="42.0" width="87.0" x="1249.0" y="208.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_ExclusiveGateway_1" bpmnElement="ExclusiveGateway_1" isMarkerVisible="true">
-        <dc:Bounds height="50.0" width="50.0" x="1390.0" y="204.0"/>
+        <dc:Bounds height="50.0" width="50.0" x="1392.0" y="204.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_22" labelStyle="BPMNLabelStyle_1">
-          <dc:Bounds height="42.0" width="87.0" x="1372.0" y="254.0"/>
+          <dc:Bounds height="42.0" width="87.0" x="1374.0" y="254.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_ScriptTask_1" bpmnElement="ScriptTask_1" isExpanded="true">
@@ -301,9 +301,9 @@ CE Manager</bpmn2:text>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_UserTask_7" bpmnElement="UserTask_7" isExpanded="true">
-        <dc:Bounds height="50.0" width="110.0" x="1490.0" y="137.0"/>
+        <dc:Bounds height="50.0" width="110.0" x="1490.0" y="139.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_34" labelStyle="BPMNLabelStyle_1">
-          <dc:Bounds height="42.0" width="101.0" x="1494.0" y="141.0"/>
+          <dc:Bounds height="42.0" width="101.0" x="1494.0" y="143.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_ManualTask_1" bpmnElement="ManualTask_1" isExpanded="true">
@@ -447,8 +447,8 @@ CE Manager</bpmn2:text>
         <bpmndi:BPMNLabel id="BPMNLabel_27"/>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_Association_19" bpmnElement="Association_19" sourceElement="BPMNShape_DataInput_4" targetElement="BPMNShape_SubProcess_2">
-        <di:waypoint xsi:type="dc:Point" x="864.0" y="173.0"/>
-        <di:waypoint xsi:type="dc:Point" x="864.0" y="229.0"/>
+        <di:waypoint xsi:type="dc:Point" x="843.0" y="189.0"/>
+        <di:waypoint xsi:type="dc:Point" x="843.0" y="229.0"/>
         <di:waypoint xsi:type="dc:Point" x="881.0" y="229.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_30"/>
       </bpmndi:BPMNEdge>
@@ -480,34 +480,33 @@ CE Manager</bpmn2:text>
         <bpmndi:BPMNLabel id="BPMNLabel_9"/>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_4" bpmnElement="SequenceFlow_4" sourceElement="BPMNShape_UserTask_6" targetElement="BPMNShape_ExclusiveGateway_1">
-        <di:waypoint xsi:type="dc:Point" x="1340.0" y="229.0"/>
-        <di:waypoint xsi:type="dc:Point" x="1365.0" y="229.0"/>
-        <di:waypoint xsi:type="dc:Point" x="1390.0" y="229.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1348.0" y="229.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1370.0" y="229.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1392.0" y="229.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_25"/>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_5" bpmnElement="SequenceFlow_5" sourceElement="BPMNShape_ExclusiveGateway_1" targetElement="BPMNShape_ScriptTask_1">
-        <di:waypoint xsi:type="dc:Point" x="1415.0" y="204.0"/>
-        <di:waypoint xsi:type="dc:Point" x="1415.0" y="144.0"/>
-        <di:waypoint xsi:type="dc:Point" x="1452.0" y="144.0"/>
-        <di:waypoint xsi:type="dc:Point" x="1452.0" y="91.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1417.0" y="204.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1417.0" y="91.0"/>
         <di:waypoint xsi:type="dc:Point" x="1490.0" y="91.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_37"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_10" bpmnElement="SequenceFlow_10" sourceElement="BPMNShape_ExclusiveGateway_1" targetElement="BPMNShape_UserTask_7">
-        <di:waypoint xsi:type="dc:Point" x="1440.0" y="229.0"/>
-        <di:waypoint xsi:type="dc:Point" x="1545.0" y="229.0"/>
-        <di:waypoint xsi:type="dc:Point" x="1545.0" y="187.0"/>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_10" bpmnElement="SequenceFlow_10" sourceElement="BPMNShape_ExclusiveGateway_1">
+        <di:waypoint xsi:type="dc:Point" x="1442.0" y="229.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1442.0" y="164.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1484.0" y="164.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1494.0" y="164.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_38"/>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_11" bpmnElement="SequenceFlow_11" sourceElement="BPMNShape_ExclusiveGateway_1" targetElement="BPMNShape_ServiceTask_2">
-        <di:waypoint xsi:type="dc:Point" x="1415.0" y="254.0"/>
-        <di:waypoint xsi:type="dc:Point" x="1415.0" y="306.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1417.0" y="254.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1417.0" y="306.0"/>
         <di:waypoint xsi:type="dc:Point" x="1485.0" y="306.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_39"/>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_13" bpmnElement="SequenceFlow_13" sourceElement="BPMNShape_ExclusiveGateway_1" targetElement="BPMNShape_ManualTask_1">
-        <di:waypoint xsi:type="dc:Point" x="1415.0" y="254.0"/>
-        <di:waypoint xsi:type="dc:Point" x="1415.0" y="408.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1417.0" y="254.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1417.0" y="408.0"/>
         <di:waypoint xsi:type="dc:Point" x="1490.0" y="408.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_40"/>
       </bpmndi:BPMNEdge>
@@ -519,10 +518,9 @@ CE Manager</bpmn2:text>
         <bpmndi:BPMNLabel id="BPMNLabel_42"/>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_Association_5" bpmnElement="Association_5" sourceElement="BPMNShape_DataInput_2" targetElement="BPMNShape_UserTask_7">
-        <di:waypoint xsi:type="dc:Point" x="1640.0" y="546.0"/>
-        <di:waypoint xsi:type="dc:Point" x="1620.0" y="546.0"/>
-        <di:waypoint xsi:type="dc:Point" x="1620.0" y="162.0"/>
-        <di:waypoint xsi:type="dc:Point" x="1600.0" y="162.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1658.0" y="521.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1658.0" y="164.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1600.0" y="164.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_43"/>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_Association_7" bpmnElement="Association_7" sourceElement="BPMNShape_DataInput_2" targetElement="BPMNShape_ServiceTask_2">
@@ -639,10 +637,9 @@ CE Manager</bpmn2:text>
         <bpmndi:BPMNLabel id="BPMNLabel_84"/>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_28" bpmnElement="SequenceFlow_28" sourceElement="BPMNShape_UserTask_8" targetElement="BPMNShape_UserTask_6">
-        <di:waypoint xsi:type="dc:Point" x="1170.0" y="220.0"/>
-        <di:waypoint xsi:type="dc:Point" x="1200.0" y="220.0"/>
-        <di:waypoint xsi:type="dc:Point" x="1200.0" y="229.0"/>
-        <di:waypoint xsi:type="dc:Point" x="1230.0" y="229.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1170.0" y="229.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1204.0" y="229.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1238.0" y="229.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_85"/>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_MessageFlow_6" bpmnElement="MessageFlow_6" sourceElement="BPMNShape_UserTask_8" targetElement="BPMNShape_ServiceTask_5">
