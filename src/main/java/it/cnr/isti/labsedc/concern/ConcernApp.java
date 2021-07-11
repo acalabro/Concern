@@ -5,6 +5,11 @@ import java.util.HashMap;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
+import org.eclipse.paho.client.mqttv3.MqttCallback;
+import org.eclipse.paho.client.mqttv3.MqttClient;
+import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 import it.cnr.isti.labsedc.concern.broker.ActiveMQBrokerManager;
 import it.cnr.isti.labsedc.concern.broker.BrokerManager;
@@ -16,7 +21,6 @@ import it.cnr.isti.labsedc.concern.notification.NotificationManager;
 import it.cnr.isti.labsedc.concern.register.ChannelsManagementRegistry;
 import it.cnr.isti.labsedc.concern.requestListener.ServiceListenerManager;
 import it.cnr.isti.labsedc.concern.storage.MySQLStorageController;
-import it.cnr.isti.labsedc.concern.utils.ChannelUtilities;
 
 public class ConcernApp
 {
