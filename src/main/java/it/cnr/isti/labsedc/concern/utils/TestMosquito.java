@@ -10,7 +10,7 @@ public class TestMosquito {
 	
 	//MOSQUITOTEST
 	try {
-		MqttClient client2 = new MqttClient("tcp://localhost:1883", MqttClient.generateClientId());
+		MqttClient client2 = new MqttClient("tcp://10.0.0.117:1883", MqttClient.generateClientId());
 		client2.setCallback( new SimpleMqttCallBack() );
 		client2.connect();
 		client2.subscribe("iot_data"); 
@@ -27,7 +27,7 @@ public class TestMosquito {
 		e1.printStackTrace();
 	}
 	try {
-		MqttClient client = new MqttClient("tcp://localhost:1883", MqttClient.generateClientId());
+		MqttClient client = new MqttClient("tcp://10.0.0.117:1883", MqttClient.generateClientId());
 		client.connect();
 		MqttMessage message = new MqttMessage();
 		message.setPayload("Hello world from Java".getBytes());
