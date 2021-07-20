@@ -12,6 +12,7 @@ import javax.jms.TopicConnection;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.eclipse.paho.client.mqttv3.MqttClient;
 
 import it.cnr.isti.labsedc.concern.ConcernApp;
 import it.cnr.isti.labsedc.concern.cep.CepType;
@@ -27,7 +28,9 @@ public class ChannelsManagementRegistry {
 	public static HashMap<String, String> ConsumersChannels;
 	public static HashMap<String, String> ProbesChannels;
 	public static ActiveMQConnectionFactory connectionFactory;
+	public static MqttClient mqttClient;
 	//the broker connection factory
+	private static String mqttChannel;
 
 	public ChannelsManagementRegistry() {
 		logger = LogManager.getLogger(ChannelsManagementRegistry.class);
@@ -63,6 +66,22 @@ public class ChannelsManagementRegistry {
 
 	public static ActiveMQConnectionFactory getConnectionFactory() {
 		return connectionFactory;
+	}
+	
+	public static void setMqttClient(MqttClient client) {
+		ChannelsManagementRegistry.mqttClient = client;
+	}
+
+	public static MqttClient getMqttClient() {
+		return ChannelsManagementRegistry.mqttClient;
+	}
+	
+	public static void setMqttChannel(String mqttChannel) {
+		ChannelsManagementRegistry.mqttChannel = mqttChannel;
+	}
+	
+	public static String getMqttChannel() {
+		return ChannelsManagementRegistry.mqttChannel;
 	}
 
 	public static TopicConnection GetNewTopicConnection(String username, String password) throws JMSException {
