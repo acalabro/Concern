@@ -18,6 +18,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.drools.core.impl.InternalKnowledgeBase;
 import org.drools.core.impl.KnowledgeBaseFactory;
+import org.eclipse.paho.client.mqttv3.MqttClient;
+import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.client.mqttv3.MqttSecurityException;
 import org.kie.api.definition.KiePackage;
 import org.kie.api.io.Resource;
 import org.kie.api.io.ResourceType;
@@ -29,9 +32,11 @@ import org.kie.internal.io.ResourceFactory;
 
 import it.cnr.isti.labsedc.concern.ConcernApp;
 import it.cnr.isti.labsedc.concern.event.ConcernAbstractEvent;
-import it.cnr.isti.labsedc.concern.event.ConcernArduinoEvent;
+import it.cnr.isti.labsedc.concern.event.ConcernProbeEvent;
+import it.cnr.isti.labsedc.concern.event.ConcernWiFiEvent;
 import it.cnr.isti.labsedc.concern.event.ConcernEvaluationRequestEvent;
 import it.cnr.isti.labsedc.concern.eventListener.ChannelProperties;
+import it.cnr.isti.labsedc.concern.eventListener.ConcernMqttCallBack;
 import it.cnr.isti.labsedc.concern.register.ChannelsManagementRegistry;
 
 public class DroolsComplexEventProcessorManager extends ComplexEventProcessorManager implements MessageListener, MessageAuthorizationPolicy {
@@ -52,9 +57,11 @@ public class DroolsComplexEventProcessorManager extends ComplexEventProcessorMan
     private static InternalKnowledgeBase kbase = KnowledgeBaseFactory.newKnowledgeBase();
     private static KieSession ksession;
 	private EntryPoint eventStream;
+	private boolean isUsingJMS = true;
 
-	public DroolsComplexEventProcessorManager(String instanceName, String staticRuleToLoadAtStartup, String connectionUsername, String connectionPassword, CepType type) {
+	public DroolsComplexEventProcessorManager(String instanceName, String staticRuleToLoadAtStartup, String connectionUsername, String connectionPassword, CepType type, boolean runningInJMS) {
 		super();
+		isUsingJMS = runningInJMS;
 		try{
 			kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
 		}catch(Exception e) {
@@ -109,13 +116,29 @@ public class DroolsComplexEventProcessorManager extends ComplexEventProcessorMan
 	}
 
 	private void communicationSetup() throws JMSException {
-		receiverConnection = ChannelsManagementRegistry.GetNewTopicConnection(username, password);
-		receiverSession = ChannelsManagementRegistry.GetNewSession(receiverConnection);
-		topic = ChannelsManagementRegistry.RegisterNewCepTopic(this.cep.name()+"-"+instanceName, receiverSession, this.cep.name()+"-"+instanceName, ChannelProperties.GENERICREQUESTS, cep);
-		logger.info("...CEP named " + this.getInstanceName() + " creates a listening channel called: " + topic.getTopicName());
-		MessageConsumer complexEventProcessorReceiver = receiverSession.createConsumer(topic);
-		complexEventProcessorReceiver.setMessageListener(this);
-		receiverConnection.start();
+		if (isUsingJMS) {
+			receiverConnection = ChannelsManagementRegistry.GetNewTopicConnection(username, password);
+			receiverSession = ChannelsManagementRegistry.GetNewSession(receiverConnection);
+			topic = ChannelsManagementRegistry.RegisterNewCepTopic(this.cep.name()+"-"+instanceName, receiverSession, this.cep.name()+"-"+instanceName, ChannelProperties.GENERICREQUESTS, cep);
+			logger.info("...CEP named " + this.getInstanceName() + " creates a listening channel called: " + topic.getTopicName());
+			MessageConsumer complexEventProcessorReceiver = receiverSession.createConsumer(topic);
+			complexEventProcessorReceiver.setMessageListener(this);
+			receiverConnection.start();
+		} else {
+			MqttClient listener = ChannelsManagementRegistry.getMqttClient();
+			listener.setCallback( new ConcernMqttCallBack() );
+			try {
+				listener.connect();
+				listener.subscribe(ChannelsManagementRegistry.getMqttChannel()); 
+				logger.info("...CEP named " + this.getInstanceName() + " is listening on " + ChannelsManagementRegistry.getMqttChannel());
+			} catch (MqttSecurityException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (MqttException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 	@Override
@@ -124,18 +147,26 @@ public class DroolsComplexEventProcessorManager extends ComplexEventProcessorMan
 		if (message instanceof ObjectMessage) {
 			try {
 					ObjectMessage msg = (ObjectMessage) message;
-					if (msg.getObject() instanceof ConcernArduinoEvent<?>) {
-						ConcernArduinoEvent<?> receivedEvent = (ConcernArduinoEvent<?>) msg.getObject();
+					if (msg.getObject() instanceof ConcernProbeEvent<?>) {
+						ConcernProbeEvent<?> receivedEvent = (ConcernProbeEvent<?>) msg.getObject();
 						insertEvent(receivedEvent);					
-					}
-					if (msg.getObject() instanceof ConcernEvaluationRequestEvent<?>) {		
-						ConcernEvaluationRequestEvent<?> receivedEvent = (ConcernEvaluationRequestEvent<?>) msg.getObject();
+					} else {
+						if (msg.getObject() instanceof ConcernEvaluationRequestEvent<?>) {		
+							ConcernEvaluationRequestEvent<?> receivedEvent = (ConcernEvaluationRequestEvent<?>) msg.getObject();
+							if (receivedEvent.getCepType() == CepType.DROOLS) {
+								loadRule(receivedEvent);	
+							}
+						} else { 
+					if (msg.getObject() instanceof ConcernWiFiEvent<?>) {
+						ConcernWiFiEvent<?> receivedEvent = (ConcernWiFiEvent<?>) msg.getObject();
 						if (receivedEvent.getCepType() == CepType.DROOLS) {
-							loadRule(receivedEvent);	
+							insertEvent(receivedEvent);
 						}
-					} 
-				}catch(ClassCastException | JMSException asd) {
-					logger.error("error on casting or getting ObjectMessage to GlimpseEvaluationRequestEvent");
+					}
+				}
+				}
+			}catch(ClassCastException | JMSException asd) {
+					logger.error("error on casting or getting ObjectMessage");
 				}
 		}
 		if (message instanceof TextMessage) {
@@ -172,7 +203,7 @@ public class DroolsComplexEventProcessorManager extends ComplexEventProcessorMan
 	private void insertEvent(ConcernAbstractEvent<?> receivedEvent) {
 		if (eventStream != null && receivedEvent != null) {
 			eventStream.insert(receivedEvent);
-			logger.info("...CEP named " + this.getInstanceName() + " insert event "  + receivedEvent.getData() +" in the stream");
+			logger.info("...CEP named " + this.getInstanceName() + " insert event "  + receivedEvent.getData() +" in the stream, sent from " + receivedEvent.getSenderID());
 			}			
 	}
 

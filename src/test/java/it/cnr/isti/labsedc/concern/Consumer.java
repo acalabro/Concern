@@ -3,9 +3,9 @@ package it.cnr.isti.labsedc.concern;
 import javax.jms.JMSException;
 
 import it.cnr.isti.labsedc.concern.cep.CepType;
+import it.cnr.isti.labsedc.concern.consumer.ConcernAbstractConsumer;
 import it.cnr.isti.labsedc.concern.event.ConcernEvaluationRequestEvent;
 import it.cnr.isti.labsedc.concern.eventListener.ChannelProperties;
-import it.cnr.it.labsedc.concern.consumer.ConcernAbstractConsumer;
 
 public class Consumer {
 
@@ -52,5 +52,6 @@ public class Consumer {
 		} catch (JMSException e) {
 			e.printStackTrace();
 		}
+		System.out.println("Rule to be monitored Sent");
 	}
 }

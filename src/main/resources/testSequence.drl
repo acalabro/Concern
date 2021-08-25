@@ -1,7 +1,7 @@
 //created on: May 13, 2021
 package it.cnr.isti.labsedc.concern.event;
 import it.cnr.isti.labsedc.concern.event.ConcernAbstractEvent;
-import it.cnr.isti.labsedc.concern.event.ConcernArduinoEvent;
+import it.cnr.isti.labsedc.concern.event.ConcernProbeEvent;
 import it.cnr.isti.labsedc.concern.KieLauncher;
 
 dialect "java"

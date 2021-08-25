@@ -2,12 +2,12 @@ package it.cnr.isti.labsedc.concern.event;
 
 import it.cnr.isti.labsedc.concern.cep.CepType;
 
-public class ConcernArduinoEvent<T> extends ConcernAbstractEvent<T> {
+public class ConcernBaseEvent<T> extends ConcernAbstractEvent<T> {
 
 	private static final long serialVersionUID = 1L;
-	private String relayStatus;
+	private String aSpecificExtension;
 	
-	public ConcernArduinoEvent(
+	public ConcernBaseEvent(
 			long timestamp,
 			String senderID,
 			String destinationID,
@@ -16,16 +16,16 @@ public class ConcernArduinoEvent<T> extends ConcernAbstractEvent<T> {
 			String name,
 			T ruleData,
 			CepType type,
-			String relayStatus) {
+			String aSpecificExtension) {
 		super(timestamp, senderID, destinationID, sessionID, checksum, name, ruleData, type);
-		this.relayStatus = relayStatus;	
+		this.aSpecificExtension = aSpecificExtension;	
 	}
 
-	public void setRelayStatus(String relayStatus) {
-		this.relayStatus = relayStatus;
+	public void setSpecificExtension(String aSpecificExtension) {
+		this.aSpecificExtension = aSpecificExtension;
 	}
 	
-	public String getRelayStstus() {
-		return this.relayStatus;
+	public String getSpecificExtension() {
+		return this.aSpecificExtension;
 	}
 }

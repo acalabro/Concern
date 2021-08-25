@@ -30,6 +30,13 @@ public class NotificationManager extends Thread {
 //			e.printStackTrace();
 //		}
 	}
+	
+	public static void NotifyToGroundStation(String port, String notificationMessage) {
+		LoRaOnSerialWriter writer = new LoRaOnSerialWriter();
+		writer.connect(port);
+		writer.write(notificationMessage);
+		writer.closePort();
+	}
 
 	@Override
 	public void run() {

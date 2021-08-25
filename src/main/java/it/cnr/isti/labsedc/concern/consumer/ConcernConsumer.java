@@ -1,4 +1,4 @@
-package it.cnr.it.labsedc.concern.consumer;
+package it.cnr.isti.labsedc.concern.consumer;
 
 import javax.jms.JMSException;
 import javax.jms.MessageListener;
