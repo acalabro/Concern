@@ -1,6 +1,7 @@
 package it.cnr.isti.labsedc.concern;
 
 import javax.jms.Connection;
+import org.json.JSONObject;
 import javax.jms.ConnectionFactory;
 import javax.jms.JMSException;
 import javax.jms.MessageProducer;
@@ -11,7 +12,8 @@ import javax.jms.Topic;
 import org.apache.activemq.ActiveMQConnectionFactory;
 
 import it.cnr.isti.labsedc.concern.cep.CepType;
-import it.cnr.isti.labsedc.concern.event.ConcernArduinoEvent;
+import it.cnr.isti.labsedc.concern.event.ConcernWiFiEvent;
+import it.cnr.isti.labsedc.concern.event.PacketType;
 
 public class Probe {
 
@@ -23,13 +25,20 @@ public class Probe {
             Topic topic = session.createTopic(topicName);
             MessageProducer producer = session.createProducer(topic);     
 			ObjectMessage msg = session.createObjectMessage();
-			ConcernArduinoEvent<String> event = new ConcernArduinoEvent<String>(
+			
+			/*ConcernProbeEvent<String> event = new ConcernProbeEvent<String>(
 					System.currentTimeMillis(), 
 					new Exception().getStackTrace()[1].getClassName(),
 					"EventChannel-ONE", "sessionA", 
 					"checksum",
-					canData, eventName, CepType.DROOLS,"open");
-				msg.setObject(event);
+					canData, eventName, CepType.DROOLS,"open");*/
+			ConcernWiFiEvent<String> event = new ConcernWiFiEvent<String>(System.currentTimeMillis(),
+					"WiFi-Probe", "monitoring", "emergencyDataSession", "none", 
+					"device found", "2412Mhz", CepType.DROOLS, "8c:8d:ab:10:40:bd",
+					PacketType.PROBE_REQUEST,"-38f");
+			JSONObject jsonObj = new JSONObject( event );
+	        System.out.println( jsonObj );
+ 				msg.setObject(event);
 				producer.send(msg);
 		} catch (JMSException e) {
 			e.printStackTrace();
@@ -40,10 +49,20 @@ public class Probe {
 		String brokerUrl = "tcp://localhost:61616";
 		//String brokerUrl = "tcp://sedc-nethd.isti.cnr.it:49195";
 		printHello();
+		testJson();
 		testProbe(brokerUrl, "DROOLS-InstanceOne", "vera", "griselda", "SLA Alert", "evento1");
 		Thread.sleep(1000);
 		testProbe(brokerUrl, "DROOLS-InstanceOne", "vera", "griselda", "load_one", "evento2");
 		System.out.println("SENT");
+	}
+
+	private static void testJson() {
+		ConcernWiFiEvent<String> event = new ConcernWiFiEvent<String>(System.currentTimeMillis(),
+				"WiFi-Probe", "monitoring", "emergencyDataSession", "none", 
+				"device found", "2412Mhz", CepType.DROOLS, "8c:8d:ab:10:40:bd",
+				PacketType.PROBE_REQUEST,"-38f");
+		JSONObject jsonObj = new JSONObject( event );
+        System.out.println( jsonObj );		
 	}
 
 	private static void printHello() {

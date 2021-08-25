@@ -13,7 +13,6 @@ import it.cnr.isti.labsedc.concern.broker.BrokerManager;
 import it.cnr.isti.labsedc.concern.cep.CepType;
 import it.cnr.isti.labsedc.concern.cep.ComplexEventProcessorManager;
 import it.cnr.isti.labsedc.concern.cep.DroolsComplexEventProcessorManager;
-import it.cnr.isti.labsedc.concern.eventListener.ConcernMqttCallBack;
 import it.cnr.isti.labsedc.concern.notification.NotificationManager;
 import it.cnr.isti.labsedc.concern.register.ChannelsManagementRegistry;
 import it.cnr.isti.labsedc.concern.requestListener.ServiceListenerManager;
@@ -37,7 +36,7 @@ public class ConcernApp
 	private static String username;
 	private static String password;
 	private static boolean LOCALBROKER = true;
-	private static boolean runningInJMS = false;
+	private static boolean runningInJMS = true;
 	private static String mqttBrokerUrl;
 	private static MqttClient listenerClient;
 
@@ -48,7 +47,7 @@ public class ConcernApp
     	
     	//brokerUrl = "tcp://sedc-nethd.isti.cnr.it:49195";
     	if(runningInJMS) {
-    	brokerUrlJMS = "tcp://localhost:61616";
+    	brokerUrlJMS = "tcp://0.0.0.0:61616";
     	maxMemoryUsage = 128000l;
     	maxCacheUsage = 128000l;
     	factory = new ActiveMQConnectionFactory(brokerUrlJMS);
@@ -85,7 +84,8 @@ public class ConcernApp
 	    			CEPInstanceName,
 	    			System.getProperty("user.dir")+ "/src/main/resources/startupRule.drl",
 	    			username, 
-	    			password, CepType.DROOLS);
+	    			password, CepType.DROOLS,
+	    			runningInJMS);
 	    	cepMan.start();
 
 	    	while (!cepMan.cepHasCompletedStartup()) {
@@ -132,7 +132,8 @@ public class ConcernApp
     			"InstanceOne",
     			System.getProperty("user.dir")+ "/src/main/resources/startupRule.drl",
     			username, 
-    			password, CepType.DROOLS);
+    			password, CepType.DROOLS,
+    			runningInJMS);
     	cepMan.start();
 
     	while (!cepMan.cepHasCompletedStartup()) {

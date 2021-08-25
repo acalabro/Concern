@@ -14,8 +14,6 @@ import it.cnr.isti.labsedc.concern.register.ChannelsManagementRegistry;
 
 public class NotificationManager extends Thread {
 
-	private static Session session;
-	private static Topic topic;
 	private static Logger logger;
 	
 	public NotificationManager() {
@@ -38,6 +36,13 @@ public class NotificationManager extends Thread {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
+	}
+	
+	public static void NotifyToGroundStation(String port, String notificationMessage) {
+		LoRaOnSerialWriter writer = new LoRaOnSerialWriter();
+		writer.connect(port);
+		writer.write(notificationMessage);
+		writer.closePort();
 	}
 
 	@Override

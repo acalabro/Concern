@@ -1,7 +1,7 @@
 package it.cnr.isti.labsedc.concern;
 
 import it.cnr.isti.labsedc.concern.cep.CepType;
-import it.cnr.isti.labsedc.concern.event.ConcernArduinoEvent;
+import it.cnr.isti.labsedc.concern.event.ConcernProbeEvent;
 
 public class KieLauncher {
 
@@ -17,7 +17,7 @@ public class KieLauncher {
 		
 		Thread.sleep(1000);
 		System.out.println("ora mando");
-		ConcernArduinoEvent<String> evt = new ConcernArduinoEvent(
+		ConcernProbeEvent<String> evt = new ConcernProbeEvent(
 				System.currentTimeMillis(), 
 				"senderA", "destinationA", "sessionA", 
 				"checksum",
@@ -25,7 +25,7 @@ public class KieLauncher {
 		DroolsKieTest.insertEvent(evt);
 		Thread.sleep(1000);
 		System.out.println("ora mando altro");
-		ConcernArduinoEvent<String> evt2 = new ConcernArduinoEvent(
+		ConcernProbeEvent<String> evt2 = new ConcernProbeEvent(
 				System.currentTimeMillis(), 
 				"senderA", "destinationA", "sessionA", 
 				"checksum",

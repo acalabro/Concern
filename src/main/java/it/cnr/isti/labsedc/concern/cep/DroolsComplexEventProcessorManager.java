@@ -32,7 +32,8 @@ import org.kie.internal.io.ResourceFactory;
 
 import it.cnr.isti.labsedc.concern.ConcernApp;
 import it.cnr.isti.labsedc.concern.event.ConcernAbstractEvent;
-import it.cnr.isti.labsedc.concern.event.ConcernArduinoEvent;
+import it.cnr.isti.labsedc.concern.event.ConcernProbeEvent;
+import it.cnr.isti.labsedc.concern.event.ConcernWiFiEvent;
 import it.cnr.isti.labsedc.concern.event.ConcernEvaluationRequestEvent;
 import it.cnr.isti.labsedc.concern.eventListener.ChannelProperties;
 import it.cnr.isti.labsedc.concern.eventListener.ConcernMqttCallBack;
@@ -56,10 +57,11 @@ public class DroolsComplexEventProcessorManager extends ComplexEventProcessorMan
     private static InternalKnowledgeBase kbase = KnowledgeBaseFactory.newKnowledgeBase();
     private static KieSession ksession;
 	private EntryPoint eventStream;
-	private boolean isUsingJMS = false;
+	private boolean isUsingJMS = true;
 
-	public DroolsComplexEventProcessorManager(String instanceName, String staticRuleToLoadAtStartup, String connectionUsername, String connectionPassword, CepType type) {
+	public DroolsComplexEventProcessorManager(String instanceName, String staticRuleToLoadAtStartup, String connectionUsername, String connectionPassword, CepType type, boolean runningInJMS) {
 		super();
+		isUsingJMS = runningInJMS;
 		try{
 			kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
 		}catch(Exception e) {
@@ -122,8 +124,7 @@ public class DroolsComplexEventProcessorManager extends ComplexEventProcessorMan
 			MessageConsumer complexEventProcessorReceiver = receiverSession.createConsumer(topic);
 			complexEventProcessorReceiver.setMessageListener(this);
 			receiverConnection.start();
-		} else
-		{
+		} else {
 			MqttClient listener = ChannelsManagementRegistry.getMqttClient();
 			listener.setCallback( new ConcernMqttCallBack() );
 			try {
@@ -146,18 +147,26 @@ public class DroolsComplexEventProcessorManager extends ComplexEventProcessorMan
 		if (message instanceof ObjectMessage) {
 			try {
 					ObjectMessage msg = (ObjectMessage) message;
-					if (msg.getObject() instanceof ConcernArduinoEvent<?>) {
-						ConcernArduinoEvent<?> receivedEvent = (ConcernArduinoEvent<?>) msg.getObject();
+					if (msg.getObject() instanceof ConcernProbeEvent<?>) {
+						ConcernProbeEvent<?> receivedEvent = (ConcernProbeEvent<?>) msg.getObject();
 						insertEvent(receivedEvent);					
-					}
-					if (msg.getObject() instanceof ConcernEvaluationRequestEvent<?>) {		
-						ConcernEvaluationRequestEvent<?> receivedEvent = (ConcernEvaluationRequestEvent<?>) msg.getObject();
+					} else {
+						if (msg.getObject() instanceof ConcernEvaluationRequestEvent<?>) {		
+							ConcernEvaluationRequestEvent<?> receivedEvent = (ConcernEvaluationRequestEvent<?>) msg.getObject();
+							if (receivedEvent.getCepType() == CepType.DROOLS) {
+								loadRule(receivedEvent);	
+							}
+						} else { 
+					if (msg.getObject() instanceof ConcernWiFiEvent<?>) {
+						ConcernWiFiEvent<?> receivedEvent = (ConcernWiFiEvent<?>) msg.getObject();
 						if (receivedEvent.getCepType() == CepType.DROOLS) {
-							loadRule(receivedEvent);	
+							insertEvent(receivedEvent);
 						}
-					} 
-				}catch(ClassCastException | JMSException asd) {
-					logger.error("error on casting or getting ObjectMessage to GlimpseEvaluationRequestEvent");
+					}
+				}
+				}
+			}catch(ClassCastException | JMSException asd) {
+					logger.error("error on casting or getting ObjectMessage");
 				}
 		}
 		if (message instanceof TextMessage) {
