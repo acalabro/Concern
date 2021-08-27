@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import javax.jms.Connection;
-import org.json.JSONObject;
 
 import it.cnr.isti.labsedc.concern.cep.CepType;
 import it.cnr.isti.labsedc.concern.event.ConcernWiFiEvent;
@@ -26,54 +25,76 @@ public class TransponderWiFiProbe {
 	static MessageProducer producer;
 	static String macAddress;
 	static String receivedDb;
+	static String device;
 	
 	public static void main(String[] args) throws InterruptedException {
-		String brokerUrl = "tcp://0.0.0.0:61616";
-		String username = "vera";
-		String password = "griselda";
-		String topicName = "DROOLS-InstanceOne";
-		String device = "wlp0s20f3";
-		//args 0 = username, args 1 = password, args 2 = brokerUrl, args 3 = topicName, args 4 = device
+		String username; 
+		String password; 
+		String brokerUrl;
+		String topicName;
+
+		if (args.length<4) {
+			System.out.println(""
+					+ "USAGE: java -jar TranspoderWifiProbe username"
+					+ "password brokerurl topicName device\n"
+					+ "Example: java -jar TranspoderWifiProbe vera griselda"
+					+ "tcp://0.0.0.0:61616 DROOLS-InstanceOne wlx984827c6f74a");
+			System.exit(1);
+		}
+
+		username = args[0];
+		password = args[1];
+		brokerUrl = args[2];
+		topicName = args[3];
+		device = args[4];
 		
 		printHello();
 		try {		
-	//		ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(args[0], args[1], args[2]);
-			ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(brokerUrl);
+			ConnectionFactory connectionFactory =
+					new ActiveMQConnectionFactory(username, password, brokerUrl);
 			Connection connection = connectionFactory.createConnection();
 			
 	        session = connection.createSession(false,Session.AUTO_ACKNOWLEDGE);
 	        
 	        Topic topic = session.createTopic(topicName);
-	        //Topic topic = session.createTopic(args[3]);
-	        
+     
 	        producer = session.createProducer(topic); 
 	        
 	        loopThread();
  
 		} catch (JMSException e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 		}   
 	}	
 		
 	private static void loopThread() {
-		//final Process p = Runtime.getRuntime().exec("tcpdump -i "+ args[4] + " -e type mgt");
 		try {	
-			Process p = Runtime.getRuntime().exec("tcpdump -i wlp0s20f3 -e");
+			Process p = Runtime.getRuntime().exec(
+					"tcpdump -i " + device + " -e type mgt");
 		new Thread(new Runnable() {
 		    public void run() {
-		        BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
+		        BufferedReader input = new BufferedReader(
+		        		new InputStreamReader(p.getInputStream()));
 		        String line = null;
-
+				String[] results;
+				System.out.print("Scan running...");
 		        try {
-		            while ((line = input.readLine()) != null)
-		            	
-		            	if (line != null) //  || line.contains("signal:"))
+		            while ((line = input.readLine()) != null) {
+		            	System.out.print(".");
+		            	if (line != null && (
+		            			line.contains("Probe Request") || 
+		            			line.contains("Beacon") ||
+		            			line.contains("Probe Response")))
 	                	{
-		            		macAddress = "asd";
-		            		receivedDb = "10";
+		            		results = line.split(" ");
+		            				            		
+		            		macAddress = results[16];
+		            		receivedDb = results[10];
+		            		PacketType packetType = checkPacketType(line);
+		            		
 	                	
-		            	sendMessage(session, new ConcernWiFiEvent<String>(System.currentTimeMillis(),
+		            	sendMessage(session, new ConcernWiFiEvent<String>(
+		            			System.currentTimeMillis(),
 		            			"Wi-Fi-Probe", 
 		            			"Monitor", 
 		            			this.getClass().getName()+"-Session1", 
@@ -81,13 +102,27 @@ public class TransponderWiFiProbe {
 		            			"tracking","Wi-Fi-trace",
 		            			CepType.DROOLS,
 		            			macAddress,
-		            			PacketType.PROBE_REQUEST,
+		            			packetType,
 		            			receivedDb),producer);
 	                	}
+		            }
 		        } catch (IOException e) {
 		            e.printStackTrace();
 		        }
 		    }
+
+			private PacketType checkPacketType(String line) {
+				if (line.contains("Probe Request")) {
+        			return PacketType.PROBE_REQUEST;
+        		}
+				if (line.contains("Probe Response")) {
+        			return PacketType.PROBE_RESPONSE;
+        		}
+				if (line.contains("Beacon")) {
+        			return PacketType.BEACON;
+        		}
+				return null;
+			}
 		}).start();
 
 			p.waitFor();
@@ -96,34 +131,17 @@ public class TransponderWiFiProbe {
 		}		
 	}
 
-	private static void sendMessage(Session session, ConcernWiFiEvent<String> event, MessageProducer producer) {
+	private static void sendMessage(Session session,
+			ConcernWiFiEvent<String> event, 
+			MessageProducer producer) {
 		try {
 			ObjectMessage msg = session.createObjectMessage();
 			msg.setObject(event);
 		producer.send(msg);
-		System.out.println("Message Sent");
 		} catch (JMSException e) {
 			e.printStackTrace();
 		}
 	}
-	
-//	private ConcernWiFiEvent<String> packEvent(String senderID, ) {
-//	
-//		 ConcernWiFiEvent<String> event = new ConcernWiFiEvent<String>(System.currentTimeMillis(),
-//				"WiFi-Probe", "monitoring", "emergencyDataSession", "none", 
-//				"device found", "2412Mhz", CepType.DROOLS, "8c:8d:ab:10:40:bd",
-//				PacketType.PROBE_REQUEST,-38f);
-//		 return event;
-//	}
-
-//	private static void testJson() {
-//		ConcernWiFiEvent<String> event = new ConcernWiFiEvent<String>(System.currentTimeMillis(),
-//				"WiFi-Probe", "monitoring", "emergencyDataSession", "none", 
-//				"device found", "2412Mhz", CepType.DROOLS, "8c:8d:ab:10:40:bd",
-//				PacketType.PROBE_REQUEST,-38f);
-//		JSONObject jsonObj = new JSONObject( event );
-//        System.out.println( jsonObj );		
-//	}
 
 	private static void printHello() {
 		
@@ -132,7 +150,6 @@ public class TransponderWiFiProbe {
 		 + "| |  | |_ ______| |_   _  | |_/ / __ ___ | |__   ___\n"
 		 + "| |/\\| | |______|  _| | | |  __/ '__/ _ \\| '_ \\ / _ \\\n"
 		 + "\\  /\\  / |      | |   | | | |  | | | (_) | |_) |  __/\n"
-		 + " \\/  \\/|_|      \\_|   |_| \\_|  |_|  \\___/|_.__/ \\___|\n");
-		                                                      
+		 + " \\/  \\/|_|      \\_|   |_| \\_|  |_|  \\___/|_.__/ \\___|\n");	                                                      
 	}
 }
