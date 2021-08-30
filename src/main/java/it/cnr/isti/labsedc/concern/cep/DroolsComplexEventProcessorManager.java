@@ -33,7 +33,6 @@ import org.kie.internal.io.ResourceFactory;
 import it.cnr.isti.labsedc.concern.ConcernApp;
 import it.cnr.isti.labsedc.concern.event.ConcernAbstractEvent;
 import it.cnr.isti.labsedc.concern.event.ConcernProbeEvent;
-import it.cnr.isti.labsedc.concern.event.ConcernWiFiEvent;
 import it.cnr.isti.labsedc.concern.event.ConcernEvaluationRequestEvent;
 import it.cnr.isti.labsedc.concern.eventListener.ChannelProperties;
 import it.cnr.isti.labsedc.concern.eventListener.ConcernMqttCallBack;
@@ -156,14 +155,7 @@ public class DroolsComplexEventProcessorManager extends ComplexEventProcessorMan
 							if (receivedEvent.getCepType() == CepType.DROOLS) {
 								loadRule(receivedEvent);	
 							}
-						} else { 
-					if (msg.getObject() instanceof ConcernWiFiEvent<?>) {
-						ConcernWiFiEvent<?> receivedEvent = (ConcernWiFiEvent<?>) msg.getObject();
-						if (receivedEvent.getCepType() == CepType.DROOLS) {
-							insertEvent(receivedEvent);
 						}
-					}
-				}
 				}
 			}catch(ClassCastException | JMSException asd) {
 					logger.error("error on casting or getting ObjectMessage");
