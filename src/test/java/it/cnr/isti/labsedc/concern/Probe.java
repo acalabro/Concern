@@ -38,7 +38,7 @@ public class Probe {
 	}
 
 	public static void main(String[] args) throws InterruptedException {
-		String brokerUrl = "tcp://localhost:61616";
+		String brokerUrl = "tcp://0.0.0.0:61616";
 		//String brokerUrl = "tcp://sedc-nethd.isti.cnr.it:49195";
 		printHello();
 		testProbe(brokerUrl, "DROOLS-InstanceOne", "vera", "griselda", "SLA Alert", "evento1");
