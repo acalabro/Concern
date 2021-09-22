@@ -35,8 +35,8 @@ import it.cnr.isti.labsedc.concern.event.ConcernAbstractEvent;
 import it.cnr.isti.labsedc.concern.event.ConcernProbeEvent;
 import it.cnr.isti.labsedc.concern.event.ConcernEvaluationRequestEvent;
 import it.cnr.isti.labsedc.concern.eventListener.ChannelProperties;
-import it.cnr.isti.labsedc.concern.eventListener.ConcernMqttCallBack;
 import it.cnr.isti.labsedc.concern.register.ChannelsManagementRegistry;
+import it.cnr.isti.labsedc.concern.utils.ConcernMQTTCallBack;
 
 public class DroolsComplexEventProcessorManager extends ComplexEventProcessorManager implements MessageListener, MessageAuthorizationPolicy {
 
@@ -125,7 +125,7 @@ public class DroolsComplexEventProcessorManager extends ComplexEventProcessorMan
 			receiverConnection.start();
 		} else {
 			MqttClient listener = ChannelsManagementRegistry.getMqttClient();
-			listener.setCallback( new ConcernMqttCallBack() );
+			listener.setCallback( new ConcernMQTTCallBack() );
 			try {
 				listener.connect();
 				listener.subscribe(ChannelsManagementRegistry.getMqttChannel()); 

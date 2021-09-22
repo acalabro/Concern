@@ -1,10 +1,10 @@
-package it.cnr.isti.labsedc.concern.eventListener;
+package it.cnr.isti.labsedc.concern.utils;
 
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
-public class ConcernMqttCallBack implements MqttCallback {
+public class ConcernMQTTCallBack implements MqttCallback {
 
 	public void connectionLost(Throwable throwable) {
 	    System.out.println("Connection to MQTT broker lost!");
