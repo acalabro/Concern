@@ -14,10 +14,10 @@ public class ConcernBaseEvent<T> extends ConcernAbstractEvent<T> {
 			String sessionID,
 			String checksum,
 			String name,
-			T ruleData,
+			T eventData,
 			CepType type,
 			String aSpecificExtension) {
-		super(timestamp, senderID, destinationID, sessionID, checksum, name, ruleData, type);
+		super(timestamp, senderID, destinationID, sessionID, checksum, name, eventData, type);
 		this.aSpecificExtension = aSpecificExtension;	
 	}
 

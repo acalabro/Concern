@@ -3,7 +3,10 @@ package it.cnr.isti.labsedc.concern.mediator;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.json.JSONObject;
 
+import it.cnr.isti.labsedc.concern.cep.CepType;
+import it.cnr.isti.labsedc.concern.event.ConcernBaseEvent;
 import it.cnr.isti.labsedc.concern.utils.ConcernMQTTCallBack;
 
 public class Mediator extends Thread {
@@ -41,5 +44,28 @@ public class Mediator extends Thread {
 	
 	public static void send(String channel, MqttMessage msg) {
 		
+		try {
+			sender.publish(channel, msg);
+		} catch (MqttException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static void main(String[] args) {
+		Mediator tested = new Mediator("tcp://localhost:1883", "monitorChannel");
+		tested.run();
+		
+		ConcernBaseEvent<String> genericEvent = new ConcernBaseEvent<String>(
+				System.currentTimeMillis(),
+				"TesterProbe", "monitoring", "theSessionID", "achecksumField", "EventA", "started", CepType.DROOLS, "extensionForSecurity");
+
+		MqttMessage genericEventInMQTT = new MqttMessage();
+		
+		JSONObject converted = new JSONObject(genericEvent);
+		
+		genericEventInMQTT.setPayload(converted.toString().getBytes());
+				
+		Mediator.send("monitorChannel", genericEventInMQTT);
 	}
 }
