@@ -35,7 +35,7 @@ public class ConcernApp
 	public static HashMap<String, Boolean> componentStarted = new HashMap<String, Boolean>();
 	private static String username;
 	private static String password;
-	private static boolean LOCALBROKER = false;
+	private static boolean LOCALBROKER = true;
 	private static boolean runningInJMS = true;
 	private static String mqttBrokerUrl;
 	private static MqttClient listenerClient;
