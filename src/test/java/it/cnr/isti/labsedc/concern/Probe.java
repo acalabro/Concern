@@ -11,11 +11,11 @@ import javax.jms.Topic;
 import org.apache.activemq.ActiveMQConnectionFactory;
 
 import it.cnr.isti.labsedc.concern.cep.CepType;
-import it.cnr.isti.labsedc.concern.event.ConcernProbeEvent;
+import it.cnr.isti.labsedc.concern.event.ConcernBaseEvent;
 
 public class Probe {
 
-	public static void testProbe(String brokerUrl, String topicName, String username, String password, String canData, String eventName) {
+	public static void testProbe(String brokerUrl, String topicName, String username, String password, String eventData, String eventName) {
 		try {
 			ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(username, password, brokerUrl);
 			Connection connection = connectionFactory.createConnection();
@@ -24,12 +24,12 @@ public class Probe {
             MessageProducer producer = session.createProducer(topic);     
 			ObjectMessage msg = session.createObjectMessage();
 			
-			ConcernProbeEvent<String> event = new ConcernProbeEvent<String>(
+			ConcernBaseEvent<String> event = new ConcernBaseEvent<String>(
 					System.currentTimeMillis(), 
 					new Exception().getStackTrace()[1].getClassName(),
-					"EventChannel-ONE", "sessionA", 
+					"AuditingSystem-Monitoring", "sessionA", 
 					"checksum",
-					canData, eventName, CepType.DROOLS,"open");
+					eventName, eventData, CepType.DROOLS,"extension");
  				msg.setObject(event);
 				producer.send(msg);
 		} catch (JMSException e) {
@@ -38,18 +38,18 @@ public class Probe {
 	}
 
 	public static void main(String[] args) throws InterruptedException {
-		String brokerUrl = "tcp://146.48.84.225:61616";
+		String brokerUrl = "tcp://0.0.0.0:61616";
 		//String brokerUrl = "tcp://sedc-nethd.isti.cnr.it:49195";
 		printHello();
-		testProbe(brokerUrl, "DROOLS-InstanceOne", "vera", "griselda", "SLA Alert", "evento1");
+		testProbe(brokerUrl, "DROOLS-InstanceOne", "vera", "griselda", "Robot-ONE", "SLA Alert");
 		Thread.sleep(1000);
-		testProbe(brokerUrl, "DROOLS-InstanceOne", "vera", "griselda", "load_one", "evento2");
+		testProbe(brokerUrl, "DROOLS-InstanceOne", "vera", "griselda", "ControlledEnvironment", "overload_one");
 		System.out.println("SENT");
 	}
 
 
 
-	private static void printHello() {
+	private static void printHello() {		
 System.out.println("  _     _    __   _  _  _  _  _ \n"
 		+ " /_`| |/_`/|//   /_//_// //_)/_`\n"
 		+ "/_, |//_,/ |/   /  / \\/_//_)/_, \n"

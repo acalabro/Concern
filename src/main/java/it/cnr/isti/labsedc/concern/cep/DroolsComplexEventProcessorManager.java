@@ -32,6 +32,7 @@ import org.kie.internal.io.ResourceFactory;
 
 import it.cnr.isti.labsedc.concern.ConcernApp;
 import it.cnr.isti.labsedc.concern.event.ConcernAbstractEvent;
+import it.cnr.isti.labsedc.concern.event.ConcernBaseEvent;
 import it.cnr.isti.labsedc.concern.event.ConcernProbeEvent;
 import it.cnr.isti.labsedc.concern.event.ConcernEvaluationRequestEvent;
 import it.cnr.isti.labsedc.concern.eventListener.ChannelProperties;
@@ -146,8 +147,8 @@ public class DroolsComplexEventProcessorManager extends ComplexEventProcessorMan
 		if (message instanceof ObjectMessage) {
 			try {
 					ObjectMessage msg = (ObjectMessage) message;
-					if (msg.getObject() instanceof ConcernProbeEvent<?>) {
-						ConcernProbeEvent<?> receivedEvent = (ConcernProbeEvent<?>) msg.getObject();
+					if (msg.getObject() instanceof ConcernBaseEvent<?>) {
+						ConcernBaseEvent<?> receivedEvent = (ConcernBaseEvent<?>) msg.getObject();
 						insertEvent(receivedEvent);					
 					} else {
 						if (msg.getObject() instanceof ConcernEvaluationRequestEvent<?>) {		
@@ -174,7 +175,7 @@ public class DroolsComplexEventProcessorManager extends ComplexEventProcessorMan
 	private void loadRule(ConcernEvaluationRequestEvent<?> receivedEvent) {
 		Object[] packages = kbase.getKiePackages().toArray();
 		for (int m = 0; m< packages.length; m++) {
-		System.out.println("Quante regole dentro package: " + ((KiePackage)packages[m]).getName() + " " + ((KiePackage)packages[m]).getRules().size());
+		System.out.println("How many rules within package: " + ((KiePackage)packages[m]).getName() + " " + ((KiePackage)packages[m]).getRules().size());
 		}
 		Resource drlToLoad = ResourceFactory.newByteArrayResource(receivedEvent.getData().toString().getBytes());
         kbuilder.add(drlToLoad, ResourceType.DRL);
@@ -188,7 +189,7 @@ public class DroolsComplexEventProcessorManager extends ComplexEventProcessorMan
         logger.info("...CEP named " + this.getInstanceName() + " receives rules "  + receivedEvent.getData() + " and load it into the knowledgeBase");
         Object[] packages2 = kbase.getKiePackages().toArray();
 		for (int m = 0; m< packages2.length; m++) {
-		System.out.println("Quante regole dentro package: " + ((KiePackage)packages2[m]).getName() + " " + ((KiePackage)packages2[m]).getRules().size());
+		System.out.println("How many rules within package: " + ((KiePackage)packages2[m]).getName() + " " + ((KiePackage)packages2[m]).getRules().size());
 		}
 	}
 

@@ -17,7 +17,7 @@ public class KieLauncher {
 		
 		Thread.sleep(1000);
 		System.out.println("ora mando");
-		ConcernProbeEvent<String> evt = new ConcernProbeEvent(
+		ConcernProbeEvent<String> evt = new ConcernProbeEvent<String>(
 				System.currentTimeMillis(), 
 				"senderA", "destinationA", "sessionA", 
 				"checksum",
@@ -25,7 +25,7 @@ public class KieLauncher {
 		DroolsKieTest.insertEvent(evt);
 		Thread.sleep(1000);
 		System.out.println("ora mando altro");
-		ConcernProbeEvent<String> evt2 = new ConcernProbeEvent(
+		ConcernProbeEvent<String> evt2 = new ConcernProbeEvent<String>(
 				System.currentTimeMillis(), 
 				"senderA", "destinationA", "sessionA", 
 				"checksum",
