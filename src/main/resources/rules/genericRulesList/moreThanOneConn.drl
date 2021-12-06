@@ -19,15 +19,15 @@ when
 	$aEvent : ConcernBaseEvent(
 	this.getName == "Connect to:",
 	this.getData == "LocalPlanner",
-	this.getSpecificExtension == "port:1234");
+	this.getProperty == "port:1234");
 	
 	$bEvent : ConcernBaseEvent(
 	this.getName == "Connect to:",
 	this.getData == "LocalPlanner",
-	this.getSpecificExtension == "port:1234",
+	this.getProperty == "port:1234",
 	this after $aEvent);
 then
-	KieLauncher.printer("Double connection to " + $aEvent.getData() + " on " + $aEvent.getSpecificExtension());	
+	KieLauncher.printer("Double connection to " + $aEvent.getData() + " on " + $aEvent.getProperty());	
 	retract($aEvent);
 	retract($bEvent);	
 end

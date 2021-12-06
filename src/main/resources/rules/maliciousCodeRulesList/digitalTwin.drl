@@ -22,11 +22,11 @@ end
 			this.getName == "CoordinatesEvent",
 			this.getSenderID == "LocalPlanner",
 			this.getDestinationID == "LocomotionController"
-			this.getSpecificExtension == "thePropertyThatIsGoingToBePredictedByThisDT");
+			this.getProperty == "thePropertyThatIsGoingToBePredictedByThisDT");
 			
 			$bEvent : ConcernBaseEvent(
 			this.getName == "CoordinatesEvent",
-			this.getSpecificExtension == $aEvent.getSpecificExtension,
+			this.getProperty == $aEvent.getProperty,
 			this.getSenderID == "LocomotionController",
 			this.getSessionID == $aEvent.getSessionID,
 			this.after $aEvent);

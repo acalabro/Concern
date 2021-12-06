@@ -23,7 +23,8 @@ public class Consumer {
 			//String ruleToPut = Consumer.readFile(System.getProperty("user.dir")+ "/src/main/resources/rules/genericRulesList/moreThanOneConn.drl");
 			//String ruleToPut = Consumer.readFile(System.getProperty("user.dir")+ "/src/main/resources/rules/genericRulesList/coordinates.drl");
 			//String ruleToPut = Consumer.readFile(System.getProperty("user.dir")+ "/src/main/resources/rules/genericRulesList/localGlobalAvgDelayCheck.drl");
-			String ruleToPut = Consumer.readFile(System.getProperty("user.dir")+ "/src/main/resources/rules/genericRulesList/digitalTwin.drl");
+			//String ruleToPut = Consumer.readFile(System.getProperty("user.dir")+ "/src/main/resources/rules/genericRulesList/digitalTwin.drl");
+			String ruleToPut = Consumer.readFile(System.getProperty("user.dir")+ "/src/main/resources/autogenRule.drl");
 			ConcernEvaluationRequestEvent<String> ruleToEvaluate = 
 					new ConcernEvaluationRequestEvent<String>(
 							System.currentTimeMillis(),"Consumer-ONE", "monitoring", 

@@ -33,6 +33,7 @@ import org.kie.internal.io.ResourceFactory;
 import it.cnr.isti.labsedc.concern.ConcernApp;
 import it.cnr.isti.labsedc.concern.event.ConcernAbstractEvent;
 import it.cnr.isti.labsedc.concern.event.ConcernBaseEvent;
+import it.cnr.isti.labsedc.concern.event.ConcernDTEvent;
 import it.cnr.isti.labsedc.concern.event.ConcernEvaluationRequestEvent;
 import it.cnr.isti.labsedc.concern.eventListener.ChannelProperties;
 import it.cnr.isti.labsedc.concern.register.ChannelsManagementRegistry;
@@ -150,12 +151,17 @@ public class DroolsComplexEventProcessorManager extends ComplexEventProcessorMan
 						ConcernBaseEvent<?> receivedEvent = (ConcernBaseEvent<?>) msg.getObject();
 						insertEvent(receivedEvent);					
 					} else {
+						if (msg.getObject() instanceof ConcernDTEvent<?>) {
+							ConcernDTEvent<?> receivedEvent = (ConcernDTEvent<?>) msg.getObject();
+							insertEvent(receivedEvent);					
+						} else {
 						if (msg.getObject() instanceof ConcernEvaluationRequestEvent<?>) {		
 							ConcernEvaluationRequestEvent<?> receivedEvent = (ConcernEvaluationRequestEvent<?>) msg.getObject();
 							if (receivedEvent.getCepType() == CepType.DROOLS) {
 								loadRule(receivedEvent);	
 							}
 						}
+					}
 				}
 			}catch(ClassCastException | JMSException asd) {
 					logger.error("error on casting or getting ObjectMessage");

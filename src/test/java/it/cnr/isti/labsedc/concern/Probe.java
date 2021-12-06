@@ -12,6 +12,7 @@ import org.apache.activemq.ActiveMQConnectionFactory;
 
 import it.cnr.isti.labsedc.concern.cep.CepType;
 import it.cnr.isti.labsedc.concern.event.ConcernBaseEvent;
+import it.cnr.isti.labsedc.concern.event.ConcernDTEvent;
 
 public class Probe {
 
@@ -43,17 +44,49 @@ public class Probe {
 	}
 
 	public static void main(String[] args) throws InterruptedException {
-		String brokerUrl = "tcp://0.0.0.0:61616";
+		String brokerUrl = "tcp://localhost:61616";
+
+		/*
 		//String brokerUrl = "tcp://sedc-nethd.isti.cnr.it:49195";
 		printHello();
 		TestmoreThanOneConn(brokerUrl);
 		Thread.sleep(3000);
 		TestlocalGlobalAvgDelayCheck(brokerUrl);
 		//testProbe(brokerUrl, "DROOLS-InstanceOne", "vera", "griselda", "Robot-ONE", "SLA Alert");
+		*/
+		
+		testDTProbe(brokerUrl);
 		
 		System.out.println("SENT");
 	}
 
+	public static void testDTProbe(String brokerUrl) throws InterruptedException {
+
+		try {
+			ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("vera","griselda", "tcp://localhost:61616");
+			Connection connection = connectionFactory.createConnection();
+            Session session = connection.createSession(false,Session.AUTO_ACKNOWLEDGE);
+            Topic topic = session.createTopic("DROOLS-InstanceOne");
+            MessageProducer producer = session.createProducer(topic);     
+			ObjectMessage msg = session.createObjectMessage();
+			
+			ConcernDTEvent<String> previous = null;
+			
+			ConcernDTEvent<String> event = new ConcernDTEvent<String>(
+					System.currentTimeMillis(), 
+					"DigitalTwin", "Monitoring", "123098", 
+					"rfng3o49bfn", "NextEventWillBE", "930",
+					CepType.DROOLS, previous);
+			
+ 				msg.setObject(event);
+				producer.send(msg);
+		} catch (JMSException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
 	public static void TestmoreThanOneConn(String brokerUrl) throws InterruptedException {
 		testProbe(brokerUrl, "DROOLS-InstanceOne", "vera", "griselda", "LocalPlanner", "Connect to:", "port:1234", "checksum", "sessionA", "sender", "destination");
 		Thread.sleep(1000);

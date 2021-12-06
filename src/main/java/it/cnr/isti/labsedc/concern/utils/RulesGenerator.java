@@ -13,15 +13,16 @@ import it.cnr.isti.labsedc.concern.eventListener.ChannelProperties;
 
 public class RulesGenerator {
 
-	public static String brokerUrl = null;
-	
+	public static String brokerUrl = "tcp://0.0.0.0:61616";
+	public static RulesGenerator ruleGen;
+
 	public RulesGenerator(String brokerUrl) {
 		RulesGenerator.brokerUrl = brokerUrl;
 	}
 	
 	public static void main(String[] args) {
 		
-		RulesGenerator ruleGen = new RulesGenerator("tcp://0.0.0.0:61616");
+		ruleGen = new RulesGenerator("tcp://0.0.0.0:61616");
 
 		ConcernDTEvent<String> previousDTEvent = new ConcernDTEvent<String>(
 				System.currentTimeMillis(),
@@ -42,6 +43,7 @@ public class RulesGenerator {
 	
 	public static void generateRuleFromDTEvent(ConcernDTEvent<?> event) {
 		
+		System.out.println("called");
 		RulesGenerator.injectRule(RulesGenerator.createRule(event), event.getSessionID());
 		
 	}
@@ -52,12 +54,11 @@ public class RulesGenerator {
 				+ "import it.cnr.isti.labsedc.concern.event.ConcernAbstractEvent;\n"
 				+ "import it.cnr.isti.labsedc.concern.event.ConcernBaseEvent;\n"
 				+ "import it.cnr.isti.labsedc.concern.event.ConcernProbeEvent;\n"
-				+ "import it.cnr.isti.labsedc.concern.event.ConcernDTEvent;\n"
 				+ "import it.cnr.isti.labsedc.concern.KieLauncher;\n"
 				+ "\n"
 				+ "dialect \"java\"\n"
 				+ "\n"
-				+ "declare ConcernDTEvent\n"
+				+ "declare ConcernBaseEvent\n"
 				+ "    @role( event )\n"
 				+ "    @timestamp( timestamp )\n"
 				+ "end\n\n";
@@ -72,7 +73,7 @@ public class RulesGenerator {
 		if (event.getPrevious() == null) {
 			
 			when = "\n\twhen\n\n"
-					+ "	$aEvent : ConcernDTEvent(\n"
+					+ "	$aEvent : ConcernBaseEvent(\n"
 					+ "	this.getName == \"" + event.getName() + "\",\n"
 					+ "	this.getData == \"" + event.getData() + "\",\n"
 					+ " \tthis.getSenderID == \"" + event.getSenderID() + "\",\n"
@@ -80,7 +81,7 @@ public class RulesGenerator {
 		} else {
 		
 		when = "\n\twhen\n\n"
-				+ "	$aEvent : ConcernDTEvent(\n"
+				+ "	$aEvent : ConcernBaseEvent(\n"
 				+ "	this.getName == \"" + event.getPrevious().getName() + "\",\n"
 				+ "	this.getData == \"" + event.getPrevious().getData() + "\",\n"
 				+ " \tthis.getSenderID == \"" + event.getPrevious().getSenderID() + "\",\n"

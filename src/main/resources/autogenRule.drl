@@ -19,8 +19,8 @@ rule "autogenRule"
 when
 	$aEvent : ConcernDTEvent(
 	this.getSenderID == "DigitalTwin",
-	this.getDestinationID == "Monitoring";
+	this.getDestinationID == "Monitoring");
 then
-	RulesGenerator.generateRuleFromDTEvent(aEvent);	
+	RulesGenerator.generateRuleFromDTEvent($aEvent);	
 	retract($aEvent);	
 end

@@ -25,7 +25,7 @@ end
 			
 			$bEvent : ConcernBaseEvent(
 			this.getName == "CoordinatesEvent",
-			this.getSpecificExtension == $aEvent.getSpecificExtension,
+			this.getProperty == $aEvent.getSpecificExtension,
 			this.getSenderID == "LocomotionController",
 			this.getSessionID == $aEvent.getSessionID,
 			this not meets [2s] $aEvent);
